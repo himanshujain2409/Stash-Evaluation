@@ -1,0 +1,264 @@
+<!--*************************************************************
+@Name: APTS_MBOPerformanceReview
+@Author: KrishnaRajani Yadlapalli,PS - Apttus
+@CreateDate: 02/13/2015
+@Description: MBO Performance feedback Visualforce page
+@UsedBy: APTS_MBOPerformanceReviewController
+******************************************************************
+@ModifiedBy: 
+@ModifiedDate: 
+@ChangeDescription: 
+
+******************************************************************-->
+<apex:page standardController="Performance_Reviews__c" extensions="APTS_MBOPerformanceReviewController">
+<style type="text/css">
+table.gridtable {
+    font-family: verdana,arial,sans-serif;
+    font-size:11px;
+    color:#333333;
+    border-width: 1px;
+    border-color: #666666;
+    border-collapse: collapse;
+}
+table.gridtable th {
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #666666;
+    background-color: #dedede;
+}
+table.gridtable td {
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #666666;
+    background-color: #ffffff;
+}
+</style>
+<script>
+    function validateresultsvisibletoemployee(){
+        if('{!performanceReview.Manager_Review_Completed__c}' == 'FALSE')
+        {
+            alert('Please Save & Submit first');
+        }
+        if('{!performanceReview.Approval_Status__c}' != 'Approved')
+        {
+            alert('This Performance Feedback will need to be reviewed by HR before it can be made visible.  Grace Bonnett has received an email notification and should be reaching out to you shortly. ');
+        }
+        else if('{!performanceReview.Approval_Status__c}' == 'Approved')
+        {
+            alert('Thank you!  This Performance Feedback is now visible to your employee.  Please make sure you also discuss this feedback with your employee in person.');
+            makeresultsvisibletoemployee();
+        }
+    }
+</script>
+    <apex:sectionHeader title="Performance Feedback " subtitle="{!performanceReview.Name}"/>
+    <apex:form id="formName" >
+
+        <apex:pageBlock title="Performance Feedback" mode="edit" id="prv">
+        <apex:pageMessages id="errorMsgs" />
+           <apex:pageBlockButtons id="buttonsBlock">
+                <apex:commandButton action="{!saveAndPending}"  value="Save & Finish later"  rendered="{!rendersavebuttons}"/>&nbsp;&nbsp;
+                <apex:commandButton onclick="validatesubmit()" value="Save & Submit" action="{!saveAndSubmit}" rendered="{!rendersavebuttons}"/>&nbsp;&nbsp;
+                <apex:commandButton onclick="validateresultsvisibletoemployee(); return false;" value="Make Results Visible to Employee" rendered="{!performanceReview.Manager__c == loggedinuserId && performanceReview.Review_Visible_to_Employee__c != 'Yes'&& performanceReview.Manager_Review_Completed__c}"/>&nbsp;&nbsp;
+                <apex:commandButton action="{!gotoMBO}"  value="Return" rendered="{!!rendersavebuttons}"/>    
+                <!--//   -->             
+            </apex:pageBlockButtons>
+            <apex:actionFunction action="{!makeresultsvisibletoemployee}" Name="makeresultsvisibletoemployee"/>
+            <apex:pageBlockSection title="Employee Information" id="employeeInfo" columns="2" >
+                <apex:pageBlockSectionItem >
+                    <apex:outputText value="{!$ObjectType.Performance_Reviews__c.fields.Employee__c.label}"/>
+                    <apex:outputField value="{!performanceReview.Employee__r.Name} "/>     
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                     <apex:outputText value="{!$ObjectType.Performance_Reviews__c.fields.Hire_Date__c.label}"/>
+                     <apex:outputField value="{!performanceReview.Hire_Date__c}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputText value="{!$ObjectType.Performance_Reviews__c.fields.Title__c.label}"/>
+                    <apex:outputField value="{!performanceReview.Title__c} "/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputText value="{!$ObjectType.Performance_Reviews__c.fields.Manager__c.label}"/>
+                    <apex:outputField value="{!performanceReview.Manager__r.Name}" />
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+
+
+            <apex:pageBlockSection title="MBO Information " id="mboInfo" columns="1" rendered="false" >
+                <table width="100%" border="1" class="gridtable">
+                    <tr>
+                        <th width="5%">Quarter</th>
+                        <th style="word-wrap: break-word;" width="5%">Overall Score</th>
+                        <th width="90%">
+                            <span style="position: relative;padding-right:3%;">#</span>
+                            <span style="position: relative;padding-right:25%;">MBO Score</span>
+                            <span style="">MBO Details</span>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td style="width:50px;height;500px;vertical-align: middle">Q1-Q2</td>
+                        <td style="width:50px;height;500px;vertical-align: middle">{!performanceReview.Q1_Q2_Overall_Score__c}</td>
+                        <td style="width:900px;height;500px">
+                            <table width="100%" border="1" class="gridtable">
+                                <tr>
+                                    <td style="width:10px;height;100px"> 1 </td>
+                                    <td style="width:300px;height;100px">{!performanceReview.APTS_MBO_Q1_Q2_Goal_1_Manager_Evaluation__c} </td>
+                                    <td style="width:690px;height;100px">{!performanceReview.APTS_MBO_Q1_Q2_Goal_1__c}</td>
+                                </tr>
+                                <tr>
+                                    <td style="width:10px;height;100px"> 2 </td>
+                                    <td style="width:300px;height;100px">{!performanceReview.APTS_MBO_Q1_Q2_Goal_2_Manager_Evaluation__c} </td>
+                                    <td style="width:690px;height;100px">{!performanceReview.APTS_MBO_Q1_Q2_Goal_2__c}</td>
+                                </tr>
+                                <tr>
+                                    <td style="width:10px;height;100px"> 3 </td>
+                                    <td style="width:300px;height;100px">{!performanceReview.APTS_MBO_Q1_Q2_Goal_3_Manager_Evaluation__c} </td>
+                                    <td style="width:690px;height;100px">{!performanceReview.APTS_MBO_Q1_Q2_Goal_3__c}</td>
+                                </tr>
+                                <tr>
+                                    <td style="width:10px;height;100px"> 4 </td>
+                                    <td style="width:300px;height;100px">{!performanceReview.APTS_MBO_Q1_Q2_Goal_4_Manager_Evaluation__c} </td>
+                                    <td style="width:690px;height;100px">{!performanceReview.APTS_MBO_Q1_Q2_Goal_4__c}</td>
+                                </tr>
+                                <tr>
+                                    <td style="width:10px;height;100px"> 5 </td>
+                                    <td style="width:300px;height;100px">{!performanceReview.APTS_MBO_Q1_Q2_Goal_5_Manager_Evaluation__c} </td>
+                                    <td style="width:690px;height;100px">{!performanceReview.APTS_MBO_Q1_Q2_Goal_5__c}</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:50px;height;500px;vertical-align: middle">Q3-Q4</td>
+                        <td style="width:50px;height;500px;vertical-align: middle">{!performanceReview.Q3_Q4_Overall_Score__c}</td>
+                        <td style="width:900px;height;500px">
+                            <table width="100%" border="1" class="gridtable">
+                                <tr>
+                                    <td style="width:10px;height;100px"> 1 </td>
+                                    <td style="width:300px;height;100px">{!performanceReview.APTS_MBO_Q3_Q4_Goal_1_Manager_Evaluation__c} </td>
+                                    <td style="width:690px;height;100px">{!performanceReview.APTS_MBO_Q3_Q4_Goal_1__c}</td>
+                                </tr>
+                                <tr>
+                                    <td style="width:10px;height;100px"> 2 </td>
+                                    <td style="width:300px;height;100px">{!performanceReview.APTS_MBO_Q3_Q4_Goal_2_Manager_Evaluation__c} </td>
+                                    <td style="width:690px;height;100px">{!performanceReview.APTS_MBO_Q3_Q4_Goal_2__c}</td>
+                                </tr>
+                                <tr>
+                                    <td style="width:10px;height;100px"> 3 </td>
+                                    <td style="width:300px;height;100px">{!performanceReview.APTS_MBO_Q3_Q4_Goal_3_Manager_Evaluation__c} </td>
+                                    <td style="width:690px;height;100px">{!performanceReview.APTS_MBO_Q3_Q4_Goal_3__c}</td>
+                                </tr>
+                                <tr>
+                                    <td style="width:10px;height;100px"> 4 </td>
+                                    <td style="width:300px;height;100px">{!performanceReview.APTS_MBO_Q3_Q4_Goal_4_Manager_Evaluation__c} </td>
+                                    <td style="width:690px;height;100px">{!performanceReview.APTS_MBO_Q3_Q4_Goal_4__c}</td>
+                                </tr>
+                                <tr>
+                                    <td style="width:10px;height;100px"> 5 </td>
+                                    <td style="width:300px;height;100px">{!performanceReview.APTS_MBO_Q3_Q4_Goal_5_Manager_Evaluation__c} </td>
+                                    <td style="width:690px;height;100px">{!performanceReview.APTS_MBO_Q3_Q4_Goal_5__c}</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </apex:pageBlockSection> 
+
+            <apex:pageBlockSection title="Employee’s Feedback" id="employeefeedback" columns="1" rendered="{!(performanceReview.Self_Review_Completed__c && performanceReview.Manager__c == loggedinuserId) || performanceReview.Employee__c == loggedinuserId}" >
+                <apex:pageBlockSectionItem >
+                    <apex:outputPanel >
+                            <apex:outputLabel value="During the past year at Apttus, what are you most proud of having achieved?  What do you see as your most significant accomplishments?  What impact did you have on your team and the company?" style="font-weight:bold" />
+                    </apex:outputPanel>      
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputPanel >
+                        <apex:inputTextarea value="{!performanceReview.Major_Accomplishments_Employee__c}" rows="5" cols="150" disabled="{!performanceReview.Self_Review_Completed__c || performanceReview.Employee__c != loggedinuserId }"/>  
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+
+                <apex:pageBlockSectionItem >
+                    <apex:outputPanel >
+                            <apex:outputLabel value="What didn’t go well?  What got in the way?  If you had the chance, what would you do differently?" style="font-weight:bold" />
+                    </apex:outputPanel>      
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputPanel >
+                        <apex:inputTextarea value="{!performanceReview.Different_Actions_Employee__c}" rows="5" cols="150" disabled="{!performanceReview.Self_Review_Completed__c || performanceReview.Employee__c != loggedinuserId }"/>  
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+
+                <apex:pageBlockSectionItem >
+                    <apex:outputPanel >
+                            <apex:outputLabel value="What are you planning on accomplishing this year?  What impact will your accomplishments have on your team and company?  What do you need from your manager and others to achieve them?" style="font-weight:bold" />
+                    </apex:outputPanel>      
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputPanel >
+                        <apex:inputTextarea value="{!performanceReview.Major_Area_of_Focus_Employee__c}" rows="5" cols="150" disabled="{!performanceReview.Self_Review_Completed__c || performanceReview.Employee__c != loggedinuserId }"/>  
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+
+                <apex:pageBlockSectionItem >
+                    <apex:outputPanel >
+                            <apex:outputLabel value="What are your professional goals?  Next steps in your career?  What skills do you need to develop to get there?" style="font-weight:bold" />
+                    </apex:outputPanel>      
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputPanel >
+                        <apex:inputTextarea value="{!performanceReview.Professional_Goals_Employee__c}" rows="5" cols="150" disabled="{!performanceReview.Self_Review_Completed__c || performanceReview.Employee__c != loggedinuserId }"/> 
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+
+            <apex:pageBlockSection title="Manager’s Feedback" id="maagerfeedback" columns="1"  rendered="{!(performanceReview.Self_Review_Completed__c && performanceReview.Manager__c == loggedinuserId) || performanceReview.Review_Visible_to_Employee__c == 'Yes'}">
+                <apex:pageBlockSectionItem >
+                    <apex:outputPanel >
+                            <apex:outputLabel value="What went well during the past year?  What were {!performanceReview.Employee__r.FirstName}’s major achievements?  Give examples of actions and behaviors that made a positive impact on the team and the company." style="font-weight:bold" />
+                    </apex:outputPanel>      
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputPanel >
+                        <apex:inputTextarea id="MajorAccomplishmentsManager" value="{!performanceReview.Major_Accomplishments_Manager__c}" rows="5" cols="150" disabled="{!performanceReview.Manager_Review_Completed__c || performanceReview.Manager__c != loggedinuserId}"/>  
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+
+                <apex:pageBlockSectionItem >
+                    <apex:outputPanel >
+                            <apex:outputLabel value="What could have gone better?  Give examples of how specific situations could have gone differently and had a better impact on the team and the business." style="font-weight:bold" />
+                    </apex:outputPanel>      
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputPanel >
+                        <apex:inputTextarea id="DifferentActionsManager" value="{!performanceReview.Different_Actions_Manager__c}" rows="5" cols="150" disabled="{!performanceReview.Manager_Review_Completed__c || performanceReview.Manager__c != loggedinuserId}"/>  
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+
+                <apex:pageBlockSectionItem >
+                    <apex:outputPanel >
+                            <apex:outputLabel value="Based on your understanding of {!performanceReview.Employee__r.FirstName}  professional goals, what skills does {!performanceReview.Employee__r.FirstName} need to develop to get there?  Prioritize individual development needs that will have the most positive impact on {!performanceReview.Employee__r.FirstName}, the team, and the company.  What will you do to help {!performanceReview.Employee__r.FirstName} achieve his/her development goals?  How will you measure success?" style="font-weight:bold" />
+                    </apex:outputPanel>      
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputPanel >
+                        <apex:inputTextarea id="MajorAreaofFocusManager" value="{!performanceReview.Major_Area_of_Focus_Manager__c}" rows="5" cols="150" disabled="{!performanceReview.Manager_Review_Completed__c || performanceReview.Manager__c != loggedinuserId}" />  
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+
+            <apex:pageBlockSection title="Overall Rating" id="overallrating" columns="1"  rendered="{!(performanceReview.Self_Review_Completed__c && performanceReview.Manager__c == loggedinuserId) || performanceReview.Review_Visible_to_Employee__c == 'Yes'}">
+                <apex:pageBlockSectionItem >
+                    <apex:outputPanel >
+                            <apex:outputLabel value="Based on the employee’s performance both on 1st and 2nd Half MBOs and in general as described in your answers to the questions above, please give the employee an overall performance rating using the 4-point scale below." style="font-weight:bold" />
+                    </apex:outputPanel>      
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputPanel >
+                       <apex:inputField value="{!performanceReview.Overall_Rating__c}" rendered="{! NOT(performanceReview.Manager_Review_Completed__c) && performanceReview.Manager__c == loggedinuserId}" required="true" />
+                       <apex:outputField value="{!performanceReview.Overall_Rating__c}" rendered="{!performanceReview.Manager_Review_Completed__c}"/>  
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

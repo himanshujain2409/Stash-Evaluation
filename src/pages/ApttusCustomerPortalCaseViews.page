@@ -1,0 +1,82 @@
+<apex:page standardStylesheets="false" Controller="ACPCaseViewsController">
+<script>
+
+
+
+</script>
+<style>
+.headerStyle{
+    font-size:14px;
+    font-family: Arial, Helvetica, sans-serif;
+    color:#1B5C78;
+    background: white;
+    padding: 6px 10px 6px 2px;
+}
+</style>
+<div id="casesView">
+
+<apex:form >
+<c:ApttusCustomerPortalDynamicMenu />
+            <div class="optionsStyle"> 
+                <apex:outputLabel id="lblView" value="View: " styleClass="labelStyle"/>
+                <apex:selectList id="views" value="{!myView}" multiselect="false" size="1" styleClass="selectionOptionsStyle" rendered="true">
+                    <apex:actionSupport event="onchange" action="{!selectedCasesView}"/> 
+                    <apex:selectOptions value="{!listViews}"/>
+                </apex:selectList>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <apex:outputLabel value="{!$Label.SearchTerm}" styleClass="labelStyle"/>
+                <apex:inputText id="txtCaseTerm" value="{!SearchTerm}"/>
+                <apex:commandButton id="cmdSearch" value="Search" action="{!SearchCases}" /> (Use "?" AND/OR "*" As Wildcard Characters)
+                <!--reRender="caseTable" status="SearchStatus"
+                <apex:actionStatus id="SearchStatus" startText="Loading..." stopText=""></apex:actionStatus>
+                -->
+            </div>
+            
+            <apex:pageblock >
+                <apex:pageBlockButtons location="top">
+                    <apex:commandButton value="Create New Case" action="{!newCase}" styleClass="btnStyle"/>
+                                       &nbsp;  <apex:commandButton value="Export To Excel" action="{!exportToExcel}" styleClass="btnStyle"/>
+                </apex:pageBlockButtons>
+                
+                <apex:dataTable id="caseTable" value="{!myCasesList}" var="case" width="100%" headerClass="headerStyle" columnClasses="columnStyle" rowClasses="rowStyle">
+                     <apex:repeat value="{!listView}" var="p">  
+                       
+                        <apex:column headerValue="{!p.Display_Name__c}"> 
+                            <apex:facet name="header">   
+                                <apex:commandLink action="{!sortCases}" value="{!p.Display_Name__c}{!IF(FieldSort=p.Field_API_Name__c,IF(order1='ASC','▼','▲'),'')}" id="idSort" reRender="caseTable, otpNav">
+                                    <apex:param value="{!p.Field_API_Name__c}" name="column" assignTo="{!FieldSort}" ></apex:param>
+                                </apex:commandLink>
+                            </apex:facet> 
+                            <apex:outputLink value="/{!case.Id}">
+                               {!case[p.Field_API_Name__c]}
+                            </apex:outputLink>
+                        </apex:column>
+                     
+                     </apex:repeat>    
+                 </apex:dataTable>
+                 </apex:pageblock>
+                 <apex:outputPanel layout="block" styleClass="pSearchShowMore" id="otpNav">  
+                    Total Records Found:
+                    &nbsp;
+                    <apex:outputText rendered="{!IF(pageCon.resultSize!=null && pageCon.resultSize<10000,true,false)}">
+                        {!pageCon.resultSize}
+                    </apex:outputText> 
+                    &nbsp;
+                    <apex:commandLink action="{!First}" title="First Page" value="First Page" rendered="{!pageCon.HasPrevious}"/>  
+                    <apex:outputPanel styleClass="pShowLess noLink" style="color:grey" rendered="{!NOT(pageCon.HasPrevious)}">First Page</apex:outputPanel>           
+                    &nbsp;
+                    <apex:commandLink action="{!Previous}" title="Previous Page" value="Previous Page" rendered="{!pageCon.HasPrevious}"/>  
+                    <apex:outputPanel styleClass="pShowLess noLink" style="color:grey" rendered="{!NOT(pageCon.HasPrevious)}">Previous Page</apex:outputPanel>           
+                    &nbsp;
+                    ({!IF(pageCon.PageNumber == 1,1,((pageCon.PageNumber -1) * pageCon.PageSize)+1)}-{!IF(pageCon.resultSize!=null && pageCon.resultSize < pageCon.PageSize,pageCon.resultSize,pageCon.PageNumber * pageCon.pageSize)})  
+                    &nbsp;
+                    <apex:outputPanel styleClass="pShowLess noLink" style="color:grey" rendered="{!NOT(pageCon.HasNext)}">Next Page</apex:outputPanel>           
+                    <apex:commandLink title="Next Page" value="Next Page" rendered="{!pageCon.HasNext}" action="{!Next}"/>  
+                    &nbsp;
+                     <apex:outputPanel styleClass="pShowLess noLink" style="color:grey" rendered="{!NOT(pageCon.HasNext)}">Last Page</apex:outputPanel>           
+                    <apex:commandLink action="{!Last}" title="Last Page" value="Last Page" rendered="{!pageCon.HasNext}"/>  
+                    &nbsp;
+                </apex:outputPanel>
+</apex:form>
+</div>
+</apex:page>

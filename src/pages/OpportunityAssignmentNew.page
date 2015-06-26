@@ -1,0 +1,37 @@
+<apex:page standardController="OpportunityAssignment__c" extensions="OpportunityAssignmentExt">
+    <apex:sectionHeader title="Opportunity Assignment Edit"  subtitle="New Opportunity Assignment" />
+    <apex:form >
+        <apex:pageMessages />
+        <apex:pageBlock mode="edit" title="Opportunity Assignment Edit">
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!doSave}" value="Save"/>
+                <!-- <apex:commandButton action="{!saveNew}" value="Save & New"/> -->
+                <apex:commandButton action="{!cancel}" value="Cancel"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection columns="1" title="Information">
+                <apex:panelGrid columns="2" id="theGrid">   
+                    <apex:outputLabel value="Opportunity Assignment Name" for="oan"  styleClass="labelCol"></apex:outputLabel>
+                    <apex:inputField value="{!OpportunityAssignment__c.Name}" id="oan" required="true" />
+                
+                    <apex:outputLabel value="Opportunity Stage" for="os"  styleClass="labelCol"></apex:outputLabel>
+                    <apex:outputPanel >
+                    <div class="requiredInput"><div class="requiredBlock"></div>
+                        <apex:selectList id="os" value="{!OpportunityAssignment__c.Opportunity_Stage__c}" size="1" required="true">
+                            <apex:selectOptions value="{!os}"></apex:selectOptions>
+                        </apex:selectList>
+                    </div>
+                    </apex:outputPanel>
+                    
+                    <apex:outputLabel value="User Roles" for="ur"  styleClass="labelCol"></apex:outputLabel>
+                    <apex:outputPanel >
+                    <div class="requiredInput"><div class="requiredBlock"></div>
+                        <apex:selectList id="ur" value="{!selectedUsers}" size="5" multiselect="true" required="true">
+                            <apex:selectOptions value="{!ur}"></apex:selectOptions>
+                        </apex:selectList>
+                    </div>
+                    </apex:outputPanel>
+                </apex:panelGrid>                      
+            </apex:pageBlockSection>    
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

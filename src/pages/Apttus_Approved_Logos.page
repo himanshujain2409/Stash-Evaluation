@@ -1,0 +1,70 @@
+<apex:page >
+<html lang="en">
+  <head>
+    <meta charset="utf-8"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+    <meta name="description" content=""></meta>
+    <meta name="author" content=""></meta>
+
+    <title>Approved Apttus Logos</title>
+
+    <!-- Bootstrap core CSS -->
+    <apex:stylesheet value="{!URLFOR($Resource.quicklinks_2, 'quicklinks/dist/css/bootstrap.css')}"/>
+
+    <!-- Custom styles for this template -->
+    
+    <apex:stylesheet value="{!URLFOR($Resource.quicklinks_2, 'quicklinks/dist/css/app.css')}"/>
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css'></link>
+
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../../assets/js/html5shiv.js"></script>
+      <script src="../../assets/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+   <body id="apptus">
+
+    <div class="container">
+        <div class="page-header">
+        <img src="{!URLFOR($Resource.quicklinks_2, 'quicklinks/dist/img/header.jpg')}" width="100%" height="auto" alt="Apttus Dreamforce Central"></img>
+        
+        <!--<h1>Apttus </h1>
+        <h1><small>Dreamforce Central</small></h1>-->
+        </div>      
+        
+        <div class="row">
+        <ul>     
+       <div align="Left"><b><font size="6" color="black">Approved Apttus Logos</font></b></div>  
+        </ul>
+          
+          <div class="col-md-6">
+                   
+          <ul>
+            <li><a href="https://apttus.my.salesforce.com/sfc/#version?selectedDocumentId=06950000000m2v6">Apttus Logo JPG</a></li>        
+            <li><a href="https://apttus.my.salesforce.com/sfc/#version?selectedDocumentId=06950000000m2vG">Apttus Logo PNG</a></li>        
+            <li><a href="https://apttus.my.salesforce.com/sfc/#version?selectedDocumentId=06950000000m2uh">Apttus Logo EPS</a></li>                                              
+            </ul>
+             </div>
+          
+          
+
+       
+       
+       
+       
+         
+    </div>
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="dist/js/jquery.js"></script>
+    <script src="dist/js/bootstrap.min.js"></script>
+  </div></body>
+</html>
+
+</apex:page>

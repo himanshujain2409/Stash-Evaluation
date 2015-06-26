@@ -1,0 +1,126 @@
+<apex:page controller="MetricsThatMatterController" title="Metrics that Matter" tabStyle="Report" sidebar="false">
+
+    <script type="text/javascript">
+        function setFocus(){}
+        var sfOnload = window.onload;
+        window.onload = function() {
+            if (sfOnload) {
+                sfOnload();
+            }
+            setFocus();
+        }
+    </script>
+    
+    <apex:sectionHeader title="Metrics that Matter"/>
+    <c:Overlay style="processing" />
+    <apex:form >
+    
+        <apex:actionStatus id="overlayStatus" onStart="showOverlay();" onstop="hideOverlay();"/>
+        <apex:actionFunction name="filter" action="{!filter}" rerender="pbReport" status="overlayStatus"/>
+        <apex:actionFunction name="exportXls" action="{!exportXls}" rerender="pbReport" status="overlayStatus"/>
+        
+        <apex:pageBlock >
+            
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton onclick="filter();return false;" value="Search"/>
+            </apex:pageBlockButtons>
+                
+            <apex:pageBlockSection columns="1">
+            
+                <apex:pageBlockSectionItem >
+                    Show
+                    <apex:selectList value="{!showOption}" multiselect="false" size="1">
+                        <apex:selectOptions value="{!showOptions}"/>
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+            
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Created From " for="startDate"/>
+                    
+                        <apex:outputPanel >
+                            <apex:inputField value="{!fromDate.Callback_Date__c}"/>
+                            &nbsp; <b>To</b> &nbsp;
+                            <apex:inputField value="{!toDate.Callback_Date__c}"/>
+                        </apex:outputPanel>
+                    
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        
+        <apex:pageBlock id="pbReport">
+        
+            <apex:pageBlockButtons location="top">
+                <apex:commandButton action="{!exportXls}" value="Excel"/>
+            </apex:pageBlockButtons>
+            
+            <apex:pageBlockTable value="{!metricWrappers}" var="w">
+            
+                <apex:column >
+                    <apex:facet name="header">Team Member</apex:facet>
+                    {!w.teamMember}
+                </apex:column>
+                
+                <apex:column >
+                    <apex:facet name="header">Rounds/Day</apex:facet>
+                    <apex:outputText value="{0, number, ##0.00}">
+                        <apex:param value="{!w.rounds_Days}"/>
+                    </apex:outputText>
+                </apex:column>
+                
+                <apex:column >
+                    <apex:facet name="header">Round 1KP/Rounds %</apex:facet>
+                    <apex:outputText value="{0, number, ##0}%">
+                        <apex:param value="{!w.round1KP_Round}"/>
+                    </apex:outputText>
+                </apex:column>
+                
+                <apex:column >
+                    <apex:facet name="header">KP/Company Ratio</apex:facet>
+                    <apex:outputText value="{0, number, ##0.00}">
+                        <apex:param value="{!w.kp_CompanyRatio}"/>
+                    </apex:outputText>
+                </apex:column>
+                <apex:column >
+                    <apex:facet name="header">Touches/Rounds Ratio</apex:facet>
+                    <apex:outputText value="{0, number, ##0.00}">
+                        <apex:param value="{!w.touchesPerRoundRatio}"/>
+                    </apex:outputText>
+                </apex:column>
+                <apex:column >
+                    <apex:facet name="header">Email % to Unique KP</apex:facet>
+                    <apex:outputText value="{0, number, ##0.00}">
+                        <apex:param value="{!w.emailPercent}"/>
+                    </apex:outputText>
+                </apex:column>
+                <apex:column >
+                    <apex:facet name="header">Rounds/Company</apex:facet>
+                    <apex:outputText value="{0, number, ##0.00}">
+                        <apex:param value="{!w.rounds_Company}"/>
+                    </apex:outputText>
+                </apex:column>
+                <apex:column >
+                    <apex:facet name="header">Rounds/KP</apex:facet>
+                    <apex:outputText value="{0, number, ##0.00}">
+                        <apex:param value="{!w.rounds_KP}"/>
+                    </apex:outputText>
+                </apex:column>
+                <apex:column >
+                    <apex:facet name="header">Rounds/MIs Booked</apex:facet>
+                    <apex:outputText value="{0, number, ##0.00}">
+                        <apex:param value="{!w.rounds_MIsBooked}"/>
+                    </apex:outputText>
+                </apex:column>
+                <apex:column >
+                    <apex:facet name="header">MI/KP Dialogues</apex:facet>
+                    <apex:outputText value="{0, number, ##0.00}">
+                        <apex:param value="{!w.mi_KPDialogues}"/>
+                    </apex:outputText>
+                </apex:column>
+                
+            </apex:pageBlockTable>
+            
+        </apex:pageBlock>
+        
+    </apex:form>
+    
+</apex:page>

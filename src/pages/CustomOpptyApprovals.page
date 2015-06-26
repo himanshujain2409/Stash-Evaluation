@@ -1,0 +1,106 @@
+<!-- 
+    Apttus Approvals Management
+    CustomOpptyApprovals
+     
+    @2014 Apttus Inc. All rights reserved.
+
+ -->
+<apex:page controller="CustomOpptyApprovalsController"
+           sidebar="{!showSidebar}"
+           showHeader="{!showHeader}">
+    
+    <script type="text/javascript">
+        // determine if we are in salesforce1
+        var inSf1Mode = false;
+        try {
+            if (sforce.one) {
+                inSf1Mode = true;
+            }
+        }
+        catch(err) {
+        }
+    </script>
+
+    <!-- include CSS resources first -->
+    <apex:stylesheet value="{!URLFOR($Resource.Apttus_Approval__JQueryUILibrary, 'css/ui-lightness/jquery-ui-1.8.16.custom.css')}" />
+
+    <!-- include JS resources last -->
+    <apex:includeScript value="{!URLFOR($Resource.Apttus_Approval__JQueryUILibrary, 'js/jquery-1.6.2.min.js')}" />
+    <apex:includeScript value="{!URLFOR($Resource.Apttus_Approval__JQueryUILibrary, 'js/jquery-ui-1.8.16.custom.min.js')}" />
+    
+    <!-- include JS resources for preview, submit, and cancel -->
+    <apex:include pageName="Apttus_Approval__ApprovalsJSLibInclude" />
+    <script type="text/javascript" src="/soap/ajax/30.0/connection.js"></script>
+    <script type="text/javascript" src="/soap/ajax/30.0/apex.js"></script>
+
+    <apex:form >
+        <apex:outputPanel id="idReturnToCaller">
+            <script type="text/javascript">
+                // make sure jQuery doesn't conflict with any other JS libraries
+                j$ = jQuery.noConflict();
+
+                // call this once the page is ready
+                j$(document).ready(function() {
+                          
+                    // handle page navigation based on whether or not we are in salesforce1 mode
+                    var pageLoaded = "{!pageLoaded}";
+                    var pageURL = "{!JSENCODE(pageURL)}";
+
+                    if (pageLoaded == 'false') {
+                        launchSObjectApprovals(inSf1Mode);
+
+                    } else {
+                        if (pageURL.length > 0) {
+                            // determine if we are in Salesforce1 and set navigation link appropriately
+                            try {
+                                if (sforce.one) {
+                                    sforce.one.navigateToURL(pageURL);
+                                }
+                                else {
+                                    top.location.replace(pageURL);
+                                    return true;
+                                }
+                            }
+                            catch(err) {
+                            }
+                        }
+                    
+                    }
+                    
+                });
+            </script>
+        </apex:outputPanel>
+
+        <script>
+            function invokeDoReturn(actionTaken) {
+                // pass actionTaken as parameter since we will redirect page after refresh
+                returnToCaller(actionTaken);
+            }
+        </script>
+
+        <apex:pageMessages id="idErrorPanel" />
+
+        <apex:outputPanel id="idApprovalsPanel">
+            <Apttus_Approval:SObjectApprovals2 id="idSObjectApprovals"
+                                               rendered="{!pageLoaded && NOT(inSf1Mode)}"
+                                               contextInfoParam="{!contextInfo}" />
+            <Apttus_Approval:SObjectApprovals2Sf1 id="idSObjectApprovalsSf1"
+                                                  rendered="{!pageLoaded && inSf1Mode}"
+                                                  contextInfoParam="{!contextInfo}" />
+        </apex:outputPanel>
+
+        <apex:actionFunction name="launchSObjectApprovals"
+                             action="{!doLaunchSObjectApprovals}"
+                             reRender="idErrorPanel,idApprovalsPanel">
+            <apex:param name="param1" assignTo="{!inSf1Mode}" value="" />
+        </apex:actionFunction>
+
+        <!-- pass actionTaken as parameter since we will redirect page after refresh -->
+        <apex:actionFunction name="returnToCaller"
+                             action="{!doReturnToCaller}"
+                             reRender="idReturnToCaller">
+            <apex:param name="actionTaken" value="" />
+        </apex:actionFunction>
+
+    </apex:form>
+</apex:page>

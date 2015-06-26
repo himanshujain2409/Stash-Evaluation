@@ -1,0 +1,144 @@
+<apex:page id="loginPage" showHeader="false" standardStylesheets="false" title="{!$Label.site.site_login}" controller="CommunitySiteLoginController">
+    <apex:stylesheet value="{!URLFOR($Resource.ApttusCustomerPortalSiteLogin, 'css/main.css')}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <link href="{!URLFOR($Resource.CustomerLoginStyle,'salesforce-login.css')}" rel="stylesheet"  type="text/css"></link>
+    <script>
+        $j = jQuery.noConflict();
+
+        var testing;
+
+
+        $j(document).ready(function() {
+            $j("#bookmark").click(function (evt) {
+                evt.preventDefault();
+                var title = "Apttus Customer Portal";
+
+                if (window.sidebar) {
+                    window.sidebar.addPanel(title, document.URL, "");
+                } else if(document.all) {
+                    window.external.AddFavorite(document.URL, title);
+                } else {
+                    alert("To bookmark this page press:\n" +
+                           "    Ctrl+D (Windows or Linux), or\n" + 
+                           "    Command+D (Mac OS)");
+                }
+            });
+        });
+    </script>
+    <!-- TEST COMMENT -->
+    <div class="container">
+    
+        <!-- Header -->
+        <div id="login_header">
+            <div id="login_header_content">
+                <a class="logo" href="http://www.apttus.com"><img src="{!URLFOR($Resource.ApttusCustomerPortalSiteLogin, 'img/logo.gif')}"/></a>
+                <h1>Success Portal</h1>
+                <span id="bookmark"><a href="#" rel="bookmark">Bookmark this page</a></span>
+            </div>
+        </div>
+
+        <!-- Lower grid -->
+        <div id="login_lower_grid">
+            <apex:pageMessages id="error"/>
+
+            <div id="content_top" class="clearfix">
+                <div id="left_box" class="box">
+                    <div class="content">
+                        <apex:form id="loginForm">
+                            <div class="form-title">
+                                <h2>Apttus Community</h2>
+                            </div>
+                        <!--c:ApttusCustomerPortalSiteLogin id="siteLogin"/-->
+                            <apex:outputPanel layout="block" id="siteLogin" rendered="{!isShowLogin}">
+                              <apex:panelGrid columns="1" style="margin-top:1em;">
+                                <apex:outputLabel value="{!$Label.site.username}" for="username"/>
+                                <apex:inputText id="username" value="{!username}"/>
+                                <apex:outputLabel value="{!$Label.site.password}" for="password"/>
+                                <apex:inputSecret id="password" value="{!password}"/>
+                                <apex:panelGroup >
+                                    <apex:inputCheckbox title="Remember My Username" id="rememberUser" value="{!rememberUser}"/>
+                                    <label for="rememberUser">Remember User Name</label>
+                                </apex:panelGroup>
+
+                                <apex:panelGroup id="theLinks">
+                                  <apex:commandButton action="{!login}" value="{!$Label.site.login_button}" id="loginButton"/>
+                                  <apex:commandLink value="{!$Label.site.forgot_your_password_q}" action="{!forgotPassword}" reRender="loginForm"/>
+                                </apex:panelGroup>
+                              </apex:panelGrid> 
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!isForgotPassword}">
+                                <b>Did you forget your password? Please enter your user name below. </b><br/><br/>
+                                <apex:outputLabel value="{!$Label.site.username}" 
+                                    styleClass="label"/>
+                                <apex:inputText styleClass="text" 
+                                value="{!username}" /><br/>
+                                <apex:commandButton value="Submit" action="{!submit}" style="margin-right: 10px;" reRender="loginForm"/>
+                                <apex:commandButton value="Back To Login" action="{!backToLogin}" reRender="loginForm"/>
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!isShowForgotPasswordConfirmationMsg}">
+                                <p>Please verify your mail.<apex:commandLink value="Return to login page" action="{!returnToLogin}" reRender="loginForm"/></p>
+                            </apex:outputPanel>
+                        </apex:form>
+                        <div class="separator">
+                        </div>
+
+                        <!-- <div class="lower_content">
+                                <h1><a href="http://info.apttus.com/ApttusSolutionslogin.html" target="_blank"><b>Additional Applications</b></a></h1>
+                                <p>
+                                    Find out how Apttus can help your business with the complete quote-to-cash process.
+                                </p>
+                        </div> -->
+                    </div>
+                </div>
+                <div id="right_box">
+                <!--    <div class="box">
+                        <div class="content">
+                            <a class="img_link" href="https://appexchange.salesforce.com/listingDetail?listingId=a0N300000016bGHEAY" target="_blank"></a>
+                        </div>
+                    </div> 
+                    <div class="box">
+                        <div class="content">
+                            <a class="img_link" href="http://info.apttus.com/Deal-Maximizer.html" target="_blank"></a>
+                        </div>
+                    </div>-->
+                <!--<div class="box">
+                        <div class="content">
+                            
+                        </div>
+                    </div>-->
+              
+                <a href='http://www.apttus.com/accelerate2015/?%E2%80%9Dtarget=' target="_blank"> <img src="{!URLFOR($Resource.CustomerLoginStyle, '/banner.png')}"  /> </a><br/><br/>
+                <a href='https://appexchange.salesforce.com/listingDetail?listingId=a0N300000016bGHEAY&tab=r' target="_blank"> <img src="{!URLFOR($Resource.CustomerLoginStyle, '/appexchange_review.png')}"/></a>
+
+             
+                </div>
+                                </div>
+
+            <!-- System Status -->
+            <div id="system_status" class="box">
+                <div class="content">
+                    <h1>System Status</h1>
+                    <p>
+                        Security Alerts, Best Practices, and System Status. To review live and historical data on system performance, review any security alerts, 
+                        learn more about information safeguards and review planned maintenance schedules visit: <a href="http://trust.salesforce.com/trust/" target="_blank">trust.salesforce.com</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+       
+        <!-- Footer -->
+        <!-- div id="footer">
+            <ul>
+                <li><a href="http://www.apttus.com/solutions">Solutions</a></li>
+                <li><a href="http://www.apttus.com/customers">Customers</a></li>
+                <li><a href="http://www.apttus.com/services">Services</a></li>
+                <li><a href="http://www.apttus.com/company">Company</a></li>
+                <li><a href="http://www.apttus.com/resource">Resource Center</a></li>
+                <li><a href="http://www.apttus.com/company/contact-us.php">Contact Us</a></li>
+                <li><a href="http://www.apttus.com/PrivacyPolicy.pdf">Privacy Policy</a></li>
+            </ul>
+            <p>Copyright ©2013 Apttus. All Rights Reserved. Various trademarks held by their respective owners.</p>
+        </div -->
+
+    </div> <!-- container -->
+</apex:page>

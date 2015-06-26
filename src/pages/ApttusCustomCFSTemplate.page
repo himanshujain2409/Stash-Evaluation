@@ -1,0 +1,408 @@
+<apex:page controller="cfsp.CFSP_TemplateController" showHeader="{!NOT(ISBLANK($CurrentPage.parameters.sfdc.tabName))}" sidebar="false" standardStylesheets="false" cache="false" docType="html-5.0" id="pageTempl" >
+
+    <head>
+        <meta charset="utf-8" />
+        <title>{!$Site.Name}</title>
+        <meta name="author" content=""/>
+        <meta name="description" content=""/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        
+        <script type="text/javascript">if (location.href.match(/inline=1/)) window.top.location=location.href.replace(/inline=1/, '');</script>
+
+        <apex:outputPanel layout="none" rendered="{!ISBLANK($CurrentPage.parameters.sfdc.tabName)}">
+            <apex:stylesheet value="{!URLFOR($Resource.cfsp__CFSP,'css/bootstrap.min.css')}"/>
+            <apex:stylesheet value="{!URLFOR($Resource.cfsp__CFSP,'css/bootstrap-responsive.css')}"/>
+            <apex:stylesheet value="{!URLFOR($Resource.cfsp__CFSP,'css/nested-table.css')}"/>
+            <apex:stylesheet value="{!URLFOR($Resource.cfsp__CFSP,'css/overrides.css')}"/>
+            <apex:stylesheet value="{!URLFOR($Resource.cfsp__CFSP,'css/overrides-responsive.css')}"/>
+            <apex:stylesheet value="{!URLFOR($Resource.cfsp__CFSP,'css/hacks.css')}"/>
+        </apex:outputPanel>
+
+        <apex:outputPanel layout="none" rendered="{!NOT(ISBLANK($CurrentPage.parameters.sfdc.tabName))}">
+            <apex:stylesheet value="{!URLFOR($Resource.cfsp__CFSP,'css/bootstrapPortal.min.css')}"/>
+            <apex:stylesheet value="{!URLFOR($Resource.cfsp__CFSP,'css/bootstrap-responsive.css')}"/>
+            <apex:stylesheet value="{!URLFOR($Resource.cfsp__CFSP,'css/nested-table.css')}"/>
+            <apex:stylesheet value="{!URLFOR($Resource.cfsp__CFSP,'css/overridesPortal.css')}"/>
+            <apex:stylesheet value="{!URLFOR($Resource.cfsp__CFSP,'css/overrides-responsive.css')}"/>
+            <apex:stylesheet value="{!URLFOR($Resource.cfsp__CFSP,'css/hacks.css')}"/>
+        </apex:outputPanel>
+
+        <style>
+         
+            table.outer-table {
+                border: 1px solid #72B40F;
+            }
+            table.outer-table th {
+                background: #72B400;
+                color: white;
+                text-align: left;
+            }
+            table.agenda th {
+                background: #72B400 !important;
+                border-width: 1px;
+                border-style: solid;
+                text-align: left;
+            }
+            table.agenda tr:last-child td {
+                border-bottom: 1px solid rgb(190, 190, 190) !important;
+            }
+            table.agenda:before {
+                border-right: 1px solid rgb(190, 190, 190);
+            }
+            table.agenda:after {
+                border-left: 1px solid rgb(190, 190, 190);
+            }
+            table.agenda tr, table.agenda th, table.agenda td {
+                border-top-style: none !important;
+            }
+            a {
+                color: #72B400;
+            }
+            a:hover, a:focus {
+                color: #72B400;
+            }
+            .legend {
+                color: #72B400;
+            }
+            table.inner-table tr td a {
+                color: #72B400;
+            }
+            table.inner-table tr td a.title-desc-btn {
+                color: #333;
+            }
+            table.inner-table tr td a.title-desc-btn:hover, table.inner-table tr td a.title-desc-btn:focus {
+                color: #72B400;
+            }
+            table.outer-table > tbody > tr.fork:nth-child(2n),
+            table.outer-table > tbody > tr.fork:nth-child(2n) table.agenda:before,
+            table.outer-table > tbody > tr.fork:nth-child(2n) table.agenda:after {
+                background: rgb(255, 255, 255);
+            }
+
+            table.outer-table {
+                border: 1px solid #72B400 !important;
+                //border: solid rgb(222, 222, 222);
+                //border-width: 1px;
+            }
+            table.outer-table th {
+                border: solid #72B400;
+                border-width: 0 1px 0 1px;
+            }
+            table.outer-table th, table.outer-table td {
+                border: solid #72B400;
+                border-width: 1px 2px 0 0;
+                padding: 10px;
+                vertical-align: top;
+            }
+            table.inner-table td {
+                border-color: #72B400;
+                border-style: dashed;
+                border-width: 1px 0 0 0;
+            }
+            table.inner-table td {
+                border-color: gray;
+                border-style: dashed;
+                border-width: 1px 0 0 0;
+            }
+            table.inner-table tr td a {
+                color: #72B400;
+            }
+            table.inner-table tr td a.title-desc-btn {
+                color: #333;
+            }
+            table.inner-table tr td a.title-desc-btn:hover, table.inner-table tr td a.title-desc-btn:focus {
+                color: #72B400;
+            }
+            table.agenda tr:last-child td {
+                border-bottom: 1px solid #72B400 !important;
+            }
+            table.agenda:before {
+                border-right: 1px solid #72B400;
+            }
+            table.agenda:after {
+                border-left: 1px solid #72B400;
+            }
+            
+            .prolate table.outer-table th:nth-child(2), .prolate table.outer-table td:nth-child(2) {
+                width: 12%;
+            }
+            .prolate table.outer-table th:nth-child(3), .prolate table.outer-table td:nth-child(3) {
+                width: 8%;
+            }
+            
+            .prolate table.outer-table th:nth-child(5), .prolate table.outer-table td:nth-child(5) {
+                width: 9%;
+            }
+            
+            .prolate table.outer-table th:nth-child(8), .prolate table.outer-table td:nth-child(8) {
+                text-align: center;
+                width: 7%;
+            }
+            .prolate table.outer-table th:nth-child(1), .prolate table.outer-table td:nth-child(1) {
+                width: 24%;
+            }
+            .header .headerNav .header-links li, .header .headerNav .header-links li h2 { line-height: 12px;}
+            h1, h2, h3 {line-height:1}
+         
+        </style> 
+        <apex:stylesheet value="{!URLFOR($Resource.cfsp__CFSP,'css/bootstrap-datetimepicker.min.css')}"/>
+        <!-- hack for Learning tab -->
+        <apex:outputPanel layout="none" rendered="{!$CurrentPage.parameters.dat='true'}">
+            <style>
+                .bodyDiv {
+                    padding-top: 0px !important;
+                }
+                .noSidebarCell, .sidebarCell .fixed {
+                    padding: 0px !important;
+                }
+                .breadcrumb > .active > a {
+                    color: #6A6C6D !important;
+                }
+                .breadcrumb {
+                    padding: 4px 10px;
+                    background-color: #72B400;
+                    border-radius: 0px;
+                }
+                .breadcrumb > li {
+                    text-shadow: none !important;
+                }
+                .breadcrumb > li > a{
+                    color: white !important;
+                }
+            </style>
+        </apex:outputPanel>
+    </head>
+
+    <body>
+
+        <apex:actionStatus layout="block" stopText="" id="statusBox">
+            <apex:facet name="start">
+                <apex:outputPanel layout="block" styleClass="statusBox-layer">
+                    <apex:outputPanel layout="block" styleClass="statusBox-msgBox"></apex:outputPanel>
+                    <apex:outputPanel layout="block" styleClass="statusBox-msg"><apex:image url="{!URLFOR($Resource.cfsp__CFSP,'img/spinner.gif')}"/>&nbsp;&nbsp;</apex:outputPanel>
+                </apex:outputPanel>
+            </apex:facet>
+        </apex:actionStatus>
+        
+        <!-- Sub tabs for Learning tab -->
+        <apex:outputPanel layout="none" rendered="{!$CurrentPage.parameters.dat='true'}">
+            <ul class="breadcrumb">
+                <li class="{!IF(OR(CONTAINS(LOWER($CurrentPage.URL), '/cfsp_findlearning'),CONTAINS(LOWER($CurrentPage.URL), '/cfsp__cfsp_findlearning')),'active','')}"><apex:outputLink value="{!$Page.cfsp__CFSP_FindLearning}?dat=true{!IF(NOT(ISNULL($CurrentPage.parameters.sfdc.tabName)),'&sfdc.tabName='+$CurrentPage.parameters.sfdc.tabName,'')}">{!$Label.cfsp__CFSP_COMMON_LINK_PAGE_FIND_LEARNING}</apex:outputLink></li>
+                <li class="{!IF(AND(OR(CONTAINS(LOWER($CurrentPage.URL), '/cfsp_mylearning'),CONTAINS(LOWER($CurrentPage.URL), '/cfsp__cfsp_mylearning')),AND(!ISBLANK($CurrentPage.parameters.mode),$CurrentPage.parameters.mode='0')),'active','')}"><apex:outputLink value="{!$Page.cfsp__CFSP_MyLearning}?mode=0&dat=true{!IF(NOT(ISNULL($CurrentPage.parameters.sfdc.tabName)),'&sfdc.tabName='+$CurrentPage.parameters.sfdc.tabName,'')}">{!$Label.cfsp__CFSP_COMMON_LINK_PAGE_MY_LEARNING}</apex:outputLink></li>
+                <li class="{!IF(AND(OR(CONTAINS(LOWER($CurrentPage.URL), '/cfsp_mylearning'),CONTAINS(LOWER($CurrentPage.URL), '/cfsp__cfsp_mylearning')),AND(!ISBLANK($CurrentPage.parameters.mode),$CurrentPage.parameters.mode='5')),'active','')}"><apex:outputLink value="{!$Page.cfsp__CFSP_MyLearning}?mode=5&dat=true{!IF(NOT(ISNULL($CurrentPage.parameters.sfdc.tabName)),'&sfdc.tabName='+$CurrentPage.parameters.sfdc.tabName,'')}">{!$Label.cfsp__CFSP_COMMON_LINK_PAGE_DEVELOPMENT_PLANS}</apex:outputLink></li>
+                <li class="{!IF(AND(OR(CONTAINS(LOWER($CurrentPage.URL), '/cfsp_mylearning'),CONTAINS(LOWER($CurrentPage.URL), '/cfsp__cfsp_mylearning')),AND(!ISBLANK($CurrentPage.parameters.mode),$CurrentPage.parameters.mode='1')),'active','')}"><apex:outputLink value="{!$Page.cfsp__CFSP_MyLearning}?mode=1&dat=true{!IF(NOT(ISNULL($CurrentPage.parameters.sfdc.tabName)),'&sfdc.tabName='+$CurrentPage.parameters.sfdc.tabName,'')}">{!$Label.cfsp__CFSP_COMMON_LINK_PAGE_COMPLETED_LEARNING}</apex:outputLink></li>
+            </ul>
+        </apex:outputPanel>
+
+        <apex:outputPanel layout="block" styleClass="wrapper">
+            <apex:outputPanel layout="none" rendered="{!$CurrentPage.parameters.dat!='true'}">
+            <apex:outputPanel layout="none" rendered="{!ISBLANK($CurrentPage.parameters.sfdc.tabName)}">
+                <apex:outputPanel layout="block" styleClass="navbar navbar-inverse navbar-fixed-top">
+                    <apex:outputPanel layout="block" styleClass="navbar-inner">
+                        <apex:outputPanel layout="block" styleClass="container-fluid"/>
+                        <apex:outputPanel layout="block" styleClass="container-fluid">
+                            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a>
+                            <apex:outputLink styleClass="brand" value="javascript:void(0);">&nbsp;</apex:outputLink>
+                        </apex:outputPanel>
+                        <apex:outputPanel layout="block" styleClass="container-fluid">
+                            <apex:outputPanel layout="block" styleClass="nav-collapse collapse" id="navbar">
+                                <p class="navbar-text pull-right">
+                                    <apex:outputText value="{!IF(ISPICKVAL($User.UserType,'Guest'),$Label.cfsp__CFSP_COMMON_TITLE_HELLO_GUEST,$Label.cfsp__CFSP_COMMON_TITLE_HELLO + ', ' + $User.FirstName + ' ' + $User.LastName + ' !')}"/>
+                                    <apex:outputLink styleClass="navbar-link" value="{!IF(ISPICKVAL($User.UserType,'Guest'),$Page.cfsp__CFSP_Login,'/secur/logout.jsp')}">{!IF(ISPICKVAL($User.UserType,'Guest'),$Label.cfsp__CFSP_COMMON_LINK_SIGN_IN,$Label.cfsp__CFSP_COMMON_LINK_LOG_OUT)}</apex:outputLink>
+                                </p>
+
+                                <ul class="nav nav-pills">
+                                    <apex:outputPanel layout="none" rendered="{!AND(ISPICKVAL($User.UserType,'Guest'),settings['anonymousSearching'])}">
+                                        <li class="{!IF(OR(CONTAINS(LOWER($CurrentPage.URL), '/cfsp_findlearning'),CONTAINS(LOWER($CurrentPage.URL), '/cfsp__cfsp_findlearning')),'active','')}"><apex:outputLink value="{!$Page.cfsp__CFSP_FindLearning}">{!$Label.cfsp__CFSP_COMMON_LINK_PAGE_FIND_LEARNING}</apex:outputLink></li>
+                                    </apex:outputPanel>
+                                    <apex:outputPanel layout="none" rendered="{!NOT(ISPICKVAL($User.UserType,'Guest'))}">
+                                        <li class="{!IF(OR(CONTAINS(LOWER($CurrentPage.URL), '/cfsp_findlearning'),CONTAINS(LOWER($CurrentPage.URL), '/cfsp__cfsp_findlearning')),'active','')}"><apex:outputLink value="{!$Page.cfsp__CFSP_FindLearning}">{!$Label.cfsp__CFSP_COMMON_LINK_PAGE_FIND_LEARNING}</apex:outputLink></li>
+                                        <li class="{!IF(AND(OR(CONTAINS(LOWER($CurrentPage.URL), '/cfsp_mylearning'),CONTAINS(LOWER($CurrentPage.URL), '/cfsp__cfsp_mylearning')),AND(!ISBLANK($CurrentPage.parameters.mode),$CurrentPage.parameters.mode='0')),'active','')}"><apex:outputLink value="{!$Page.cfsp__CFSP_MyLearning}?mode=0">{!$Label.cfsp__CFSP_COMMON_LINK_PAGE_MY_LEARNING}</apex:outputLink></li>
+                                        <li class="{!IF(AND(OR(CONTAINS(LOWER($CurrentPage.URL), '/cfsp_mylearning'),CONTAINS(LOWER($CurrentPage.URL), '/cfsp__cfsp_mylearning')),AND(!ISBLANK($CurrentPage.parameters.mode),$CurrentPage.parameters.mode='1')),'active','')}"><apex:outputLink value="{!$Page.cfsp__CFSP_MyLearning}?mode=1">{!$Label.cfsp__CFSP_COMMON_LINK_PAGE_COMPLETED_LEARNING}</apex:outputLink></li>
+                                        <li class="{!IF(OR(CONTAINS(LOWER($CurrentPage.URL), '/cfsp_myaccount'),CONTAINS(LOWER($CurrentPage.URL), '/cfsp__cfsp_myaccount')),'active','')}"><apex:outputLink value="{!$Page.cfsp__CFSP_MyAccount}">{!$Label.cfsp__CFSP_COMMON_LINK_PAGE_MY_ACCOUNT}</apex:outputLink></li>
+                                    </apex:outputPanel>
+                                </ul>
+                            </apex:outputPanel>
+                        </apex:outputPanel>
+                        <apex:outputPanel layout="block" styleClass="container-fluid"/>
+                    </apex:outputPanel>
+                </apex:outputPanel>
+            </apex:outputPanel>
+            </apex:outputPanel>
+
+            <!-- Body Content -->
+            <apex:insert name="body"/>
+
+        </apex:outputPanel>
+
+       <div class="sidebarModulePortalWelcomeContainer sidebarModule" style="display: none;">
+           <div class="sidebarModuleHeader brandPrimaryBgr">
+               <h2 class="brandPrimaryFgr"><apex:outputText value="Welcome, {!$User.FirstName} {!$User.LastName}"/></h2>
+           </div>
+       </div>
+       
+       <!-- Footer -->
+        <apex:outputPanel layout="none" rendered="{!ISBLANK($CurrentPage.parameters.sfdc.tabName)}">
+            <apex:outputPanel layout="block" styleClass="footer">
+                <apex:outputPanel layout="block" styleClass="container-fluid">
+                    <apex:outputPanel layout="block" styleClass="row-fluid">
+                        <apex:outputPanel layout="block" styleClass="span12">
+                            <p class="copyright">Copyright &copy;<apex:outputPanel layout="inline" id="date">2013</apex:outputPanel></p>
+                        </apex:outputPanel>
+                    </apex:outputPanel>
+                </apex:outputPanel>
+            </apex:outputPanel>
+        </apex:outputPanel>
+
+        <apex:outputPanel layout="block" styleClass="lightbox">
+            <apex:outputPanel layout="block" styleClass="window">
+                <apex:outputPanel layout="block" styleClass="header">
+                    <a class="close"><i class="icon-large icon-remove icon-button"></i></a>
+                </apex:outputPanel>
+                <apex:outputPanel layout="block" styleClass="bracket"></apex:outputPanel>
+            </apex:outputPanel>
+        </apex:outputPanel>
+
+        <!--
+        <apex:includeScript value="{!URLFOR($Resource.cfsp__CFSP,'js/jquery.min.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.cfsp__CFSP,'js/bootstrap.min.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.cfsp__CFSP,'js/nested-table.js')}"/>
+        -->
+        
+        <apex:includeScript value="{!URLFOR($Resource.cfsp__CFSP,'js/jquery.min.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.cfsp__CFSP,'js/bootstrap.min.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.cfsp__CFSP,'js/nested-table.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.cfsp__CFSP,'/js/bootstrap-datetimepicker.min.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.cfsp__CFSP,'/js/locales/bootstrap-datetimepicker.' + settings['currentLocaleShort'] + '.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.cfsp__CFSP,'js/launch.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.cfsp__CFSP,'js/ie-polyfill.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.cfsp__CFSP,'js/cfsp.js')}"/>
+
+        <script>
+            var CURRENT_LOCALE,CURRENT_LOCALE_SHORT,CURRENT_LOCALE_DATE_TIME_FORMAT;
+
+            function expandDevelopmentPlans() {
+                jQuery('tr .type-DevelopmentPlan a[name="knob"], tr .type-Activity a[name="knob"]').click();
+            }
+
+            function defineDateTimePicker() {
+                CURRENT_LOCALE = '{!settings['currentLocale']}';
+                CURRENT_LOCALE_SHORT = '{!settings['currentLocaleShort']}';
+                CURRENT_LOCALE_DATE_TIME_FORMAT = 'mm/d/yyyy h:ii P';
+
+                try {
+                    if (cfsp.locales[CURRENT_LOCALE] !== undefined) {
+                        CURRENT_LOCALE_DATE_TIME_FORMAT = cfsp.locales[CURRENT_LOCALE];
+                    }
+                    else if (cfsp.locales[CURRENT_LOCALE_SHORT] !== undefined) {
+                        CURRENT_LOCALE_DATE_TIME_FORMAT = cfsp.locales[CURRENT_LOCALE_SHORT];
+                    }
+                }
+                catch (e) {}
+
+                $('div.date-time-picker > input').each(function(i,e) {
+                    $(e).datetimepicker({
+                        format: CURRENT_LOCALE_DATE_TIME_FORMAT,
+                        language: CURRENT_LOCALE_SHORT,
+                        minView: 2,
+                        todayBtn: true,
+                        autoclose: true,
+                        showMeridian: false
+                    });
+                });
+
+            }
+            /*$(function() {
+                if ($('body').width() <= 979) {
+                    $('#apart').addClass('span3').removeClass('span2');
+                    $('#part').addClass('span9').removeClass('span10');
+                }
+                $(window).resize(function() {
+                    if ($('body').width() <= 979) {
+                        $('#apart').addClass('span3').removeClass('span2');
+                        $('#part').addClass('span9').removeClass('span10');
+                    }
+                });
+                if ($('body').width() > 979) {
+                    $('#apart').addClass('span2').removeClass('span3');
+                    $('#part').addClass('span10').removeClass('span9');
+                }
+                $(window).resize(function() {
+                    if ($('body').width() > 979) {
+                        $('#apart').addClass('span2').removeClass('span3');
+                        $('#part').addClass('span10').removeClass('span9');
+                    }
+                });
+            });*/
+            function defineSettings() {
+                try {
+                    defineDateTimePicker();
+                }
+                catch(e) {}
+
+                try {
+                    expandDevelopmentPlans();
+                }
+                catch(e) {}
+                $(function() {
+                    (document).on('click', '.title-desc-btn', function() {
+                        $(this).next().next().toggle();
+                    });
+                });
+                if (!(/^.*(apttus.force.com*)/i.test(window.location.href))) {
+                    $('.navigation').find('a').each(function() {
+                        if ($(this).attr('id') == 'home' || $(this).attr('id') == 'cases' || $(this).attr('id') == 'documentation' || $(this).attr('id') == 'Install' || $(this).attr('id') == 'nav_doc_faq' || $(this).attr('id') == 'nav_doc_doc') {
+                            var linksource = jQuery(this).attr('href');
+                            if (linksource.indexOf('/apex/c__') == -1) {
+                                var linkcustom = linksource.replace('/apex/','/apex/c__');
+                                $(this).attr('href', linkcustom);
+                            }
+                        }
+                    });
+                    var logolink = $('div.logo').find('a');
+                    var linksource = logolink.attr('href');
+                    if (linksource.indexOf('/apex/c__') == -1) {
+                        var linkcustom = linksource.replace('/apex/','/apex/c__');
+                        logolink.attr('href', linkcustom);
+                    }
+                }
+     
+                
+                var certlinks = $('.m-award').parent();
+                if (certlinks !== undefined) {
+                    for (var i=0; i < certlinks.length; i++) {
+                        var linksource = $(certlinks[i]).attr('href');
+                        var linkcustom = linksource.replace('lmscons__LMS_Certificate','c__Certificate_Apttus');
+                        $(certlinks[i]).attr('href', linkcustom);
+                        $(certlinks[i]).attr('target', '__blank');
+                    }
+                }
+            }
+            $(function() {
+                defineSettings();
+                $('.nav-training').addClass('active');
+                var certlinks = $('.m-award').parent();
+                if (certlinks !== undefined) {
+                    for (var i=0; i < certlinks.length; i++) {
+                        var linksource = $(certlinks[i]).attr('href');
+                        var linkcustom = linksource.replace('lmscons__LMS_Certificate','c__Certificate_Apttus');
+                        $(certlinks[i]).attr('href', linkcustom);
+                        $(certlinks[i]).attr('target', '__blank');
+                    }
+                }
+                $(document).on('click', '.title-desc-btn', function() {
+                    $(this).next().next().toggle();
+                });
+                $('.lightbox').find('.close, .cancel').on('click', function() {
+                    $('.lightbox').hide();
+                });
+                $('.pop-lightbox').click(function() {
+                    $('.lightbox').show();
+                });
+            });
+        </script>
+
+        <!-- <apex:includeScript value="{!URLFOR($Resource.cfsp__CFSP,'js/ie-polyfill.js')}"/> -->
+
+    </body>
+</apex:page>

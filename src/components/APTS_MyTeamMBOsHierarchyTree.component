@@ -1,0 +1,49 @@
+<!--    
+    * Author : Harish Emmadi, APTTUS - 02/20/2015.
+    * Description : display logged in user's team MBOs in hierarchial structure.
+
+    parameters
+    ==========
+    Name                 | Required | Description
+    =====================|==========|======================================================================================
+    		             |          |
+    yearvalue            |  Yes     |  Filter on Year field of MBO object.
+    		             |          |     
+    =======================================================================================================================
+-->
+<apex:component controller="APTS_MyTeamMBOHierarchialStructure">
+	<script src="{!URLFOR($Resource.treetablejs, '/treetablejs/jquery.1.9.1.min.js')}"></script>
+	<apex:stylesheet value="{!URLFOR($Resource.treetablejs, '/treetablejs/css/jquery.treetable.css')}" />
+	<apex:stylesheet value="{!URLFOR($Resource.treetablejs, '/treetablejs/css/jquery.treetable.theme.default.css')}" />
+	<apex:stylesheet value="{!URLFOR($Resource.treetablejs, '/treetablejs/css/screen.css')}" />
+	<script src="{!URLFOR($Resource.treetablejs, '/treetablejs/jquery.treetable.js')}"></script>
+	<script>
+		var j$ = jQuery.noConflict();
+		j$(document).ready(function(){
+			j$("#myteammbos_table{!year}").treetable({ expandable: true, clickableNodeNames: false, columnElType: "td"});
+		});
+	</script><!-- more configuration settings for hierarchy are availabel here http://www.jqueryscript.net/demo/jQuery-Plugin-For-Displaying-A-Tree-Of-Data-In-A-Table-treetable/#examples-->
+	<apex:attribute name="yearvalue" description="Mbos of year to be displayed." type="String" required="true" assignTo="{!year}"/>
+	<apex:pageBlock title="My Team MBOs" rendered="{!myteammbos.size > 0}">
+		<apex:outputPanel >
+		<table id="myteammbos_table{!year}" class="list" style="border-collapse: collapse;">
+			<tr class="headerRow">
+				<th class="headerRow">MBO Name</th>
+				<th class="headerRow">{!year} MBO Q1/Q2</th>
+				<th class="headerRow">{!year} MBO Q3/Q4</th>
+			</tr>
+			<apex:repeat value="{!myteammbos}" var="mbow">
+				<tr data-tt-id="{!mbow.rowId}" data-tt-parent-id="{!mbow.parentId}">
+					<td><apex:outputLink value="/{!IF(mbow.mbos.size > 1, mbow.mbos[1].Id, mbow.mbos[0].Id)}" target="_blank" rendered="{!mbow.mbos.size>0}">{!mbow.username} {!year}</apex:outputLink></td>
+					<td>
+						<apex:outputLink value="/{!mbow.mbos[0].Id}" target="_blank" rendered="{!mbow.mbos.size>0}">{!mbow.mbos[0].Name}</apex:outputLink>
+					</td>
+					<td>
+						<apex:outputLink value="/{!mbow.mbos[1].Id}"  target="_blank" rendered="{!mbow.mbos.size>1}">{!mbow.mbos[1].Name}</apex:outputLink>
+					</td>
+				</tr>
+			</apex:repeat>	
+		</table>
+		</apex:outputPanel>
+	</apex:pageBlock>
+</apex:component>

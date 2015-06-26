@@ -1,0 +1,61 @@
+<apex:page standardController="Apttus_PS_Project_Issue__c" recordSetVar="unused" sidebar="false">
+    
+<apex:includeScript value="{!$Resource.UtilJS}" />
+<apex:form >
+<apex:pageBlock >
+<apex:pageMessages />
+<apex:pageBlock >
+Note: All modifications made on the page will be lost if Return button is clicked without clicking the Save button first. 
+</apex:pageBlock>
+<apex:pageBlockButtons >
+<apex:commandButton value="Save" action="{!save}"/>
+<apex:commandButton value="Return" action="{!cancel}"/>
+</apex:pageBlockButtons>
+<apex:pageBlockTable value="{!selected}" var="a" id="table">
+<apex:column headerValue="Name">
+<apex:inputField value="{!a.name}"/>
+</apex:column>
+
+
+<apex:column headerValue="Internal to Apttus">
+<apex:inputField value="{!a.Apttus_PS_Internal_to_Apttus__c}"/>
+</apex:column>
+
+
+<apex:column headerValue="Issue Summary">
+<apex:inputField value="{!a.Apttus_PS_Summary__c}"/>
+</apex:column>
+
+<apex:column headerValue="Status">
+<apex:inputField value="{!a.Apttus_PS_Status__c}"/>
+</apex:column>
+
+<apex:column headerValue="Severity">
+<apex:inputField value="{!a.Apttus_PS_Severity__c}"/>
+</apex:column>
+
+<apex:column headerValue="Description">
+<apex:inputField value="{!a.Apttus_PS_Description__c}"/>
+</apex:column>
+
+<apex:column headerValue="Type">
+<apex:inputField value="{!a.Apttus_PS_Type__c}"/>
+</apex:column>
+
+<apex:column headerValue="Actual Comp Date">
+<apex:inputField value="{!a.Apttus_PS_Actual_Completion_Date__c}"/>
+</apex:column>
+
+<apex:column headerValue="Exp Comp Date">
+<apex:inputField value="{!a.Apttus_PS_Expected_Completion_Date__c}"/>
+</apex:column>
+
+<apex:column headerValue="Proposed Resolution">
+<apex:inputField value="{!a.Apttus_PS_Proposed_Resolution__c}"/>
+</apex:column>
+
+
+</apex:pageBlockTable>
+</apex:pageBlock>
+</apex:form>
+</apex:page>

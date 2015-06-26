@@ -1,0 +1,4 @@
+<apex:page standardController="Case"> 
+<apex:iframe id="jiraWindow"
+src="https://apttusdev.atlassian.net/plugins/servlet/customware/connector/issue/3/Case/fetch.action?id={!Case.Id}"></apex:iframe> 
+</apex:page>

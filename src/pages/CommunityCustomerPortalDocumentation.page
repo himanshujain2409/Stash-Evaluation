@@ -1,0 +1,307 @@
+<apex:page controller="CCPDocumentationController" showHeader="true" sidebar="false">
+<!-- <c:CustomerCommunityPortal /> -->
+        
+   
+      <!-- jQuery UI Plugin Set -->
+        <link rel="stylesheet" href="{!URLFOR($Resource.Assets, '/assets/plugins/jquery-ui-1.11.1/jquery-ui.css')}"></link>
+         
+         
+       
+        
+        <!-- Bootstrap Plugin Set -->
+        <link rel="stylesheet" href="{!URLFOR($Resource.Assets, '/assets/css/bootstrap.css')}"></link>
+        <!--  <script src="{!URLFOR($Resource.Assets, '/assets/js/bootstrap.js')}"></script>  -->
+        
+        <!-- Font Aewsome Plugin Set -->
+        <link rel="stylesheet" href="{!URLFOR($Resource.Assets, '/assets/plugins/font-awesome/css/font-awesome.min.css')}"></link>
+        
+        <!-- Fonts -->
+        <link href='//fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,700,800,300' rel='stylesheet' type='text/css'></link>
+        
+        <!-- Project Theme Style Sheet -->
+        <link rel="stylesheet" href="{!URLFOR($Resource.Community_Assets, '/assets/css/project-theme.css')}"></link>        
+        
+        <link href="{!URLFOR($Resource.ApttusCustomerPortalJQueryTree, 'jquery.treeview.css')}" rel="stylesheet" type="text/css"></link>
+        
+        
+    <style>
+        #docSearchBar #srch_document_sbar .btn{
+            background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+            background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+            filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+            background-color:#ededed;
+            -moz-border-radius:6px;
+            -webkit-border-radius:6px;
+            border-radius:6px;
+            border:1px solid #dfdfdf;
+            display:inline-block;
+            color:#1b5c78;
+            font-family:Arial,Helvetica,sans-serif;
+            font-size:12px;
+            font-weight:bold;
+            padding:2px 14px;
+            text-decoration:none;
+        }
+        .searchTextBox,
+        #searchTextLabel{
+            font-family:Arial,Helvetica,sans-serif;
+            font-size:12px;
+        }
+        .treeview .folder,
+        .treeview .file {
+            font-family:Arial,Helvetica,sans-serif;
+            font-size: 14px;
+            line-height: 16px;
+        }
+        .treeview .folder.hover,
+        #browserApttus a:hover,
+        #browserApttus a:visited {
+            color: #15365f;
+        }
+        #treecontrol{
+            border-left-width: 1px;
+            border-right-width: 1px;
+            border-top-width: 1px;
+            font-family: Arial;
+            font-size: 10px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            margin-left: 18px;
+        }
+        #treecontrol a, .treeview .folder:hover {
+            text-decoration:underline;
+        }
+    </style>
+    <apex:form >
+     <apex:pageblock >
+         <apex:pageMessages id="showmsg"></apex:pageMessages>
+            <apex:outputLabel >Enter keywords to find matching documents.</apex:outputLabel><br/><br/>
+            <apex:inputText value="{!findDoc}" id="findDocs" />
+            <apex:commandButton value="Find Document" action="{!findDocument}" reRender="showmsg,showTreeViewPanel,ShowListPanel" />&nbsp;&nbsp;&nbsp;
+            <apex:commandButton value="Clear Search" action="{!ClearSearch}" onclick="reload()" reRender="showmsg,showTreeViewPanel,ShowListPanel"/>
+            <br/><br/>
+            <apex:outputPanel id="ShowListPanel">
+                <apex:pageBlockTable value="{!docs}" var="doc" id="ShowList" rendered="{!ShowList}" >                    
+                    <apex:column headerValue="Action">
+                        <apex:outputlink value="/servlet/servlet.FileDownload?file={!doc.Id} ">View</apex:outputlink>
+                    </apex:column>
+
+                    <apex:column headerValue="Name">
+                        <apex:outputText value="{!doc.Name}"/>
+                    </apex:column>
+                    
+                    <apex:column headerValue="Description">
+                        <apex:outputText value="{!doc.Description}"/>
+                    </apex:column>
+                    
+                    <apex:column headerValue="Type">
+                        <apex:outputText value="{!doc.Type}"/>
+                    </apex:column>
+                    
+                    <apex:column headerValue="Folder Name">
+                        <apex:outputText value="{!doc.Folder.Name}"/>
+                    </apex:column>
+                    
+                    <apex:column headerValue="Author">
+                        <apex:outputText value="{!doc.Author.Name}"/>
+                    </apex:column>
+                    
+                    <apex:column headerValue="LastModifiedDate">
+                       <!-- <outputText value="{docs.LastModifiedDate}"></outputText>-->
+                        <apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
+                            <apex:param value="{!doc.LastModifiedDate}" /> 
+                        </apex:outputText>
+                    </apex:column>
+                </apex:pageBlockTable> 
+            </apex:outputPanel>                
+        </apex:pageblock>
+    </apex:form>
+     
+    <apex:outputPanel id="showTreeViewPanel" rendered="{!flag}">
+        <div id="docuemntsBolck" class="bPageBlock brandSecondaryBrd apexDefaultPageBlock secondaryPalette" style="display: {!displayTreeview};">
+            <div class="pbHeader">
+                <div class="pbTitle">
+                    <h2 class="mainTitle">Documentation</h2>
+                </div>
+            </div>
+            <div id="treecontrol" style="display: block;">
+                    <a title="Expand the entire tree below" href="#"><img src="{!URLFOR($Resource.ApttusCustomerPortalJQueryTree, '/images/plus.gif')}" /> Expand All</a>
+                    <a title="Collapse the entire tree below" href="#"><img src="{!URLFOR($Resource.ApttusCustomerPortalJQueryTree, '/images/minus.gif')}"/> Collapse All</a>
+            </div>
+            <div style="margin-left: 15px;">
+                <ul id="browserApttus" class="filetree treeview">
+                    <apex:repeat value="{!listWrapperDocuments}" var="wDocs">
+                        <li>
+                            <div class="hitarea expandable-hitarea"></div>
+                            <span class="folder">{!wDocs.folderName}</span>
+                            <ul style="display:none;"> 
+                                <apex:repeat value="{!wDocs.documents}" var="d">
+                                    <li>
+                                        <span class="file">
+                                            <ul style="display:{!displayTreeview};">
+                                            <apex:outputlink value="/{!d.Id}">{!d.Name}</apex:outputlink>
+                                            </ul>
+                                        </span>
+                                    </li>
+                                </apex:repeat>
+                           </ul>
+                        </li> 
+                    </apex:repeat>
+                </ul>
+            </div>
+            <span class="fFooter"></span>
+        </div>
+    </apex:outputPanel>
+    <!--    <footer>
+            <div class="container">
+                <div class="footer-nav-lists-container">
+                    <div class="row">
+                        
+                        <div class="col-sm-3">
+                            <div class="footer-nav-list">
+                                <div class="list-head">
+                                    <h4>Menu</h4>
+                                </div>
+                                <div class="list-body">
+                                    <ul class="list-unstyled apttus-block-list">
+                                        <li><a href="#">Collaboration</a></li>
+                                        <li><a href="#">Ideas</a></li>
+                                        <li><a href="#">Knowledge Base</a></li>
+                                        <li><a href="#">Documentation</a></li>
+                                        <li><a href="#">Training</a></li>
+                                        <li><a href="#">My Cases</a></li>
+                                        <li><a href="#">Install</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="footer-nav-list">
+                                <div class="list-head">
+                                    <h4>Other Sites</h4>
+                                </div>
+                                <div class="list-body">
+                                    <ul class="list-unstyled apttus-block-list text-uppercase">
+                                        <li><a href="#">Apptus.com</a></li>
+                                        <li><a href="#">X-Author.com</a></li>
+                                    </ul>
+                                    <ul class="list-inline apttus-inline-list social-icons-container">
+                                        <li><a href="https://www.facebook.com/ApttusCorporation"><img src="{!URLFOR($Resource.Assets, '/assets/images/social-icon-01.png')}" alt="" class="img-responsive"/></a></li>
+                                        <li><a href="https://twitter.com/apttus"><img src="{!URLFOR($Resource.Assets, '/assets/images/social-icon-02.png')}" alt="" class="img-responsive"/></a></li>
+                                        <li><a href="http://www.linkedin.com/company/1181097"><img src="{!URLFOR($Resource.Assets, '/assets/images/social-icon-03.png')}" alt="" class="img-responsive"/></a></li>
+                                        <li><a href="https://www.youtube.com/user/ApttusChannel"><img src="{!URLFOR($Resource.Assets, '/assets/images/social-icon-04.png')}" alt="" class="img-responsive"/></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="footer-nav-list">
+                                <div class="list-head">
+                                    <h4>Company</h4>
+                                </div>
+                                <div class="list-body">
+                                    <ul class="list-unstyled apttus-block-list">
+                                        <li><a href="#">About Apttus</a></li>
+                                        <li><a href="#">Contact Us</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="footer-nav-list">
+                                <div class="list-head">
+                                    <h4>What's New</h4>
+                                </div>
+                                <div class="list-body">
+                                    <ul class="list-unstyled apttus-block-list">
+                                        <li><a href="http://www.apttus.com/accelerate2015/">Events</a></li>
+                                        <li><a href="#">New Features</a></li>
+                                        <li><a href="http://apttus.force.com/articles/Best_Practice/Customer-Excellence-Webinar-Series">Webinar Series</a></li>
+                                        <li><a href="http://info.apttus.com/Apttus-Newsletter.html">Newsletter</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="footer-nav-list">
+                                <div class="list-head">
+                                    <h4>Need a demo?</h4>
+                                </div>
+                                <div class="list-body">
+                                    <ul class="list-unstyled apttus-block-list">
+                                        <li>Increase revenues, margin, profits. Fast track optimum deals.</li>
+                                    </ul>
+                                    <div class="footer-list-link">
+                                        <a href="#" class="highlight"><span>Request a demo</span> <i class="fa fa-angle-double-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="footer-nav-list">
+                                <div class="list-head">
+                                    <h4>Like Apttus?</h4>
+                                </div>
+                                <div class="list-body">
+                                    <ul class="list-unstyled apttus-block-list">
+                                        <li>Let us know why with an AppExchange review.</li>
+                                    </ul>
+                                    <div class="footer-list-link">
+                                        <a href="#" class="highlight"><span>Write a review</span> <i class="fa fa-angle-double-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </footer> -->
+    <!--<c:CommunityCustomerPortalFooter />-->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script> 
+<script src="{!URLFOR($Resource.Assets, '/assets/plugins/jquery-ui-1.11.1/jquery.easing.js')}"></script>
+<script type="text/javascript" rel="javascript" src="{!URLFOR($Resource.ApttusCustomerPortalJQueryTree, 'jquery.treeview.js')}"></script>
+<script src="{!URLFOR($Resource.ApttusCustomerPortalJQueryTree, '/lib/jquery.cookie.js')}"></script>     
+
+<script type="text/javascript">
+    // var jQuery = $.noConflict();
+    jQuery(document).ready(function(){
+        jQuery('#docSearchBar').append(jQuery('[name="srch_document_sbar"]'));
+        jQuery('#docSearchBar #srch_document_sbar .btn').attr('value', 'Find Document');
+        
+        setTimeout(function()
+        {
+            jQuery("#browserApttus").treeview({
+                control: "#treecontrol"
+            });
+        } , 2000);                    
+    });
+
+    // Sort folders as specified in "ACPDocumentationFoldersOrder" custom label
+    var folderNames = '{!JSINHTMLENCODE($Label.ACPDocumentationFoldersOrder)}'
+        .replace(/\n{2,}/g, '\n')
+        .split('\n');
+
+    for (var i = folderNames.length - 1; i >=0 ; i--) {
+        jQuery("#browserApttus > li:contains('" + folderNames[i].trim() + "')").prependTo("#browserApttus");
+    }        
+</script>
+
+        
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    
+    ga('create', 'UA-57878445-1', 'auto');
+    ga('send', 'pageview');
+</script>
+
+<script>
+    function reload(){
+         document.getElementById("j_id0:j_id2:j_id3:findDocs").value = "";
+    }
+</script>
+</apex:page>

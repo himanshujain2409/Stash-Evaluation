@@ -1,0 +1,7 @@
+<apex:component controller="ACPOrganizationController">
+	<p>
+		<b>My Company: </b><apex:outputText value="{!contactInformation.Account.Name}" /><br /><br />
+		<b>Support Level: </b><apex:outputText value="{!contactInformation.Account.Support_Level__c}" /><br /><br />
+		<b>Case Response Time: </b><apex:outputText value="{!contactInformation.Account.Case_Response_Time__c}" />
+	</p>
+</apex:component>

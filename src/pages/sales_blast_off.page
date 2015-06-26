@@ -1,0 +1,126 @@
+<apex:page >
+<html lang="en">
+  <head>
+    <meta charset="utf-8"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+    <meta name="description" content=""></meta>
+    <meta name="author" content=""></meta>
+
+    <title>Sales Blast-Off</title>
+
+    <!-- Bootstrap core CSS -->
+    <apex:stylesheet value="{!URLFOR($Resource.quicklinks_2, 'quicklinks/dist/css/bootstrap.css')}"/>
+
+    <!-- Custom styles for this template -->
+    
+    <apex:stylesheet value="{!URLFOR($Resource.quicklinks_2, 'quicklinks/dist/css/app.css')}"/>
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css'></link>
+
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../../assets/js/html5shiv.js"></script>
+      <script src="../../assets/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+   <body id="apptus">
+
+    <div class="container">
+        <div class="page-header">
+        <img src="{!URLFOR($Resource.quicklinks_2, 'quicklinks/dist/img/header.jpg')}" width="100%" height="auto" alt="Apttus Dreamforce Central"></img>
+        
+        <!--<h1>Apttus </h1>
+        <h1><small>Dreamforce Central</small></h1>-->
+        </div>      
+        
+        <div class="row">
+        <ul>     
+       <div align="Left"><b><font size="6" color="black">Sales Blast-Off 2014</font></b></div>  
+        </ul>
+          
+          <div class="col-md-6">
+          <h4> <img src="{!URLFOR($Resource.quicklinks_2, 'quicklinks/dist/img/event_basic_icon.png')}" width="30" height="30" alt="Sales Tools"></img>SALES BLAST OFF SCHEDULE</h4><p></p>
+          <ul>
+              <li><A HREF="https://www.dropbox.com/s/6xj7hel3z86wzhg/Sales%20Blast%20Off%20Training%20Agenda--R2.xlsx">Click Here</A></li>
+          </ul>
+          <h4> <img src="{!URLFOR($Resource.quicklinks_2, 'quicklinks/dist/img/event_basic_icon.png')}" width="30" height="30" alt="Sales Tools"></img>SESSION VIDEOS DAY ONE - 01/27/14</h4><p></p>        
+          <ul>
+            <li><a href="https://apttus.my.salesforce.com/06850000000nHKP">Sales Presentation</a></li>
+            <li><a href="https://www.dropbox.com/s/chot22k90dxckt3/Kirk_Intro.mp4">Kirk: Sales Blast-Off Introduction</a></li>
+            <li><a href="https://www.dropbox.com/s/cx7qry4rgmlnh0l/Kamal_day1_Market_Overview.mp4">Kamal: Market Overview</a></li>
+            <li><a href="https://www.dropbox.com/s/70vrf1203404p22/Al%20West_Apttus%20Sales.mp4">Al West: State of Apttus Sales</a></li>
+            <li><a href="https://www.dropbox.com/s/l67gd2iu34urcd5/Al%20West%20Sales%20Kick%20Off%202014.ppt">State of Apttus Sales PPT</a></li>
+            <li><a href="https://www.dropbox.com/s/dfyu4ak8ehqmd4e/Tom%2C%20Eric%20and%20Nick_QTC%20Footprint.mp4">Tom, Eric, and Nick: QTC Solution Footprint</a></li>
+            <li><a href="https://www.dropbox.com/s/roousqbktmaodt4/Ray_Power%20of%20the%20Platform.mp4">Ray: Power of the Platform</a></li>
+            <li><a href="https://www.dropbox.com/s/tawcd4lqhqj1eon/Power%20of%20the%20Platform%20-%20Ray%20%26%20Avanish%20-%20Sales%20Training%2027-Jan-2014.pptx">Power of the Platform PPT</a></li>
+            <li><a href="https://www.dropbox.com/s/gu0m6ioqzc3elmt/Kent%20Perkocha_win%20with%20QTC.mp4">Kent: Winning With QTC</a></li>
+            <li><a href="https://www.dropbox.com/s/limw5rwcv6h4xxj/Winning%20with%20QTC%20MT.pptx">Winning With QTC PPT</a></li>
+            <li><a href="https://www.dropbox.com/s/mnk80p2pi4f7bg5/Nick%20McCoy%20and%20Elliot%20Yama_QTC%20Intelligence.mp4">Elliot and Nick: QTC Intelligence</a></li>
+            <li><a href="https://www.dropbox.com/s/fnz9cqxpe77prr1/QTC%20Intelligence%20PPT%20for%20SKO.pptx">QTC Intelligence PPT</a></li>
+            <li><a href="https://www.dropbox.com/s/z4kp996sgmhlec7/Kamal_QTC%20to%20Customer.mp4">Kamal: Selling QTC</a></li>
+            <li><a href="https://www.dropbox.com/s/r86plisztyp160t/QTC%20Sales%20Deck%20Final.ppt">Final QTC Sales Deck</a></li>
+            <li><a href="https://www.dropbox.com/s/0ggsab6plqz3g7r/Paul_EMEA%20Overview.mp4">Paul: EMEA Overview</a></li>
+            <li><a href="https://www.dropbox.com/s/zzypfg5jg0zqcir/EMEA%20Business%20Overview.pptx">EMEA PPT</a></li>
+            <li><a href="https://www.dropbox.com/s/6hia80y51il6zbl/Steve.mp4">Steve: The Terminator</a></li>
+                                  </ul>
+          <h4><img src="{!URLFOR($Resource.quicklinks_2, 'quicklinks/dist/img/event_basic_icon.png')}" width="30" height="30" alt="Crush Big Machines"></img>SESSION VIDEOS DAY TWO - 1/28/14</h4><p></p>  
+          <ul>
+            <li><a href="https://www.dropbox.com/s/2m1hqv5jnfqg1lk/Erwan%2C%20Yesim%20and%20Eric_What%20is%20CPQ.mp4">Erwan, Eric, and Yesim: What is CPQ?</a></li>
+             <li><a href="https://www.dropbox.com/s/lgsa160g50g0bxn/Miguel%20Tam_How%20to%20Sell%20CPQ.mp4">Miguel: How to Sell CPQ</a></li>
+             <li><a href="https://www.dropbox.com/s/qu384z7s0av9dyt/APT_VP_of_Sales_Talk_Track.pptx">CPQ Talk Track for VP of Sales</a></li>
+             <li><a href="https://www.dropbox.com/s/5epmlv4xouv7m7m/CPQ%20SKO%20Overview%20vFinal.pptx">CPQ Overview PPT</a></li>
+             <li><a href="https://www.dropbox.com/s/thl3denw1oqh7gc/Tom%20Banton_CPQ%20Demo.mp4">Tom Banton: CPQ Demo</a></li>
+             <li><a href="https://www.dropbox.com/s/smix77aoha7a3x5/Kent_Deal%20Management.mp4">Kent: Deal Management</a></li>
+             <li><a href="https://www.dropbox.com/s/ga5tkjp2iacyihv/Apttus%20Deal%20Management%20for%20SKO%20vMT.pptx">Deal Management PPT</a></li>
+             <li><a href="https://www.dropbox.com/s/v083l69ngz1z2it/Kamal_E-Commerce.mp4">Kamal: Multi-Channel Sales and E-Commerce</a></li>
+             <li><a href="https://www.dropbox.com/s/ouhomqngakpv2wz/Multi-Channel%20Sales%20and%20E-Commerce%20-%201-28-14.pptx">Multi-Channel Sales and E-Commerce PPT</a></li>
+             <li><a href="https://www.dropbox.com/s/tlhdvzgynmmx24x/Maria_Marketing%20Plan%202014.mp4">Maria: Marketing Plan 2014</a></li>
+             <li><a href="https://www.dropbox.com/s/59437h7vkv1vbsb/Ben_CPQ%20Comp.mp4">Ben Allen: Baby Pictures and CPQ Competition</a></li>
+             <li><a href="https://www.dropbox.com/s/oezmk5r6s6xuxi1/CPQ%20Competition%20Jan25.pptx">CPQ Competition PPT</a></li>
+             <li><a href="https://www.dropbox.com/s/1m9u1xrbcmmfr95/Kamal%202_CPQ%20Customer.mp4">Kamal: Present CPQ Story</a></li>
+             <li><a href="https://www.dropbox.com/s/7u5gsjf3sfvtlh6/Erwan_CPQ%20Value.mp4">Erwan: CPQ Value</a></li>
+             <li><a href="https://www.dropbox.com/s/4rh7jnlp8ahb6gj/Value%20of%20CPQ%20-%20PSC.pptx">CPQ Value PSC PPT</a></li>
+             <li><a href="https://www.dropbox.com/s/i9rygcgc4tb3qpz/Value%20of%20CPQ%20-%20Aruba.pptx">CPQ Value Aruba PPT</a></li>
+                       </ul>
+          <h4><img src="{!URLFOR($Resource.quicklinks_2, 'quicklinks/dist/img/event_basic_icon.png')}" width="30" height="30" alt="Customer Marketing"></img>SESSION VIDEOS DAY THREE - 1/29/14</h4><p></p>  
+          <ul>
+            <li><a href="https://www.dropbox.com/s/3eva0lv074dc164/Al%20West%2C%20Charmel%20Rhyne%2C%20Chuck%20Nelson_CLM.mp4">Al, Charmel, Chuck: What is CML?</a></li>
+             <li><a href="https://www.dropbox.com/s/qymh2zkh5nx60jg/What%20is%20Contract%20Lifecycle%20Management%20SKO14%20CN%2001282014%20V6.pptx">What is CLM PPT</a></li>
+             <li><a href="https://www.dropbox.com/s/xunbi4xw8gquftl/Michael%20Dunne_Talk%20Track%20CLM.mp4">Michael Dunne: CLM Talk Track</a></li>
+             <li><a href="https://www.dropbox.com/s/fvuc4tx5zt8wmsa/APT_General_Counsel_Legal_Talk_Track%20V7.pptx">CLM Talk Track PPT</a></li>
+             <li><a href="https://www.dropbox.com/s/sscmjr1zaokr78q/Charmle%20Rhyne_CLM%20Demo.mp4">Charmel Rhyne: CLM Demo</a></li>
+             <li><a href="https://www.dropbox.com/s/faofyckx2835d59/Ben%20Allen%20%26%20Al%20West_CLM%20Comp.mp4">Ben Allen: More Baby Pictures and CLM Competition</a></li>
+             <li><a href="https://www.dropbox.com/s/3l485jijipb11cc/CLM%20Competition.pptx">CLM Competition PPT</a></li>
+             <li><a href="https://www.dropbox.com/s/xy7no76sd5yugyq/Jules_X-Author.mp4">Jules: X-Author</a></li>
+             <li><a href="https://www.dropbox.com/s/5esbr4onw91rt75/Al%20West_Selling%20CLM.mp4">Selling CLM</a></li>
+             <li><a href="https://www.dropbox.com/s/1xjbzpxqdai4hq6/CLM%20Sales%20Deck%20Final.ppt">CLM Sales Deck</a></li>
+             <li><a href="https://www.dropbox.com/s/jphi81ucwii5yts/Kent_Rev%20Management.mp4">Kent: Revenue Management</a></li>
+             <li><a href="https://www.dropbox.com/s/fo52ksmrk5j4dmu/Revenue%20Management%20FINAL.pptx">Revenue Management PPT</a></li>
+             <li><a href="https://www.dropbox.com/s/ohgofz5ysgopto6/Tim%20%26%20Erwan_Renewals%20Management.mp4">Tim and Erwan: Renewals Management</a></li>
+             <li><a href="https://www.dropbox.com/s/4i2925ajkeb4jlb/Renewals%20Management%20for%20SKO%20vTim_v2.pptx">Renewals Management PPT 1</a></li>
+             <li><a href="https://www.dropbox.com/s/nxajmt1gkczewtb/Renewals%20Management%20for%20SKO%20v2.pptx">Renewals Management PPT 2</a></li>
+             <li><a href="https://www.dropbox.com/s/7zguisbui02diox/Order%20Management%20and%20Billing%20v5-MT.ppt">Order Management PPT</a></li>
+                                    </ul>
+             </div>
+          
+          
+
+       
+       
+       
+       
+         
+    </div>
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="dist/js/jquery.js"></script>
+    <script src="dist/js/bootstrap.min.js"></script>
+  </div></body>
+</html>
+
+</apex:page>

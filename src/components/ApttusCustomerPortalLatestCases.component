@@ -1,0 +1,14 @@
+<apex:component controller="ACPLatestCasesController">
+	
+	<ul>
+		<apex:repeat value="{!latestCases}" var="case" id="casesLink">
+			<li>
+				<apex:outputLink value="/{!case.Id}" styleClass="communityLink">
+					{!case.CaseNumber + ' ' + IF(LEN(case.Subject) > 28, LEFT(case.Subject, 25) + "...", case.Subject)}
+				</apex:outputLink>
+			</li>
+		</apex:repeat>
+	</ul>
+	<br/>
+	
+</apex:component>

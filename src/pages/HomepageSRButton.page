@@ -1,0 +1,20 @@
+<apex:page showHeader="false">
+
+<script>
+function OpenInNewTab() {
+  var win = window.open('/a4K/e?retURL=%2Fa4K%2Fo',  '_blank');
+ win.focus();
+}
+</script>
+<apex:form >
+<apex:commandButton value="Internal Saleforce Request.." onclick="OpenInNewTab()" style="background-image:none; 
+    background: #1798c1;
+padding:6px;
+color: white;
+height:30px;
+border: none;
+font-family: Arial;
+font-size: 1.08em;
+border-radius:3px;"/>
+</apex:form>
+</apex:page>

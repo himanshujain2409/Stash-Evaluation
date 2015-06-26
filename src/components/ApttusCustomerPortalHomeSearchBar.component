@@ -1,0 +1,21 @@
+<apex:component >
+<script>
+	jQuery(document).ready(function(){
+		jQuery('.searchBarHomePage').append(jQuery('[name="srch_solution_sbar"]').parent().parent());
+		/*jQuery('.searchBarHomePage').append(jQuery('.searchModule .sidebarModuleBody'));*/
+		jQuery('[name="srch_solution_sbar"]	').append(jQuery('.searchBarHomePage #searchIconImage'));
+	});
+</script>
+
+<apex:stylesheet value="{!URLFOR($Resource.ApttusCustomerPortalHomeSearchBar, 'css/searchbar.css?v=2')}" />
+
+<style>
+
+</style>
+
+<div class="searchBarHomePage">
+	<span class="searchBarTitle"><apex:outputText value="{!$Label.ACPHomeSearchBarTitle}" /></span>
+	<input id="searchIconImage" src="{!URLFOR($Resource.ApttusCustomerPortalHomeSearchBar, 'img/img_bannersearchbutton4.png')}" styleclass="searchbtn" type="image" />
+</div>
+
+</apex:component>

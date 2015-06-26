@@ -1,0 +1,148 @@
+<apex:page standardController="Apttus_Approval__Approval_Request__c"
+           extensions="PS_ProjectApprovalSummaryController"
+           showHeader="true" 
+           sidebar="true"
+           cache="false" 
+           tabstyle="Apttus_Approval__Approval_Request__c" >
+        
+    <apex:sectionHeader title="{!$Label.Apttus_Approval__ApprovalRequest}" 
+                        subtitle="{!$ObjectType.pse__Proj__c.Label} {!Apttus_Approval__Approval_Request__c.Apttus_Approval__Object_Name__c}" />
+    <apex:pageBlock title="Project Information">
+        <apex:pageBlockSection columns="2">
+            <apex:pageblocksectionItem >
+                <label>Project Name</label>
+                <apex:outputLink value="/{!Project.Id}">{!Project.Name}</apex:outputLink>
+            </apex:pageblocksectionItem>
+            <apex:pageblocksectionItem >
+                <label>Practice director</label>
+                <apex:outputField value="{!Project.OwnerId}" />
+            </apex:pageblocksectionItem>
+            <apex:pageblocksectionItem >
+                <label>Account</label>
+                <apex:outputLink value="/{!Project.pse__Account__r.Id}">{!Project.pse__Account__r.Name}</apex:outputLink>
+            </apex:pageblocksectionItem>
+             <apex:outputField value="{!Project.pse__Project_Manager__c}" />
+            <apex:outputField value="{!Project.pse__Account__r.AccountStatusGS__c}" />
+            <apex:outputField value="{!Project.pse__Account__r.CSM__c}" />
+            <apex:outputField value="{!Project.pse__Account__r.Account_Level__c}" />
+       </apex:pageBlockSection>
+    </apex:pageblock>
+    <apex:pageblock title="project Details">
+        <apex:pageBlockSection columns="2">
+            <apex:outputField value="{!Project.PS_Bookings__c}" />
+            <apex:outputField value="{!Project.pse__Planned_Hours__c}" />
+            <apex:outputField value="{!Project.Concession_amount__c}" />
+            <apex:outputField value="{!Project.Concession_Hours__c}" />
+            <apex:outputField value="{!Project.Gross_Bookings__c}" />
+            <apex:outputField value="{!Project.Total_Planned_Hours__c}" />
+            <apex:pageblocksectionItem >
+                <label>SOW Type</label>
+                <apex:outputField value="{!Project.pse__Billing_Type__c}" />
+            </apex:pageblocksectionItem>
+            <apex:outputField value="{!Project.PM_Estimated_Total_Hours__c}" />
+            <apex:pageblocksectionItem >
+                <label>SOW Amount</label>
+                <apex:outputField value="{!Project.pse__Bookings__c}" />
+            </apex:pageblocksectionItem>
+            <apex:outputField value="{!Project.Total_hours_spent__c}" />
+        </apex:pageBlockSection>
+     </apex:pageblock>
+     <apex:pageblock title="Concession Request Details">
+        <apex:pageBlockSection columns="2">
+            <apex:outputField value="{!ConcessionRequest.Concession_Type__c}" />
+            <apex:outputField value="{!ConcessionRequest.Root_cause__c}" />
+            <apex:outputField value="{!ConcessionRequest.Hours_Requested__c}" />
+             &nbsp;
+            <apex:outputField value="{!ConcessionRequest.Reasons_for_cost_and_time_overruns__c}" />
+             &nbsp;
+            <apex:outputField value="{!ConcessionRequest.Delivery_Confidence__c}" />
+            &nbsp;
+            <apex:outputField value="{!ConcessionRequest.Risks__c}" />
+        </apex:pageBlockSection> 
+        
+    </apex:pageBlock>
+    
+    <!-- <apex:include pageName="Apttus_Approval__ApprovalAction" /> -->
+   
+    <!-- <apex:include pageName="Apttus_Approval__ApprovalRequestsList"/> -->
+    
+   <apex:form >
+        <!-- required fields -->
+        <apex:outputText value="{!Apttus_Approval__Approval_Request__c.Apttus_Approval__Approval_Process__c}" rendered="false" />
+
+        <apex:pageBlock title="{!IF(isPageModeApproveRequest, $Label.Apttus_Approval__ApproveRejectRequest, $Label.Apttus_Approval__AddCommentsToRequest)}" >
+
+            <apex:pageMessages />
+            
+            <apex:pageBlockButtons >
+                
+                <apex:commandButton action="{!doAttachFile}" 
+                                    value="{!$Label.Apttus_Approval__AttachFile}" 
+                                    rendered="{!and(isPageModeApproveRequest, isUserAuthorized)}" />
+                <apex:commandButton action="{!doApprove}" 
+                                    value="{!$Label.Apttus_Approval__Approve}" 
+                                    rendered="{!and(isPageModeApproveRequest, isUserAuthorized)}" />
+                <apex:commandButton action="{!doReject}" 
+                                    value="{!$Label.Apttus_Approval__Reject}" 
+                                    rendered="{!AND(isPageModeApproveRequest, isUserAuthorized)}" />
+                <apex:commandButton action="{!doAddComment}" 
+                                    value="{!$Label.Apttus_Approval__AddComment}" />
+                <apex:commandButton action="{!doCancel}" 
+                                    value="{!$Label.Apttus_Approval__Cancel}" />
+            
+            </apex:pageBlockButtons>
+
+            <apex:pageBlockSection columns="1">
+
+                <apex:pageBlockSectionItem rendered="{!NOT(ISBLANK(Apttus_Approval__Approval_Request__c.Apttus_Approval__SubmissionComment1__c))}" >
+                    <apex:outputLabel for="idSubmissionComment1"
+                                      value="{!$Label[submissionComment1Label]}" />
+                    <apex:outputText id="idSubmissionComment1"
+                                     value="{!Apttus_Approval__Approval_Request__c.Apttus_Approval__SubmissionComment1__c}" />
+                </apex:pageBlockSectionItem>
+
+                <apex:pageBlockSectionItem rendered="{!NOT(ISBLANK(Apttus_Approval__Approval_Request__c.Apttus_Approval__SubmissionComment2__c))}" >
+                    <apex:outputLabel for="idSubmissionComment2"
+                                      value="{!$Label[submissionComment2Label]}" />
+                    <apex:outputText id="idSubmissionComment2"
+                                     value="{!Apttus_Approval__Approval_Request__c.Apttus_Approval__SubmissionComment2__c}" />
+                </apex:pageBlockSectionItem>
+
+                <apex:pageBlockSectionItem rendered="{!NOT(ISBLANK(Apttus_Approval__Approval_Request__c.Apttus_Approval__SubmissionComment3__c))}" >
+                    <apex:outputLabel for="idSubmissionComment3"
+                                      value="{!$Label[submissionComment3Label]}" />
+                    <apex:outputText id="idSubmissionComment3"
+                                     value="{!Apttus_Approval__Approval_Request__c.Apttus_Approval__SubmissionComment3__c}" />
+                </apex:pageBlockSectionItem>
+
+                <apex:outputField value="{!Apttus_Approval__Approval_Request__c.Apttus_Approval__Request_Comments__c}"
+                                  style="font-weight:bold;" />
+                    
+                <apex:inputField value="{!Apttus_Approval__Approval_Request__c.Apttus_Approval__Approver_Comments__c}"
+                                 style="height:100px;width:400px;" />
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection columns="1" 
+                                   title="Attachments" 
+                                   rendered="{!AND((arAttachments.size > 0), isUserAuthorized)}">
+                                   
+                <apex:pageBlockTable value="{!arAttachments}" var="arAttachment" >
+                
+                    <apex:column >
+                        <apex:facet name="header">{!$Label.Apttus_Approval__FileName}</apex:facet>
+                        <apex:outputLink target="_blank" value="/{!arAttachment.Id}">{!arAttachment.Name}</apex:outputLink>
+                    </apex:column>
+                    <apex:column value="{!arAttachment.Description}" />
+                    <apex:column value="{!arAttachment.CreatedDate}" />
+                    <apex:column value="{!arAttachment.BodyLength}" />
+                    
+                </apex:pageBlockTable>
+                
+            </apex:pageBlockSection>
+            
+        </apex:pageBlock>
+        
+    </apex:form>
+    
+    
+</apex:page>

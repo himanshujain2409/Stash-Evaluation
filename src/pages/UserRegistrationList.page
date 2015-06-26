@@ -1,0 +1,180 @@
+<apex:page standardStylesheets="false" StandardController="UserRegistration__c" extensions="clsUserCreation" id="reglist">
+
+<style>
+
+    /* This is for the full screen DIV */
+    .popupBackground {
+        /* Background color */
+        background-color:black;
+        opacity: 0.20;
+        filter: alpha(opacity = 20);
+        /* Dimensions */
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 998;
+        position: absolute;
+        /* Mouse */
+        cursor:wait;
+    }
+     
+    /* This is for the message DIV */
+    .PopupPanel {
+        /* Background color */
+        border: solid 2px blue;
+        background-color: white;
+         
+        /* Dimensions */
+        left: 50%;
+        width: 200px;
+        margin-left: -100px;
+        top: 50%;
+        height: 50px;
+        margin-top: -25px;
+        z-index: 999;
+        position: fixed;
+        /* Mouse */
+        cursor:pointer;
+    }
+    
+</style>
+
+<script type="text/javascript">
+   function selectCheckboxes(inpt,receivedInptID)
+    {
+        var inputCheckBox = document.getElementsByTagName("input");                  
+        for(var i=0; i<inputCheckBox.length; i++)
+        {          
+            if(inputCheckBox[i].id.indexOf(receivedInptID)!=-1 && inputCheckBox[i].disabled == false)
+            {                                     
+                inputCheckBox[i].checked = inpt.checked;
+            }
+        }
+    }
+   
+    function checkCreateUser()
+    {
+        var isCatChecked = false;
+        var inputCheckBox = document.getElementsByTagName("input");                  
+        for(var i=0; i<inputCheckBox.length; i++)
+        {          
+           if(inputCheckBox[i].checked && inputCheckBox[i].id.indexOf("inputId")!=-1)
+           {                                     
+              isCatChecked = true;
+              break;
+           }
+        }
+        if(isCatChecked == false)
+        {
+            showMessage('WARNING', 'Please select at least one request.');
+            return false;
+        }
+        CreateUser();
+    }
+    
+    function checkRejectRequest()
+    {
+        var isCatChecked = false;
+        var inputCheckBox = document.getElementsByTagName("input");                  
+        for(var i=0; i<inputCheckBox.length; i++)
+        {          
+           if(inputCheckBox[i].checked && inputCheckBox[i].id.indexOf("inputId")!=-1)
+           {                                     
+              isCatChecked = true;
+              break;
+           }
+        }
+        if(isCatChecked == false)
+        {
+            showMessage('WARNING', 'Please select at least one request.');
+            return false;
+        }
+        RejectRequest();
+    }
+    
+    function checkDeleteRequest()
+    {
+        var isCatChecked = false;
+        var inputCheckBox = document.getElementsByTagName("input");                  
+        for(var i=0; i<inputCheckBox.length; i++)
+        {          
+           if(inputCheckBox[i].checked && inputCheckBox[i].id.indexOf("inputId")!=-1)
+           {                                     
+              isCatChecked = true;
+              break;
+           }
+        }
+        if(isCatChecked == false)
+        {
+            showMessage('WARNING', 'Please select at least one request.');
+            return false;
+        }
+        DeleteRequest();
+    }
+    
+</script>
+
+    <apex:actionStatus id="statusSaveTrip" stopText="">
+        <apex:facet name="start">
+            <div>
+                <div class="popupBackground" />
+                <div class="PopupPanel">
+                    <table border="0" width="100%" height="100%">
+                        <tr>
+                            <td align="center"><b>Please Wait...</b></td>
+                        </tr>
+                        <tr>
+                            <td align="center"><img src="{!$Resource.ProgressBar}"/></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </apex:facet>
+    </apex:actionStatus>
+
+    <apex:form >
+        <apex:pageMessages id="MessageID" />
+        
+        <apex:actionFunction name="showMessage" action="{!showMessage}" rerender="MessageID">
+            <apex:param name="errorLevel" assignTo="{!errorLevel}" value="" />
+            <apex:param name="messageName" assignTo="{!messageName}" value="" />
+        </apex:actionFunction>
+    
+        <apex:actionFunction name="CreateUser" action="{!CreateUser}" oncomplete="return CallWebService();" status="statusSaveTrip"  rerender="pbtUserList,MessageID"/>
+        <apex:actionFunction name="RejectRequest" action="{!RejectRequest}" status="statusSaveTrip"  rerender="pbtUserList,MessageID"/>
+        <apex:actionFunction name="DeleteRequest" action="{!DeleteRequest}" status="statusSaveTrip"  rerender="pbtUserList,MessageID"/>
+        <apex:actionFunction action="{!createLMSUsers}" name="CallWebService" status="statusSaveTrip" reRender="MessageID"/>
+           
+        <apex:pageBlock title="User Registration List">
+            <apex:outputText value="Status: "></apex:outputText>
+            <apex:selectList id="status" size="1" multiselect="false" value="{!selectedStatus}">
+                <apex:selectOption itemLabel="--All--" itemValue="--All--"/>  
+                <apex:selectOptions value="{!items}"/>
+            </apex:selectList>
+            <apex:commandButton value="Search" action="{!registationList}" rerender="pbtUserList"/>
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Create User" onclick="return checkCreateUser();" rerender="pbtUserList,MessageID"/>
+                <apex:commandButton value="Deny Request" onclick="return checkRejectRequest();" rerender="pbtUserList,MessageID"/>
+                <apex:commandButton value="Delete Request" onclick="return checkDeleteRequest();" rerender="pbtUserList,MessageID"/>
+            </apex:pageBlockButtons>
+            <!-- In our table we are displaying the userregistration records -->
+            <apex:pageBlockTable value="{!UserRegistrationList}" var="userRegistration" id="pbtUserList" title="Registration Request(s)">
+                <apex:column >
+                    <apex:facet name="header">
+                       <apex:inputCheckbox onclick="selectCheckboxes(this,'inputId')"/>
+                    </apex:facet>
+                    <apex:inputCheckbox value="{!userRegistration.selected}" id="inputId" disabled="{!userRegistration.disabled}"/>
+                </apex:column>
+                <!-- This is how we access the contact values within our userregistration container/wrapper -->
+                <apex:column value="{!userRegistration.userReg.First_Name__c}" />
+                <apex:column value="{!userRegistration.userReg.Last_Name__c}" />
+                <apex:column value="{!userRegistration.userReg.Email_Address__c}" />
+                <apex:column value="{!userRegistration.userReg.Phone__c}" />                  
+                <apex:column value="{!userRegistration.userReg.Job_Title__c}" />
+                <apex:column value="{!userRegistration.userReg.Organization__c}" />
+                <apex:column value="{!userRegistration.userReg.Status__c}" />
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

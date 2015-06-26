@@ -1,0 +1,263 @@
+<apex:component controller="APTS_AccountEmailController" access="global" >
+    <apex:attribute name="ApprovalRequestSO"   description="This is the Approval Request SObject."   type="Apttus_Approval__Approval_Request__c"  assignTo="{!Context.RequestSO}" />
+    <apex:attribute name="ApprovalRecipientSO"   description="This is the Approval Recipient SObject."  type="User"  assignTo="{!Context.RecipientSO}" />
+    <apex:outputPanel rendered="{!Context.AreActionsSupported}" >               
+        <apex:outputText value="{!$Label.Apttus_Approval__ApprovalActionLinkInstructionForEmailResponse1}" escape="false" rendered="{!Context.IsEmailApprovalResponseEnabled}" />
+        <apex:outputText value="{!$Label.Apttus_Approval__ApprovalActionLinkInstruction}" rendered="{!NOT(Context.IsEmailApprovalResponseEnabled)}" />
+        <br/>
+        <br/>
+        <apex:outputLink value="{!Context.ReassignPageUrl}">{!$Label.Apttus_Approval__Reassign}</apex:outputLink>
+        <br/>
+        <apex:outputLink value="{!Context.ApproveRejectPageUrl}">{!$Label.Apttus_Approval__ApproveReject}</apex:outputLink>
+        <br/>
+        <apex:outputLink value="{!Context.AddCommentPageUrl}">{!$Label.Apttus_Approval__AddComment}</apex:outputLink>
+        <br/>
+        <br/>
+        <apex:outputPanel rendered="{!Context.IsEmailApprovalResponseEnabled}"  >     
+            <apex:outputText value="{!$Label.Apttus_Approval__ApprovalActionLinkInstructionForEmailResponse2}" escape="false" />
+            <br/>
+            <br/>
+            <apex:outputText value="{!$Label.Apttus_Approval__ApprovalActionLinkInstructionForEmailResponse3}" escape="false" />
+            <br/>
+            <br/>
+        </apex:outputPanel>
+   </apex:outputPanel>
+   <apex:outputPanel >
+   <br/>
+       <b>Concession Request Details</b> {!AccountWrapper.ConcessionRequestSO.RecordType.Name}
+      
+       <apex:outputPanel rendered="{!IF(AccountWrapper.ConcessionRequestSO.RecordType.Name =='Support',true,false)}">
+           <table border="1">
+           <tr>             
+                 <td class="labels">{!$ObjectType.Concession_Request_CS__c.fields.Concession_Request_Sub_Type__c.Label}:</td>
+                 <td><apex:outputField value="{!AccountWrapper.ConcessionRequestSO.RecordType.Name }" /></td>
+            </tr>
+            <tr>             
+                 <td class="labels">{!$ObjectType.Concession_Request_CS__c.fields.Root_cause_characteristics__c.Label}:</td>
+                 <td><apex:outputField value="{!AccountWrapper .ConcessionRequestSO.Root_cause_characteristics__c}" /></td>
+            </tr>
+             <tr>
+                 <td class="labels">{!$ObjectType.Concession_Request_CS__c.fields.Hours_Requested__c.Label}:</td>
+                 <td><apex:outputField value="{!AccountWrapper .ConcessionRequestSO.Hours_Requested__c}" /></td>
+            </tr>
+            
+            <tr>
+                 <td class="labels">{!$ObjectType.Concession_Request_CS__c.fields.Justification__c.Label}:</td>
+                 <td><apex:outputField value="{!AccountWrapper .ConcessionRequestSO.Justification__c}" /></td>
+            </tr>
+           
+            <tr>
+                 <td class="labels">{!$ObjectType.Concession_Request_CS__c.fields.Has_CR_been_Negotiated_with_Customer__c.Label}:</td>
+                 <td><apex:outputField value="{!AccountWrapper .ConcessionRequestSO.Has_CR_been_Negotiated_with_Customer__c}" /></td>
+            </tr>
+           
+            <tr>
+                 <td class="labels">{!$ObjectType.Concession_Request_CS__c.fields.Notes__c.Label}:</td>
+                 <td><apex:outputField value="{!AccountWrapper.ConcessionRequestSO.Notes__c}" /></td>
+            </tr>
+        </table>   
+       </apex:outputPanel>
+       
+       
+       <apex:outputPanel rendered="{!IF(AccountWrapper.ConcessionRequestSO.RecordType.Name !='Support',true,false)}">
+           <table border="1">
+            <tr>             
+                 <td class="labels">{!$ObjectType.Concession_Request_CS__c.fields.Concession_Request_Sub_Type__c.Label}:</td>
+                  <td><apex:outputField value="{!AccountWrapper.ConcessionRequestSO.Concession_Request_Type__c}" /></td>
+            </tr>
+            <tr>             
+                 <td class="labels">{!$ObjectType.Concession_Request_CS__c.fields.Root_cause_characteristics__c.Label}:</td>
+                 <td><apex:outputField value="{!AccountWrapper.ConcessionRequestSO.Root_cause_characteristics__c}" /></td>
+            </tr>
+             <tr>
+                 <td class="labels">{!$ObjectType.Concession_Request_CS__c.fields.Requested_Concession_Hours__c.Label}:</td>
+                 <td><apex:outputField value="{!AccountWrapper.ConcessionRequestSO.Requested_Concession_Hours__c}" /></td>
+            </tr>
+            
+            <tr>
+                 <td class="labels">{!$ObjectType.Concession_Request_CS__c.fields.Requested_Concession_Amount__c.Label}:</td>
+                 <td><apex:outputField value="{!AccountWrapper.ConcessionRequestSO.Requested_Concession_Amount__c}" /></td>
+            </tr>
+           
+            <tr>
+                 <td class="labels">{!$ObjectType.Concession_Request_CS__c.fields.Justification__c.Label}:</td>
+                 <td><apex:outputField value="{!AccountWrapper.ConcessionRequestSO.Justification__c}" /></td>
+            </tr>
+            <tr>
+                 <td class="labels">{!$ObjectType.Concession_Request_CS__c.fields.SOW_Hours__c.Label}:</td>
+                 <td><apex:outputField value="{!AccountWrapper.ConcessionRequestSO.SOW_Hours__c}" /></td>
+            </tr>
+            <tr>
+                 <td class="labels">{!$ObjectType.Concession_Request_CS__c.fields.Proposed_Rate__c.Label}:</td>
+                 <td><apex:outputField value="{!AccountWrapper.ConcessionRequestSO.Proposed_Rate__c}" /></td>
+            </tr>
+            <tr>
+                 <td class="labels">{!$ObjectType.Concession_Request_CS__c.fields.Request_to_waive_FP_uplift__c.Label}:</td>
+                 <td><apex:outputField value="{!AccountWrapper.ConcessionRequestSO.Request_to_waive_FP_uplift__c}" /></td>
+            </tr>
+            <tr>
+                 <td class="labels">{!$ObjectType.Concession_Request_CS__c.fields.Request_to_waive_onsite_rate__c.Label}:</td>
+                 <td><apex:outputField value="{!AccountWrapper.ConcessionRequestSO.Request_to_waive_onsite_rate__c}" /></td>
+            </tr>
+             <tr>
+                 <td class="labels">{!$ObjectType.Concession_Request_CS__c.fields.Has_CR_been_Negotiated_with_Customer__c.Label}:</td>
+                 <td><apex:outputField value="{!AccountWrapper.ConcessionRequestSO.Has_CR_been_Negotiated_with_Customer__c}" /></td>
+            </tr>
+             <tr>
+                 <td class="labels">{!$ObjectType.Concession_Request_CS__c.fields.Notes__c.Label}:</td>
+                 <td><apex:outputField value="{!AccountWrapper.ConcessionRequestSO.Notes__c}" /></td>
+            </tr>
+        </table>   
+       </apex:outputPanel>
+   <br/>
+    <b>Customer Details</b>
+    <table border="1">
+        <tr>
+            <td>{!$ObjectType.Account.fields.Name.Label}: </td><td><apex:outputText value="{!AccountWrapper.AccountSO.Name}" /></td>
+        </tr>
+        <tr>
+            <td>Account Owner:</td><td><apex:outputText value="{!AccountWrapper.AccountSO.Owner.Name}" /></td>
+        </tr>
+        <tr>
+            <td>{!$ObjectType.Account.fields.AccountStatusGS__c.Label}:</td><td><apex:outputText value="{!AccountWrapper.AccountSO.AccountStatusGS__c}" /></td>
+        </tr>
+        <tr>
+            <td>{!$ObjectType.Account.fields.Account_Level__c.Label}:</td><td><apex:outputText value="{!AccountWrapper.AccountSO.Account_Level__c}" /></td>
+        </tr>
+        <tr>
+            <td>{!$ObjectType.Account.fields.CSM__c.Label} :</td><td><apex:outputField value="{!AccountWrapper.AccountSO.CSM__r.Name}" /></td>
+        </tr>
+    </table>
+    </apex:outputPanel>
+    <br/><br />
+    <b>Opportunity Details</b>
+    <table>
+        <tr>
+            <td>{!$ObjectType.Opportunity.fields.FY_ACV__c.Label}</td>{!AccountWrapper.ConcessionRequestSO.Opportunity__r.FY_ACV__c}
+            <td><apex:outputtext value="{!AccountWrapper.ConcessionRequestSO.Opportunity__r.FY_ACV__c}" /></td>
+        </tr>
+        <tr>
+            <td>{!$ObjectType.Opportunity.fields.ACV__c.Label}</td>
+            <td><apex:outputtext value="{!AccountWrapper.ConcessionRequestSO.Opportunity__r.ACV__c}" /></td>
+        </tr>
+        <tr>
+            <td>{!$ObjectType.Opportunity.fields.Ramped_ACV__c.Label}</td>
+            <td><apex:outputtext value="{!AccountWrapper.ConcessionRequestSO.Opportunity__r.Ramped_ACV__c}" /></td>
+        </tr>
+        <tr>
+            <td>{!$ObjectType.Opportunity.fields.ACV_Value_Change__c.Label}</td>
+            <td><apex:outputtext value="{!AccountWrapper.ConcessionRequestSO.Opportunity__r.ACV_Value_Change__c}" /></td>
+        </tr>
+        <tr>
+            <td>{!$ObjectType.Opportunity.fields.ACV_Prior_Amount__c.Label}</td>
+            <td><apex:outputtext value="{!AccountWrapper.ConcessionRequestSO.Opportunity__r.ACV_Prior_Amount__c}" /></td>
+        </tr>
+    </table>                    
+    
+    <br />    
+    
+    <br/>
+    <apex:outputPanel rendered="{!IF(AccountWrapper.ConcessionRequestSO.RecordType.Name =='Support',true,false)}">
+    <b>Other Support Pending Concession Requests (Submitted via Workflow):</b>
+     
+    <table>
+        <tr>
+            <th>{!$ObjectType.Concession_Request_CS__c.fields.Concession_Request_Sub_Type__c.Label}</th>
+            <th>Case Number</th>
+            <th>{!$ObjectType.Concession_Request_CS__c.fields.Root_cause_characteristics__c.Label}</th>
+            <th>{!$ObjectType.Concession_Request_CS__c.fields.Hours_Requested__c.Label}</th>
+            <th>Approval Status</th>
+            <th>Requestor</th>
+            <th>Approval request assigned to</th>
+        </tr>
+        <apex:repeat value="{!AccountWrapper.SupportPendingRequestSO}" var="support">
+            <tr>
+                <td><apex:outputField value="{!support.ConcessionRequestSO.Concession_Request_Sub_Type__c}" /></td>
+                <td><apex:outputField value="{!support.ConcessionRequestSO.Case__c}" /></td>
+                <td><apex:outputField value="{!support.ConcessionRequestSO.Root_cause_characteristics__c}" /></td>
+                <td><apex:outputField value="{!support.ConcessionRequestSO.Hours_Requested__c}" /></td>
+                <td><apex:outputField value="{!support.ApprovalRequestSO.Apttus_Approval__Approval_Status__c}" /></td>
+                <td>N/A</td>
+                <td><apex:outputField value="{!support.ApprovalRequestSO.Apttus_Approval__Assigned_To_Name__c}" /></td>
+            </tr>
+                
+        </apex:repeat>
+    </table>
+    </apex:outputPanel>
+    <apex:repeat ></apex:repeat>
+    <br />
+    
+    <br/>
+     <apex:outputPanel rendered="{!IF(AccountWrapper.ConcessionRequestSO.RecordType.Name !='Support',true,false)}">
+    <b>Other Sales Pending Concession Requests (Submitted via Workflow): </b>
+     <table>
+        <tr>
+            <th>{!$ObjectType.Concession_Request_CS__c.fields.Concession_Request_Type__c.Label}</th>
+            <th>{!$ObjectType.Concession_Request_CS__c.fields.Concession_Request_Sub_Type__c.Label}</th>
+            <th>{!$ObjectType.Concession_Request_CS__c.fields.Root_cause_characteristics__c.Label}</th>
+            <th>Rate Discount # of hours</th>
+            <th>Rate Discount Proposed Rate</th>
+            <th>First-time Customer Credit # of hours</th>
+            <th>Request to waive FP uplift</th>
+            <th>Approval Status</th>
+            <th>Requestor</th>
+            <th>Approval request assigned to</th>
+        </tr>
+       <apex:repeat value="{!AccountWrapper.SalesPendingRequestSO }" var="sale">
+            <tr>
+                <td><apex:outputField value="{!sale.ConcessionRequestSO.Concession_Request_Type__c}" /></td>
+                <td><apex:outputField value="{!sale.ConcessionRequestSO.Concession_Request_Sub_Type__c}" /></td>
+                <td><apex:outputField value="{!sale.ConcessionRequestSO.Root_cause_characteristics__c}" /></td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td><apex:outputField value="{!sale.ConcessionRequestSO.Request_to_waive_FP_uplift__c}" /></td>
+                <td><apex:outputField value="{!sale.ApprovalRequestSO.Apttus_Approval__Approval_Status__c}" /></td>
+                <td>N/A</td>
+                <td><apex:outputField value="{!sale.ApprovalRequestSO.Apttus_Approval__Assigned_To_Name__c}" /></td>
+            </tr>
+        </apex:repeat>
+    </table> 
+    <br />
+     </apex:outputPanel>
+    <apex:outputText value="{!Context.ContextLinkInstruction}" />
+    <br/>
+    <apex:outputLink value="{!Context.ContextPageUrl}">{!Context.requestSO.Apttus_Approval__Object_Name__c}</apex:outputLink>
+    <br/>
+    <br/>
+    <apex:outputPanel rendered="{!NOT(Context.IsStatusCancelled)}" >    
+        <apex:outputText value="{!$Label.Apttus_Approval__ApprovalRequestID & ': '}" /><apex:outputField value="{!Context.requestSO.Id}" />
+        <br/>
+        <apex:outputText value="{!$Label.Apttus_Approval__ApprovalUserID & ': '}" /><apex:outputField value="{!Context.recipientSO.Id}" />
+        <br/>
+    </apex:outputPanel>
+    
+   <apex:outputPanel rendered="{!NOT(Context.IsStatusCancelled)}" >    
+        <apex:outputText value="{!$Label.Apttus_Approval__Approvals & ':'}" />
+        <br/>
+        <table border="1">
+            <tr>
+                <th><apex:outputText value="{!$ObjectType.Apttus_Approval__Approval_Request__c.Fields.Apttus_Approval__Step_Name__c.Label}"/></th>
+                <th><apex:outputText value="{!$ObjectType.Apttus_Approval__Approval_Request__c.Fields.Apttus_Approval__Approval_Status__c.Label}"/></th>
+                <th><apex:outputText value="{!$ObjectType.Apttus_Approval__Approval_Request__c.Fields.Apttus_Approval__Date__c.Label}"/></th>
+                <th><apex:outputText value="{!$Label.Apttus_Approval__AssignedTo}"/></th>
+                <th><apex:outputText value="{!$ObjectType.Apttus_Approval__Approval_Request__c.Fields.Apttus_Approval__DependsOn__c.Label}"/></th>
+                <th><apex:outputText value="{!$ObjectType.Apttus_Approval__Approval_Request__c.Fields.Apttus_Approval__Actual_Approver__c.Label}"/></th>
+                <th><apex:outputText value="{!$ObjectType.Apttus_Approval__Approval_Request__c.Fields.Apttus_Approval__Approver_Comments__c.Label}"/></th>
+                
+            </tr>
+            <apex:repeat value="{!Context.ApprovalHistory}" var="history" >
+                <tr>
+                    <td><apex:outputField value="{!history.Apttus_Approval__Step_Name__c}" /></td>
+                    <td><apex:outputField value="{!history.Apttus_Approval__Approval_Status__c}" /></td>
+                    <td><apex:outputField value="{!history.Apttus_Approval__Date__c}" /></td>
+                    <td><apex:outputField value="{!history.Apttus_Approval__Assigned_To_Name__c}" /></td>
+                    <td><apex:outputField value="{!history.Apttus_Approval__DependsOn__c}" /></td>
+                    <td><apex:outputField value="{!history.Apttus_Approval__Actual_Approver__c}" /></td>
+                    <td><apex:outputField value="{!history.Apttus_Approval__Approver_Comments__c}" /></td>
+                    
+                </tr>
+            </apex:repeat>
+        </table>
+    </apex:outputPanel>
+</apex:component>

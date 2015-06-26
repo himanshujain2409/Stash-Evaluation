@@ -1,0 +1,109 @@
+<apex:page controller="PMProductivityReportController" tabStyle="Report" sidebar="false" showHeader="false" contenttype="application/x-excel#ProductivitySummaryReport.xls">
+	<head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    
+        <style>
+            br {mso-data-placement:same-cell;}
+        </style>
+    </head>
+	<apex:sectionHeader title="PM Productivity Report for Leads & Contacts"/>
+	
+	<apex:pageBlock id="pbReport" title="Generated Report : ">
+	
+		<apex:pageBlockTable value="{!roundSummaryList}" var="rsW">
+		
+			<apex:column value="{!rsW.roundOwnerName}">
+					<apex:facet name="footer">Grand Total</apex:facet>
+					<apex:facet name="header">Round Owner Name</apex:facet>
+				</apex:column>
+				
+				<apex:column headerValue="Unique Accounts" value="{!rsW.noOfAccounts}">
+					<apex:facet name="footer">{!grandTotalNoOfAccounts}</apex:facet>
+				</apex:column>
+								
+				<apex:column headerValue="Unique Contacts" value="{!rsW.noOfContacts}">
+					<apex:facet name="footer">{!grandTotalNoOfContacts}</apex:facet>
+				</apex:column>
+				
+				<apex:column headerValue="Rounds" value="{!rsW.noOfRounds}">
+					<apex:facet name="footer">{!grandTotalNoOfRounds}</apex:facet>
+				</apex:column>
+				
+				<apex:column value="{!rsW.totalAdminDialog}">
+					<apex:facet name="footer">{!grandTotalAdminDialog}</apex:facet>
+					<apex:facet name="header">Admin Dialog</apex:facet>
+				</apex:column>
+				
+				<apex:column value="{!rsW.totalAdminEM}">
+					<apex:facet name="footer">{!grandTotalAdminEM}</apex:facet>
+					<apex:facet name="header">Admin EM</apex:facet>
+				</apex:column>
+				
+				<apex:column value="{!rsW.totalAdminVM}">
+					<apex:facet name="footer">{!grandTotalAdminVM}</apex:facet>
+					<apex:facet name="header">Admin VM</apex:facet>
+				</apex:column>
+				
+				<apex:column value="{!rsW.totalKPDialog}">
+					<apex:facet name="footer">{!grandTotalKPDialog}</apex:facet>
+					<apex:facet name="header">KP Dialog</apex:facet>
+				</apex:column>
+				
+				<apex:column value="{!rsW.totalKPEM}">
+					<apex:facet name="footer">{!grandTotalKPEM}</apex:facet>
+					<apex:facet name="header">KP EM</apex:facet>
+				</apex:column>
+				
+				<apex:column value="{!rsW.totalKPVM}">
+					<apex:facet name="footer">{!grandTotalKPVM}</apex:facet>
+					<apex:facet name="header">KP VM</apex:facet>
+				</apex:column>
+				
+				<apex:column headerValue="# of Touches" value="{!rsW.noOfTouches}">
+					<apex:facet name="footer">{!grandTotalNoOfTouches}</apex:facet>
+				</apex:column>
+				
+				<apex:column >
+					<apex:facet name="footer">
+						<apex:outputText value="{0, number, #####}">
+							<apex:param value="{!grandTotalMI}"/>
+						</apex:outputText>
+					</apex:facet>
+					<apex:facet name="header">MI</apex:facet>
+					<apex:outputText value="{0, number, #####}">
+						<apex:param value="{!rsW.totalMI}"/>
+					</apex:outputText>
+				</apex:column>
+				
+				<apex:column headerValue="MIs executed" value="{!rsW.noOfMIs}">
+					<apex:facet name="footer">{!grandTotalNoOfMIs}</apex:facet>
+				</apex:column>
+				
+				<apex:column >
+					<apex:facet name="footer">
+						<apex:outputText value="{0, number, #####}">
+							<apex:param value="{!grandTotalRound1KP}"/>
+						</apex:outputText>
+					</apex:facet>
+					<apex:facet name="header">Round 1 KP</apex:facet>
+					<apex:outputText value="{0, number, #####}">
+						<apex:param value="{!rsW.totalRound1KP}"/>
+					</apex:outputText>
+				</apex:column>
+				
+				<apex:column headerValue="Sum of Round Scores">
+					<apex:facet name="footer">
+						<apex:outputText value="{0, number, #####}">
+							<apex:param value="{!grandTotalRoundScores}"/>
+						</apex:outputText>
+					</apex:facet>
+					<apex:outputText value="{0, number, #####}">
+						<apex:param value="{!rsW.totalRoundScores}"/>
+					</apex:outputText>
+				</apex:column>
+			
+		</apex:pageBlockTable>
+			
+	</apex:pageBlock>
+
+</apex:page>

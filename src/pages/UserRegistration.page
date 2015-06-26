@@ -1,0 +1,419 @@
+<apex:page standardStylesheets="false" StandardController="UserRegistration__c" extensions="clsRegisterUser" id="pg">
+<style>
+    /* This is for the full screen DIV */
+    .popupBackground 
+    {
+        /* Background color */
+        background-color:black;
+        opacity: 0.20;
+        filter: alpha(opacity = 20);
+        /* Dimensions */
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 998;
+        position: absolute;
+        /* Mouse */
+        cursor:wait;
+    }
+ 
+    /* This is for the message DIV */
+    .PopupPanel 
+    {
+        /* Background color */
+        border: solid 2px blue;
+        background-color: white;
+         
+        /* Dimensions */
+        left: 50%;
+        width: 200px;
+        margin-left: -100px;
+        top: 50%;
+        height: 50px;
+        margin-top: -25px;
+        z-index: 999;
+        position: fixed;
+        /* Mouse */
+        cursor:pointer;
+    }
+</style>
+
+ <style type="text/css">
+    .HeaderC
+    {
+        font-weight: bold;
+        font-size: 18px;
+        color: Navy;
+        font-family: Arial;
+    }
+    .LabelC
+    {
+        font-weight: bold;
+        font-size: 13px;
+        color: Black;
+        font-family: Arial;
+    }
+    .InfoC
+    {
+        font-size: 13px;
+        color: Black;
+        font-family: Arial;
+    }
+    .InputC
+    {
+        font-size: 12px;
+        color: Black;
+        font-family: Arial;
+        width: 80%;
+        height: 15px;
+        background-color: #E8F3F2;
+    }
+    .SpanC
+    {
+        font-size: 12px;
+        font-weight: bold;
+        font-family: Arial;
+        color: Red;
+    }        
+    .txt
+    {
+        resize: none;
+        display: inline;
+        width: 70%;
+        padding: 3px 5px;
+        height: 20px;
+        font-size: 12px;
+        color: #555555;
+        vertical-align: middle;
+        background-color: #E8F3F2;
+        border: 1px solid #cccccc;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    }
+    .form-control:-moz-placeholder
+    {
+        color: #999999;
+    }
+    .form-control::-moz-placeholder
+    {
+        color: #999999;
+    }
+    .form-control:-ms-input-placeholder
+    {
+        color: #999999;
+    }
+    .form-control::-webkit-input-placeholder
+    {
+        color: #999999;
+    }
+    .form-control
+    {
+        display: block;
+        width: 99%;
+        height: 20px;
+        padding: 6px 12px;
+        width: 70%;
+        line-height: 1.428571429;
+        color: #555555;
+        vertical-align: middle;
+        background-color: #E8F3F2;
+        border: 1px solid #cccccc;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    }
+    .form-control:focus
+    {
+        border-color: #66afe9;
+        outline: 0;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+    }
+    .line-separator
+    {
+        height: 1px;
+        border-bottom: 1px dotted gray;
+    }    
+    .info
+    {
+        padding: 0px 0px 10px 50px;
+        border-style: solid;
+        border-width: 1px;
+        background-position: 10px 10px;
+        background-repeat: no-repeat;
+        border-radius:0.25em;
+    } 
+    .info 
+    {
+        background-color: #dfeff5;
+        background-image: url({!$Resource.MessageImages}/icons/info.png);
+        border-color: #9ebcce;
+        border-radius:0.25em;
+    }
+   
+</style>
+
+<apex:actionStatus id="statusSaveTrip" stopText="">
+    <apex:facet name="start">
+        <div>
+            <div class="popupBackground" />
+            <div class="PopupPanel">
+                <table border="0" width="100%" height="100%">
+                    <tr>
+                        <td align="center"><b>Please Wait</b></td>
+                    </tr>
+                    <tr>
+                        <td align="center"><img src="{!$Resource.ProgressBar}"/></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </apex:facet>
+</apex:actionStatus>
+
+<apex:form id="fm">
+<apex:pageMessages id="MessageID" />
+<table>
+    <tr>
+        <td>
+            <apex:outputText styleClass="HeaderC" value="Enter your Registration Information"></apex:outputText>
+        </td>
+    </tr>
+</table>
+
+<table style="width:100%">
+    <tr>
+        <td style="width:50%">
+            &nbsp;
+        </td>
+        <td style="width:50%">
+            &nbsp;
+        </td>
+    </tr>
+    <tr>
+        <td style="width:50%">
+            <apex:outputText styleClass="SpanC" value="*"></apex:outputText>
+            <apex:outputText styleClass="LabelC" value=" First Name"></apex:outputText>
+        </td>
+        <td style="width:50%">
+            <apex:outputText styleClass="SpanC" value="*"></apex:outputText>
+            <apex:outputText styleClass="LabelC" value=" Last Name"></apex:outputText>
+        </td>
+    </tr>
+    <tr>
+        <td style="width:50%">
+            <apex:inputField styleClass="txt form-control" id="firstname" value="{!UserRegistration__c.First_Name__c}" ></apex:inputField>
+        </td>
+        <td style="width:50%">
+            <apex:inputField styleClass="txt form-control" id="lastname" value="{!UserRegistration__c.Last_Name__c}"></apex:inputField>
+        </td>
+    </tr>
+    <tr>
+        <td style="width:50%">
+            &nbsp;
+        </td>
+        <td style="width:50%">
+            &nbsp;
+        </td>
+    </tr>
+    <tr>
+        <td style="width:50%">
+            <apex:outputText styleClass="SpanC" value="*"></apex:outputText>
+            <apex:outputText styleClass="LabelC" value=" Username"></apex:outputText>
+        </td>
+        <td style="width:50%">
+            <apex:outputText styleClass="SpanC" value="*"></apex:outputText>
+            <apex:outputText styleClass="LabelC" value=" Email Address"></apex:outputText>
+        </td>
+    </tr>    
+    <tr>
+        <td style="width:50%">
+            <apex:inputField styleClass="txt form-control" id="username" value="{!UserRegistration__c.Username__c}"></apex:inputField>
+        </td>
+        <td style="width:50%">
+            <apex:inputField styleClass="txt form-control" id="emailaddress" value="{!UserRegistration__c.Email_Address__c}"></apex:inputField>
+        </td>
+    </tr>
+    <tr>
+        <td style="width:50%">
+            &nbsp;
+        </td>
+        <td style="width:50%">
+            &nbsp;
+        </td>
+    </tr>
+    <tr>
+        <td style="width:50%">
+            <apex:outputText styleClass="SpanC" value="*"></apex:outputText>
+            <apex:outputText styleClass="LabelC" value=" Phone"></apex:outputText>
+        </td>
+        <td style="width:50%">
+            <apex:outputText styleClass="SpanC" value="*"></apex:outputText>
+            <apex:outputText styleClass="LabelC" value=" Job Title"></apex:outputText>
+        </td>
+    </tr>
+    <tr>
+        <td style="width:50%">
+            <apex:inputField styleClass="txt form-control" id="phone" value="{!UserRegistration__c.Phone__c}"></apex:inputField>
+        </td>
+        <td style="width:50%">
+            <apex:inputField styleClass="txt form-control" id="jobtitle" value="{!UserRegistration__c.Job_Title__c}"></apex:inputField>
+        </td>
+    </tr>
+    <tr>
+        <td style="width:50%">
+            &nbsp;
+        </td>
+        <td style="width:50%">
+            &nbsp;
+        </td>
+    </tr>
+    <tr>
+        <td style="width:50%">
+            <apex:outputText styleClass="SpanC" value="*"></apex:outputText>
+            <apex:outputText styleClass="LabelC" value=" Organization"></apex:outputText>
+        </td>
+    </tr>
+    <tr>
+        <td style="width:50%">
+           <c:AutoCompleteV2 id="accountinfo" allowClear="true" importJquery="true" labelField="Name" SObject="Account" valueField="Id" targetField="{!UserRegistration__c.Organization__c}"  style="width:75%"/>
+        </td>
+    </tr>
+    <tr>
+        <td style="width:50%">
+            &nbsp;
+        </td>
+        <td style="width:50%">
+            &nbsp;
+        </td>
+    </tr>
+</table>
+
+<div class="line-separator"></div>
+
+<table style="width:100%">
+    <tr>
+        <td>
+            &nbsp;
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <apex:outputText styleClass="HeaderC" value="Registration Questions"></apex:outputText>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            &nbsp;
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <apex:outputText styleClass="SpanC" value="*"></apex:outputText>
+            <apex:outputText styleClass="LabelC" value=" What is your level of Salesforce Administrative experience?"></apex:outputText>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <apex:inputField id="adminexp" style="width:80%" required="true" value="{!UserRegistration__c.Salesforce_Administrative_Experience__c}"></apex:inputField>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            &nbsp;
+        </td>
+    </tr>
+    <tr>
+        <td style="width:70%">
+         <apex:outputText styleClass="InfoC" value="Training organizers are prohibited from soliciting confidential personal information (credit card information, social security number, etc.) in the registration form. This questionnaire is not intended to handle sensitive data."></apex:outputText>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            &nbsp;
+        </td>
+    </tr>
+</table>
+
+<div class="line-separator"></div>
+
+<table style="width:100%">
+    <tr>
+        <td>
+            &nbsp;
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <apex:outputText styleClass="SpanC" value="*"></apex:outputText>
+            <apex:outputText styleClass="InfoC" value=" Indicates a required field"></apex:outputText>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            &nbsp;
+        </td>
+    </tr>
+</table>
+
+<div class="info" style="width:80%">
+    <p>
+       By clicking this button you submit your information to the training organizer, who will use it to communicate with you regarding this event and their other services.
+    </p>
+</div>
+<br/>
+
+<apex:pageBlock id="captchablock">
+    <apex:pageBlockSection >
+    <!-- Show the reCAPTCHA form if they are not yet verified -->
+            <apex:pageBlockSectionItem >
+                <!-- reCAPTCHA verification 
+                     Source: https://developers.google.com/recaptcha/docs/display -->
+                <script type="text/javascript"
+                    src="https://www.google.com/recaptcha/api/challenge?k={!publicKey}">
+                </script>
+                <noscript>
+                    <iframe src="https://www.google.com/recaptcha/api/noscript?k={!publicKey}"
+                    height="290" width="500" frameborder="0"></iframe><br/>
+                    <textarea name="recaptcha_challenge_field" rows="3" cols="40"></textarea>
+                    <input type="hidden" name="recaptcha_response_field"
+                        value="manual_challenge"/>
+                </noscript>
+                <!-- end reCAPTCHA verification -->
+            </apex:pageBlockSectionItem>       
+        </apex:pageBlockSection>
+        </apex:pageBlock>
+        
+<table style="width:100%">
+    <tr>
+        <td>
+            &nbsp;
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <apex:CommandButton value="Submit" action="{!submitUserInfo}" id="Continue" status="statusSaveTrip" reRender="MessageID" style="width:80px; height:30px;"/>            
+        </td>
+    </tr>
+    <tr>
+        <td>
+            &nbsp;
+        </td>
+    </tr>
+</table>
+
+<apex:actionFunction name="showMessage" action="{!showMessage}" rerender="MessageID">
+    <apex:param name="errorLevel" assignTo="{!errorLevel}" value="" />
+    <apex:param name="messageName" assignTo="{!messageName}" value="" />
+</apex:actionFunction>
+
+ <apex:actionFunction name="submitUserInfo" action="{!submitUserInfo}" status="statusSaveTrip" reRender="MessageID" />
+ 
+</apex:form>
+</apex:page>

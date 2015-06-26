@@ -1,0 +1,49 @@
+<!-- Support Tab: Open a new browser tab for the Customer Portal login -->
+<apex:page >
+    <div id="popup_notice" style="display: none">
+        <apex:pageBlock >
+            <h1>You must allow this pop-up to open in order to access the customer portal.</h1>
+        </apex:pageBlock>
+    </div>
+
+    <script>
+        function showNotice() {
+            window.location.hash = "#blocked";
+            document.getElementById("popup_notice").style.display = "block";
+        }
+
+        /* From http://stackoverflow.com/questions/2914/how-can-i-detect-if-a-browser-is-blocking-a-popup?lq=1 */
+        var blockChecker = {
+            check: function(tab) {
+                var _scope = this;
+
+                if (tab) {
+                    if (/chrome/.test(navigator.userAgent.toLowerCase())) {
+                        setTimeout(function () {
+                            _scope._is_tab_blocked(_scope, tab);
+                        },200);
+                    } else {
+                        _scope._is_tab_blocked(_scope, tab);
+                    }
+                } else {
+                    showNotice();
+                }
+            },
+
+            _is_tab_blocked: function(scope, tab){
+                if ((tab.innerHeight > 0) == false) {
+                    showNotice();
+                } else {
+                    history.go(-1);
+                }
+            }
+        };
+
+        if (window.location.hash !== '#blocked') {
+            var newTab = window.open("{!$Label.ApttusCustomerPortalLoginURL}", "_blank");
+            blockChecker.check(newTab);
+        } else {
+            showNotice();
+        }
+    </script>
+</apex:page>

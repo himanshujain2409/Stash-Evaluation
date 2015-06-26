@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>24.0</apiVersion>
+    <availableInTouch>false</availableInTouch>
+    <confirmationTokenRequired>false</confirmationTokenRequired>
+    <description>Mass Edit Project Milestones Related List under Agreements (Record Type = SOW)</description>
+    <label>Apttus_PS_MassEdit_ProjectMilestones</label>
+</ApexPage>

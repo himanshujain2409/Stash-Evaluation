@@ -1,0 +1,545 @@
+<apex:page >
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+    <meta name="description" content=""></meta>
+    <meta name="author" content=""></meta>
+
+    <title>Quick Links 2</title>
+
+    <!-- Bootstrap core CSS -->
+    <apex:stylesheet value="{!URLFOR($Resource.quicklinks_2, 'quicklinks/dist/css/bootstrap.css')}"/>
+
+    <!-- Custom styles for this template -->
+    
+    <apex:stylesheet value="{!URLFOR($Resource.quicklinks_2, 'quicklinks/dist/css/app.css')}"/>
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css'></link>
+
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../../assets/js/html5shiv.js"></script>
+      <script src="../../assets/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+   <body id="apptus">
+        <p align="right"><font size="4"><b>Go to <a href="https://apttus--c.na3.visual.force.com/apex/content_library" style="text-decoration:none;" target="_blank">Content Library I &#8594;</a></b></font></p>
+
+    <div class="container">
+        <div class="page-header">
+        <img src="{!URLFOR($Resource.quicklinks_2, 'quicklinks/dist/img/header.jpg')}" width="100%" height="auto" alt="Apttus Dreamforce Central"></img>
+        
+        <!--<h1>Apttus </h1>
+        <h1><small>Dreamforce Central</small></h1>-->
+        </div>      
+        
+        <div class="row">
+          
+          <div class="col-md-4">
+              <h4> <img src="{!URLFOR($Resource.quicklinks_2, 'quicklinks/dist/img/event_basic_icon.png')}" width="30" height="30" alt="Sales Tools"></img> REVENUE MANAGEMENT </h4><p></p>        
+          <b>Introduction to Revenue Management</b>
+          <ul>
+          <li>Intro Video -- Early Stage</li>
+          <li><u>Description:</u> Apttus Revenue Management gives you insight into the fiscal structure of your contracts, so you can create accurate and timely orders, quickly model complex revenue programs and continually keep your customers happy.</li>
+          <li><a href="http://www.apttus.com/introduction-to-revenue-management/" target="_blank">Gated</a> -- <a href="https://www.youtube.com/watch?v=qjvLGABmJno" target="_blank">Ungated</a></li>
+          </ul>
+          <b>Ultimate Guide to Revenue Management</b>
+          <ul>
+          <li>White Paper -- Early Stage</li>
+          <li><u>Description:</u> This guide will teach you how revenue management tools can accelerate revenue velocity, eliminate errors and risk, and gain more insight into your customers.</li>
+          <li><a href="http://www.apttus.com/ultimate-guide-revenue-management/" target="_blank">Gated</a> -- <a href="http://info.apttus.com/rs/apttus/images/Apttus_Ultimate_Guide_%20to_Revenue_Management.pdf" target="_blank">Ungated</a></li>
+          </ul>
+          <b>Apttus Revenue Management</b>
+          <ul>
+          <li>Data Sheet -- Mid Stage</li>
+          <li><u>Description:</u> Apttus Revenue Management helps you accelerate revenue velocity, eliminate errors and risk, and gain more insight into your customers.</li>
+          <li><a href="https://apttus.my.salesforce.com/sfc/p/500000007Zkl/a/50000000Puk3/1is7jZtTbuZKJe1EbhlGsOG4joZbCfCvImA20.3Mq00" target="_blank">Ungated Only</a></li>
+          </ul>
+          <b>Apttus Rebate Management</b>
+          <ul>
+          <li>Data Sheet -- Mid Stage</li>
+          <li><u>Description:</u> Apttus Rebate Management helps you manage the complete rebate process all inside Salesforce - streamlining rebate calculations and payments, reducing revenue leakage and improving responsiveness with your partners.</li>
+          <li><a href="https://apttus.my.salesforce.com/sfc/p/500000007Zkl/a/50000000D2sL/JVIjCPTL7jY4lVJ6ZhAE5QgWE0hhTwl_D2w2uQ3Sqn0" target="_blank">Ungated Only</a></li>
+          </ul>
+          <b>Billing Management</b>
+          <ul>
+          <li>Data Sheet -- Mid Stage</li>
+          <li><u>Description:</u> Apttus helps you accurately invoice your customers through detailed insight into your quotes, contracts and orders.</li>
+          <li><a href="http://info.apttus.com/rs/apttus/images/Billing_Datasheet.pdf" target="_blank">Ungated Only</a></li>
+          </ul>
+          <b>Completing Quote-to-Cash with Revenue Management</b>
+          <ul>
+          <li>Video -- Early-Mid Stage</li>
+          <li><u>Description:</u> In this online presentation, get an overview of Apttus Revenue Management, including Billing Management, Revenue Recognition and Rebate Management.</li>
+          <li><a href="http://www.apttus.com/apttus-revenue-management-best-kept-secret/" target="_blank"> Gated</a> -- <a href="http://info.apttus.com/Accelerate-2014-Video_Revenue-Management-Best-Kept-Secret.html" target="_blank">Ungated Only</a></li>
+          </ul>
+          <b>How Delighting Your Internal Users Leads to Delighted Customers</b>
+          <ul>
+          <li>Video -- Mid Stage</li>
+          <li><u>Description:</u> In this video, Salesforce.com discusses how innovating revenue operations in the cloud is helping them make the customer experience a delight.</li>
+          <li><a href="http://apttus.com/delighting-internal-users-leads-delighted-customers/" target="_blank"> Gated</a> -- <a href="http://info.apttus.com/delight-QTC.html" target="_blank">Ungated Only</a></li>
+          </ul>
+          <b>Revenue Management, The Best Kept Secret</b>
+          <ul>
+          <li>Video -- Mid Stage</li>
+          <li><u>Description:</u> Revenue Management simplifies, automates and increases accuracy of your revenue processes for your customers, partners, and financial stakeholders. </li>
+          <li><a href="http://info.apttus.com/Accelerate-2014-Video_Revenue-Management-Best-Kept-Secret.html" target="_blank">Video </a> -- <a href="https://apttus.my.salesforce.com/sfc/p/500000007Zkl/a/50000000D3fm/npni7p72jgWv_peFjsTa0x6JsNS2sD2ZrUhurcNeWo0" target="_blank">Ungated Only</a></li>
+          </ul>
+          <b>Billing on Salesforce1</b>
+          <ul>
+          <li>Video -- Mid Stage</li>
+          <li><u>Description:</u> Salesforce helps you understand everything about your customers, so shouldn't you use it for the most sensitive part of the customer experience?</li>
+          <li><a href="http://dreamforce.vidyard.com/watch/VGbZYrQK6-yy7YrOxAFTsw" target="_blank">Ungated Only</a></li>
+          </ul>
+          <b>Billing Management</b>
+          <ul>
+          <li>Data Sheet -- Mid Stage</li>
+          <li><u>Description:</u> Apttus Billing Management is the world's only Billing solution that's built on the Salesforce1 platform and integrated to the entire Quote-to-Cash process.</li>
+          <li><a href="https://apttus.my.salesforce.com/sfc/p/500000007Zkl/a/50000000D3r4/Wgz8KY._o9TAYKKk9icDRyINFL015LBreLh3pTEFWTE" target="_blank">Ungated Only</a></li>
+          </ul>
+                  
+                  <h4> <img src="{!URLFOR($Resource.quicklinks_2, 'quicklinks/dist/img/event_basic_icon.png')}" width="30" height="30" alt="Sales Tools"></img> E-Commerce </h4><p></p>
+          <b>Introduction to E-Commerce</b>
+          <ul>
+          <li>Intro Video -- Early Stage</li>
+          <li><u>Description:</u> Apttus E-Commerce is the only solution that fully supports global e-commerce for complex products and pricing models across multiple channels on a single platform.</li>
+          <li><a href="http://www.apttus.com/introduction-e-commerce-salesforce/" target="_blank">Gated</a> -- <a href="https://www.youtube.com/watch?v=bl5demrmbpk" target="_blank">Ungated</a></li>
+          </ul>
+          <b>Ultimate Guide to E-Commerce</b>
+          <ul>
+          <li>White Paper -- Early-Mid Stage</li>
+          <li><u>Description:</u> The Ultimate Guide to E-Commerce on Salesforce looks at the strong technical foundation that the Salesforce1 Platform offers for e-commerce initiatives. The guide then examines Apttus E-Commerce, which is built on the Salesforce1 Platform and provides enterprises immediate access to innovative, comprehensive functionality.</li>
+          <li><a href="http://www.apttus.com/ultimate-guide-e-commerce-salesforce/" target="_blank">Gated</a> -- <a href="http://info.apttus.com/rs/apttus/images/Ultimate%20Guide%20to%20Salesforce%20E-Commerce_Apttus.pdf" target="_blank">Ungated Only</a></li>
+          </ul>
+          <b>E-Commerce Demo | Badger</b>
+          <ul>
+          <li>Demo -- Mid-Late Stage</li>
+          <li><u>Description:</u> Take this self-guided, interactive CPQ demo to learn how Apttus helps your sales channels sell more, sell bigger, and sell anywhere.</li>
+          <li><a href="http://www.apttus.com/cpq-demo/" target="_blank">Gated</a> -- <a href="http://apttus.com/badger_VO2/" target="_blank">Ungated</a></li>
+          </ul>
+          <b>E-Commerce Data Sheet</b>
+          <ul>
+          <li>Data Sheet -- Mid Stage</li>
+          <li><u>Description:</u> Apttus E-Commerce empowers enterprises to drive more sales with greater efficiency across multiple channels. It enables consistent shopping, buying and service experiences across different channels.</li>
+          <li><a href="https://apttus.my.salesforce.com/sfc/p/500000007Zkl/a/50000000D2s1/4cNWR_tS.9Aj225X_d99AqJqxRuboY_Bepp3Drf_FVg" target="_blank">Gated</a> -- <a href="http://info.apttus.com/rs/apttus/images/Apttus E-Commerce Datasheet.pdf" target="_blank">Ungated</a></li>
+          </ul>
+          <b>Customer Success Stories - Neopost</b>
+          <ul>
+          <li>Video -- Mid-Late Stage</li>
+          <li><u>Description:</u> Steve Rakoczy discusses how Apttus E-Commerce creates better relationships with their customers.</li>
+          <li><a href="http://apttus.com/customers-overview/customers/#testimonials" target="_blank">Gated</a> -- <a href="https://www.youtube.com/watch?v=CE24tiA--8o" target="_blank">Ungated</a></li>
+          </ul>
+          <b>A Foolproof Guide to E-Commerce and Online Sales with Salesforce1</b>
+          <ul>
+          <li>Video -- Mid-Late Stage</li>
+          <li><u>Description:</u> You will learn how to easily set up complex product offerings across the web, while delivering consistent products, prices, and promotions across all channels.</li>
+          <li><a href="http://dreamforce.vidyard.com/watch/W-Txwzmj1PsXmAP3Z_rysQ" target="_blank">Ungated Only</a></li>
+          </ul>
+
+          </div>
+                     
+              <div class="col-md-4">
+                  <h4> <img src="{!URLFOR($Resource.quicklinks_2, 'quicklinks/dist/img/event_basic_icon.png')}" width="30" height="30" alt="Sales Tools"></img> X-Author</h4><p></p>        
+          <b>Introduction to X-Author</b>
+          <ul>
+          <li>Intro Video -- Early Stage</li>
+          <li><u>Description:</u> Watch the video to learn how Apttus' patent pending technology combines Salesforce and Microsoft Office.</li>
+          <li><a href="http://apttus.com/solutions/advanced_solutions/salesforce-x-author/" target="_blank">Gated</a> -- <a href="https://www.youtube.com/watch?v=qIYCoaKHc1U" target="_blank">Ungated</a></li>
+          </ul>
+          <b>Apttus X-Author for Excel</b>
+          <ul>
+          <li>Video -- Early Stage</li>
+          <li><u>Description:</u> X-Author for Excel transforms the world’s most popular spreadsheet application into much more than a stand-alone desktop tool.</li>
+          <li><a href="http://x-author.com/x-author-for-excel/" target="_blank">Gated</a> -- <a href="https://www.youtube.com/watch?v=an8RjclHNqo" target="_blank">Ungated</a></li>
+          </ul>
+          <b>App Mavericks: Sync Excel and Salesforce with Apttus X-Author</b>
+          <ul>
+          <li>Video -- Mid Stage</li>
+          <li><u>Description:</u> Update opportunities, create quotes, submit budgets, and assign territories in Excel - and all the data will be stored in Salesforce!</li>
+          <li><a href="https://www.youtube.com/watch?v=cwuFuMCxTSQ" target="_blank">Ungated Only</a></li>
+          </ul>
+          <b>X-Author Developer Guide</b>
+          <ul>
+          <li>Guide -- Late Stage</li>
+          <li><u>Description:</u> Using the X-Author Designer, you can create Excel application templates from new or existing workbooks.</li>
+          <li><a href="http://www.apttus.com/x-author-developer-guide/" target="_blank">Gated</a> -- <a href="http://info.apttus.com/rs/apttus/images/APT_X-Author_Developer_Guide.pdf" target="_blank">Ungated</a></li>
+          </ul>
+          <b>X-Author: Build Miracles with Microsoft Office and Salesforce</b>
+          <ul>
+          <li>Video -- Mid-Late Stage</li>
+          <li><u>Description:</u> Jules Erlich's presentation at Dreamforce 2013 - product description and Nick McCoy Demo.</li>
+          <li><a href="http://www.apttus.com/build-miracles-microsoft-office-salesforce/" target="_blank">Gated</a> -- <a href="http://info.apttus.com/Build-Miracles-with-Microsoft-Office-Salesforce.html?aliId=6882996" target="_blank">Ungated</a></li>
+          </ul>
+          <b>Apttus X-Author for MS Office</b>
+          <ul>
+          <li>Video -- Early Stage</li>
+          <li><u>Description:</u> Apttus X-Author is enabling Salesforce customers and partners to integrate and build Microsoft applications that leverage all the collaboration, intelligence, and innovation of the Salesforce platform.</li>
+          <li><a href="https://www.youtube.com/watch?v=qIYCoaKHc1U&feature=youtu.be" target="_blank">Ungated Only</a></li>
+          </ul>
+          <b>X-Author For Salesforce Chatter inside Microsoft Office</b>
+          <ul>
+          <li>Demo -- Mid Stage</li>
+          <li><u>Description:</u> Apttus X-Author is enabling Salesforce customers and partners to integrate and build Microsoft applications that leverage all the collaboration, intelligence, and innovation of the Salesforce platform.</li>
+          <li><a href="http://info.apttus.com/Chatter-Demo.html" target="_blank">Ungated Only</a></li>
+          </ul>
+          <b>Customer Success Stories - PayPal</b>
+          <ul>
+          <li>Video -- Mid-Late Stage</li>
+          <li><u>Description:</u> Apttus Contract Management and X-Author Customer, PayPal, reviews the end to end benefits of X-Author for Excel.</li>
+          <li><a href="http://apttus.com/customers-overview/customers/#testimonials" target="_blank">Gated</a> -- <a href="https://www.youtube.com/watch?v=8_Yag9dkcP4" target="_blank">Ungated</a></li>
+          </ul>
+
+                  <h4> <img src="{!URLFOR($Resource.quicklinks_2, 'quicklinks/dist/img/event_basic_icon.png')}" width="30" height="30" alt="Sales Tools"></img> Platform</h4><p></p>
+          
+          <b>Datasheet: Salesforce Currencies</b>
+          <ul>
+          <li>Datasheet -- Early Stage</li>
+          <li><u>Description:</u> 160+ currencies supported on the Salesforce1 platform.</li>
+          <li><a href="https://apttus.my.salesforce.com/sfc/p/500000007Zkl/a/50000000D3oF/RTL0FzBtdUcZNR0Qu7RsuSVzjnm_2YtrxMaQQIdhbek" target="_blank">Ungated Only</a></li>
+          </ul>
+          <b>Datasheet: Salesforce Languages</b>
+          <ul>
+          <li>Datasheet -- Early Stage</li>
+          <li><u>Description:</u> Languages supported on the Salesforce1 platform.</li>
+          <li><a href="https://apttus.my.salesforce.com/sfc/p/500000007Zkl/a/50000000D3oK/VkO4aF1HdAZ.02vfH5RY7hrRC92JyanIA1WWAH2Aa6w" target="_blank">Ungated Only</a></li>
+          </ul>
+          <b>Salesforce Success from Salesforce MVPs</b>
+          <ul>
+          <li>Video -- Early Stage</li>
+          <li><u>Description:</u> Download the video to learn everything you ever wanted to know about Salesforce, including user adoption, Salesforce1, advanced administration, app development and more.</li>
+          <li><a href="http://www.apttus.com/salesforce-success-salesforce-mvps/" target="_blank">Gated</a> -- <a href="http://info.apttus.com/salesforce-mvps.html" target="_blank">Ungated</a></li>
+          </ul>
+          <b>Seven Deadly Sins of DIY Cloud</b>
+          <ul>
+          <li>White Paper -- Early-Mid Stage</li>
+          <li><u>Description:</u> Even though cloud development can be easy, DIY apps aren’t always the right choice. If trying to save money is the main reason to build an app that’s already available on the market, DIY apps will often backfire – resulting in  missed revenue opportunities, unexpected costs and unhappy customers.</li>
+          <li><a href="http://www.apttus.com/seven-deadly-sins-diy-cloud/" target="_blank">Gated</a> -- <a href="http://info.apttus.com/rs/apttus/images/Seven-Deadly-Sins-of-DIY-Cloud-Apps3.pdf" target="_blank">Ungated</a></li>
+          </ul>
+          <b>Build vs. Buy vs. Outsource: More Deadly Sins of the DIY Cloud</b>
+          <ul>
+          <li>White Paper -- Early Stage</li>
+          <li><u>Description:</u> Learn more about the unanticipated costs and risks of a DIY enterprise software, and better understand your decision to Build, Buy, or Outsource a cloud based application.</li>
+          <li><a href="http://www.apttus.com/build-outsource-diy/" target="_blank">Gated</a> -- <a href="http://info.apttus.com/rs/apttus/images/Build_Buy_Outsource_WP.pdf" target="_blank">Ungated</a></li>
+          </ul>
+          <b>Revenue Growth and IT Agility on the Salesforce1 Platform</b>
+          <ul>
+          <li>White Paper -- Early Stage</li>
+          <li><u>Description:</u> Download this white paper to find out how the Salesforce1 platform can transform your IT department into a customer-centric, profit center and how it can boost the overall revenue in your organization.</li>
+          <li><a href="http://www.apttus.com/revenue-growth-agility-salesforce1_platform/" target="_blank">Gated</a> -- <a href="http://info.apttus.com/rs/apttus/images/Revenue_Growth_IT_Agility_and_Salesforce1.pdf" target="_blank">Ungated</a></li>
+          </ul>
+          <b>10 Essential Steps to Securing the Cloud</b>
+          <ul>
+          <li>White Paper -- Early Stage</li>
+          <li><u>Description:</u> In this white paper, get the aggregated insights of fifteen CIOs across financial services, manufacturing and professional services on how to create an effective cloud security framework.</li>
+          <li><a href="http://www.apttus.com/10-essential-steps-securing-cloud/" target="_blank">Gated</a> -- <a href="http://info.apttus.com/rs/apttus/images/Apttus_10_Steps_to_a_Cloud_Security_Framework.pdf" target="_blank">Ungated</a></li>
+          </ul>
+          <b>Best Practices for Selecting AppExchange Solutions</b>
+          <ul>
+          <li>Webinar -- Early Stage</li>
+          <li><u>Description:</u> In this on-demand webinar, hear real-world examples of companies that have quickly realized benefits like higher adoption, improved customer satisfaction and fewer errors by choosing the right AppExchange solutions.</li>
+          <li><a href="http://www.apttus.com/best-practices-selecting-appexchange-solutions/" target="_blank">Gated</a> -- <a href="http://info.apttus.com/Selecting-AppExchange-Solutions-Recording.html?mkt_tok=3RkMMJWWfF9wsRolvKnBZKXonjHpfsX57%2BUvWKGylMI%2F0ER3fOvrPUfGjI4FT8BnI%2BSLDwEYGJlv6SgFQ7LBMbJlw7gOUxE%3D" target="_blank">Ungated</a></li>
+          </ul>
+          <b>Delight Your Customers with Quote-to-Cash and Salesforce</b>
+          <ul>
+          <li>Webinar -- Mid Stage</li>
+          <li><u>Description:</u> During this on-demand webinar, learn from Xactly, Jitterbit, DocuSign and Apttus how Salesforce customers are automating the Quote-to-Cash process with an integrated ecosystem.</li>
+          <li><a href="http://apttus.com/accelerate-2014-salesforce-delight-customers-quote-cash/" target="_blank">Gated</a> -- <a href="http://info.apttus.com/Delight-Customers-Right-Apps-Recording-LP.html?mkt_tok=3RkMMJWWfF9wsRolsqrBZKXonjHpfsX57%2BUvWKGylMI%2F0ER3fOvrPUfGjI4FScFiI%2BSLDwEYGJlv6SgFQ7LBMbJlw7gOUxE%3D" target="_blank">Ungated</a></li>
+          </ul>
+          <b>DIY vs. Off-the-Shelf: When To Buy An AppExchange Solution</b>
+          <ul>
+          <li>Webinar -- Mid-Late Stage</li>
+          <li><u>Description:</u> In this on-demand Webinar, learn from Salesforce.com’s evangelist Warren Chen about when it absolutely makes sense to create your own apps and when it makes sense to buy.</li>
+          <li><a href="http://www.apttus.com/diy-vs-shelf-buy-appexchange-solution/" target="_blank">Gated</a> -- <a href="http://info.apttus.com/When-to-Buy-AppExchange-Recording.html?mkt_tok=3RkMMJWWfF9wsRolvajMZKXonjHpfsX57%2BUvWKGylMI%2F0ER3fOvrPUfGjI4FTcFnI%2BSLDwEYGJlv6SgFQ7LBMbJlw7gOUxE%3D" target="_blank">Ungated</a></li>
+          </ul>
+          <b>Extending Salesforce with Quote-to-Cash Apps</b>
+          <ul>
+          <li>White Paper -- Mid Stage</li>
+          <li><u>Description:</u> In this white paper, learn how Apttus Quote-to-Cash, aided by Xactly compensation management, DocuSign electronic signature and Jitterbit cloud integration, is extending Salesforce by helping you close the CRM to ERP gap.</li>
+          <li><a href="http://www.apttus.com/extending-salesforce-quote-cash-apps/" target="_blank">Gated</a> -- <a href="http://info.apttus.com/rs/apttus/images/Extend_SFDC_QTC_WP.pdf?aliId=4121106" target="_blank">Ungated</a></li>
+          </ul>
+          <b>Your Five Point Checklist for Selecting the Right Software</b>
+          <ul>
+          <li>Report/Checklist -- Mid Stage</li>
+          <li><u>Description:</u> Use the 5-point checklist below to help you determine which software solution is the right fit for you.</li>
+          <li><a href="http://www.apttus.com/your-five-point-checklist-for-selecting-the-right-software/" target="_blank">Gated</a> -- <a href="http://info.apttus.com/rs/apttus/images/5-Point-Checklist-Selecting-the-Right-Software.pdf" target="_blank">Ungated</a></li>
+          </ul>
+          
+                   
+          </div>  
+                            
+              <div class="col-md-4">
+                 <h4> <img src="{!URLFOR($Resource.quicklinks_2, 'quicklinks/dist/img/event_basic_icon.png')}" width="30" height="30" alt="Sales Tools"></img> Customer Success Stories</h4><p></p>        
+          <b>Highlight Video</b>
+          <ul>
+          <li>Video -- Mid-Late Stage</li>
+          <li><u>Description:</u> Apttus Execs on customer excellence and various customer testimonials on the success with Apttus Professional Services.</li>
+          <li><a href="http://apttus.com/customers-overview/customers/#testimonials" target="_blank">Gated</a> -- <a href="https://www.youtube.com/watch?v=56lBq8OIeA8" target="_blank">Ungated</a></li>
+          </ul>
+          <b>DSV</b>
+          <ul>
+          <li>Video -- Mid-Late Stage</li>
+          <li><u>Description:</u> Global logistics company DSV, on keys to delivering success in over 32 countries with Apttus solutions.</li>
+          <li><a href="http://apttus.com/customers-overview/customers/#testimonials" target="_blank">Gated</a> -- <a href="https://www.youtube.com/watch?v=_F0LIbkgN2c" target="_blank">Ungated</a></li>
+          </ul>
+          <b>Axis Stars</b>
+          <ul>
+          <li>Video -- Mid-Late Stage</li>
+          <li><u>Description:</u> French footballer and founder of Axis Stars, Louis Saha describe how his partnership with Apttus has improved critical business processes.</li>
+          <li><a href="http://apttus.com/customers-overview/customers/#testimonials" target="_blank">Gated</a> -- <a href="https://www.youtube.com/watch?v=kj1ySrSGbGk" target="_blank">Ungated</a></li>
+          </ul>
+          <b>CUNA Mutual</b>
+          <ul>
+          <li>Video -- Mid-Late Stage</li>
+          <li><u>Description:</u> CUNA Mutual discusses ease of use and product flexibility as well as implementation success of Apttus CPQ (Configure Price Quote), Apttus Deal Manager and Apttus X-Author for Excel.</li>
+          <li><a href="http://apttus.com/customers-overview/customers/#testimonials" target="_blank">Gated</a> -- <a href="https://www.youtube.com/watch?v=KOPjULS4YzM" target="_blank">Ungated</a></li>
+          </ul>
+          <b>Trimble</b>
+          <ul>
+          <li>Video -- Mid-Late Stage</li>
+          <li><u>Description:</u> Check out Claude Chassot discussing how Trimble used Apttus CPQ providing them with a 360° overview of the pricing process.</li>
+          <li><a href="http://apttus.com/customers-overview/customers/#testimonials" target="_blank">Gated</a> -- <a href="https://www.youtube.com/watch?v=ZkOlEla2xX4" target="_blank">Ungated</a></li>
+          </ul>
+          <b>Cornerstone OnDemand</b>
+          <ul>
+          <li>Video -- Mid-Late Stage</li>
+          <li><u>Description:</u> Listen to LMS and HCM leader Cornerstone explain how Apttus is helping them improve core Configure Price Quote (CPQ) process on the Salesforce platform.</li>
+          <li><a href="http://apttus.com/customers-overview/customers/#testimonials" target="_blank">Gated</a> -- <a href="https://www.youtube.com/watch?v=VufQ3lFwnr0" target="_blank">Ungated</a></li>
+          </ul>
+          <b>PayPal</b>
+          <ul>
+          <li>Video -- Mid-Late Stage</li>
+          <li><u>Description:</u> Apttus Contract Management and X-Author Customer, PayPal, reviews the end to end benefits of X-Author for Excel.</li>
+          <li><a href="http://apttus.com/customers-overview/customers/#testimonials" target="_blank">Gated</a> -- <a href="https://www.youtube.com/watch?v=8_Yag9dkcP4" target="_blank">Ungated</a></li>
+          </ul>
+          <b>Equinix</b>
+          <ul>
+          <li>Video -- Mid-Late Stage</li>
+          <li><u>Description:</u> Equinix discusses how Apttus is helping them improve business-critical contracting processes.</li>
+          <li><a href="http://apttus.com/customers-overview/customers/#testimonials" target="_blank">Gated</a> -- <a href="https://www.youtube.com/watch?v=onZBui-k114" target="_blank">Ungated</a></li>
+          </ul>
+          <b>Ceridian</b>
+          <ul>
+          <li>Video -- Mid-Late Stage</li>
+          <li><u>Description:</u> Larry Donovan talks how Ceridian Legal team uses Apttus CLM and CPQ.</li>
+          <li><a href="http://apttus.com/customers-overview/customers/#testimonials" target="_blank">Gated</a> -- <a href="https://www.youtube.com/watch?v=8Wz1eGxfel4" target="_blank">Ungated</a></li>
+          </ul>
+          <b>IMS Health</b>
+          <ul>
+          <li>Video -- Mid-Late Stage</li>
+          <li><u>Description:</u> Christine Wiegand talks about Apttus CLM, X-Author for Excel and Customer Portals.</li>
+          <li><a href="http://apttus.com/customers-overview/customers/#testimonials" target="_blank">Gated</a> -- <a href="https://www.youtube.com/watch?v=he1lnuc6j8s" target="_blank">Ungated</a></li>
+          </ul>
+          <b>NXP</b>
+          <ul>
+          <li>Video -- Mid-Late Stage</li>
+          <li><u>Description:</u> NXP VP Legal Charles Smit discusses the advantages of Apttus Contract Management.</li>
+          <li><a href="http://apttus.com/customers-overview/customers/#testimonials" target="_blank">Gated</a> -- <a href="https://www.youtube.com/watch?v=c3Z9bUx5hAA" target="_blank">Ungated</a></li>
+          </ul>
+          <b>Neopost</b>
+          <ul>
+          <li>Video -- Mid-Late Stage</li>
+          <li><u>Description:</u> Steve Rakoczy discusses how Apttus E-Commerce creates better relationships with their customers.</li>
+          <li><a href="http://apttus.com/customers-overview/customers/#testimonials" target="_blank">Gated</a> -- <a href="https://www.youtube.com/watch?v=CE24tiA--8o" target="_blank">Ungated</a></li>
+          </ul>
+          <b>Zhone</b>
+          <ul>
+          <li>Video -- Mid-Late Stage</li>
+          <li><u>Description:</u> Claus Roggensack discusses Apttus CPQ and X-Author for Excel.</li>
+          <li><a href="http://apttus.com/customers-overview/customers/#testimonials" target="_blank">Gated</a> -- <a href="https://www.youtube.com/watch?v=PeOkvOZrmI8" target="_blank">Ungated</a></li>
+          </ul>
+                    
+                 <h4> <img src="{!URLFOR($Resource.quicklinks_2, 'quicklinks/dist/img/event_basic_icon.png')}" width="30" height="30" alt="Sales Tools"></img> SRM</h4><p></p> 
+          
+          <b>Introduction to SRM</b>
+          <ul>
+          <li>Video -- Early Stage</li>
+          <li><u>Description:</u> Learn how Apttus SRM builds on Apttus Buy-Side Contracting to drive strategic differentiation through superior supplier engagement – all through the world’s leading cloud platform - Salesforce1.</li>
+          <li><a href="http://apttus.com/solutions/supplier-relationship-management/" target="_blank">Gated</a> -- <a href="https://www.youtube.com/watch?v=xTw0Dgc683g" target="_blank">Ungated</a></li>
+          </ul> 
+          <b>Supplier Relationship Management</b>
+          <ul>
+          <li>Collateral -- Mid Stage</li>
+          <li><u>Description:</u> Apttus’ Supplier Management enables you to gain complete visibility and control of your suppliers and their performance. It is easy to deploy and very easy to use. You gain benefits immediately.</li>
+          <li><a href="http://apttus.com/solutions/supplier-relationship-management/" target="_blank">Gated</a> -- <a href="http://info.apttus.com/rs/apttus/images/Apttus_SupplierManagement.pdf" target="_blank">Ungated</a></li>
+          </ul>
+          <b>SRM Data Sheet</b>
+          <ul>
+          <li>Data Sheet -- Mid Stage</li>
+          <li><u>Description:</u> Apttus Supplier Relationship Management (SRM) helps your Savings Team drive additional value from your supplier relationships.</li>
+          <li><a href="http://apttus.com/solutions/supplier-relationship-management/" target="_blank">Gated</a> -- <a href="http://info.apttus.com/rs/apttus/images/Apttus%20SRM%20Datasheet%20-%20November%202014.pdf" target="_blank">Ungated</a></li>
+          </ul>
+          <b>IT Asset Manager: Comprehensive IT Asset Tracking and Management</b>
+          <ul>
+          <li>Collateral -- Mid Stage</li>
+          <li><u>Description:</u> Apttus IT Asset Manager enables you to easily identify, track, monitor and comply with your IT Assets.</li>
+          <li><a href="http://info.apttus.com/rs/apttus/images/Apttus_ITAssetManagement.pdf" target="_blank">Ungated Only</a></li>
+          </ul>
+          
+                   
+          </div>
+          
+          
+        </div> <!--end row 1-->
+
+       <p></p>
+       <p></p>
+       <p></p>
+       
+            <div class="row">
+      <div class="col-md-12">
+       <apex:stylesheet value="{!URLFOR($Resource.fullcalendar, 'fullcalendar.css')}"/>
+<apex:includeScript value="{!URLFOR($Resource.fullcalendar, 'lib/moment.min.js')}"/>
+<apex:includeScript value="{!URLFOR($Resource.fullcalendar, 'lib/jquery.min.js')}"/>
+<apex:includeScript value="{!URLFOR($Resource.fullcalendar, 'fullcalendar.min.js')}"/>
+<apex:includeScript value="{!URLFOR($Resource.fullcalendar, 'gcal.js')}"/>
+<script>
+
+    $(document).ready(function() {
+    
+        $('#calendar').fullCalendar({
+
+            // http://fullcalendar.io/docs/google_calendar/
+            googleCalendarApiKey: 'AIzaSyBzRPKDRUehKfV_pU3ma0YWI0_53ec85MQ',
+        
+            eventSources:[
+            {
+                googleCalendarId: "38cmpi9sbikenieevodke53re8@group.calendar.google.com",
+                className: 'content-releases',
+                color: '#a47ae2',
+                textColor: 'black'
+            },
+            {
+                googleCalendarId: "06cbq9qkh9v7jsa45gbjsk9rac@group.calendar.google.com",
+                className: 'email-campaigns',
+                color: '#9fe1e7',
+                textColor: 'black'
+            },
+            {
+                googleCalendarId: "o26d0sslb1lhvskfg4fg7r8rec@group.calendar.google.com",
+                className: 'live-events',
+                color: '#b3dc6c',
+                textColor: 'black'
+            },
+            {
+                googleCalendarId: "ueufmsrdoh48grll2cs5fcfmd0@group.calendar.google.com",
+                className: 'press-releases',
+                color: '#f691b2',
+                textColor: 'black'
+            },
+            {
+                googleCalendarId: "a30dcoi6ob4a8rcvmbe9tucfdc@group.calendar.google.com",
+                className: 'webinars',
+                color: '#cd74e6',
+                textColor: 'black'
+            },
+            {
+                googleCalendarId: "rjudoa8pmdmvk4bpr665ot2mnk@group.calendar.google.com",
+                className: 'partner',
+                color: '#fbe983',
+                textColor: 'black'
+            },
+            {
+                googleCalendarId: "p4tnrai91r1ha90jloa9v9ge0k@group.calendar.google.com",
+                className: 'executive business reviews (ebr)',
+                color: '#ff6666',
+                textColor: 'black'
+            },
+             {
+                googleCalendarId: "o10a0v6vkafrho59tb373br0ak@group.calendar.google.com",
+                className: 'EMEA',
+                color: '#E6E6FA',
+                textColor: 'black'   
+            }],
+            
+            eventClick: function(event) {
+                // opens events in a popup window
+                window.open(event.url, 'gcalevent', 'width=700,height=600');
+                return false;
+            },
+            
+            loading: function(bool) {
+                $('#loading').toggle(bool);
+            }
+            
+        });
+        
+    });
+
+</script>
+<style>
+
+    body {
+        margin: 40px 10px;
+        padding: 0;
+        font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+        font-size: 14px;
+    }
+        
+    #loading {
+        display: none;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+
+    #calendar {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+</style>
+<apex:form >
+<apex:pageBlock title="Marketing Calendar">
+
+
+    <!-- apex:pageBlockButtons >
+        <apex:commandButton id="marketingcalendar_commandbutton" value="Full View" onclick="window.top.location.href = '/apex/MarketingCalendarTab?sfdc.tabName=01r50000000V5nK';"/>
+    </apex:pageBlockButtons -->
+
+
+<div id='calendar' style="margin-bottom=10px;"></div>
+
+<div style="float: right;margin: 10px;">
+<h3>Legend</h3>
+<div style="width:140px;background-color:#a47ae2;margin:2px;padding:1px;border-right-width: 1px;"><span>Content Releases</span></div>
+<div style="width:140px;background-color:#9fe1e7;margin:2px;padding:1px;"><span>Email Campaigns</span></div>
+<div style="width:140px;background-color:#b3dc6c;margin:2px;padding:1px;"><span>Live Events</span></div>
+<div style="width:140px;background-color:#f691b2;margin:2px;padding:1px;"><span>Press Releases</span></div>
+<div style="width:140px;background-color:#cd74e6;margin:2px;padding:1px;"><span>Webinars</span></div>
+<div style="width:140px;background-color:#fbe983;margin:2px;padding:1px;"><span>SFDC Marketing</span></div>
+<div style="width:140px;background-color:#ff6666;margin:2px;padding:1px;"><span>Exec Business Reviews</span></div>
+<div style="width:140px;background-color:#E6E6FA;margin:2px;padding:1px;"><span>EMEA</span></div>
+</div>
+<div style="clear: both;"></div>
+
+</apex:pageBlock>
+</apex:form>
+       </div>
+      </div> 
+ 
+       
+       
+       
+       
+      <hr>
+
+      <footer>
+        <p>&copy; Apttus 2015</p>
+      </footer>  
+      </hr>
+
+    </div>
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="dist/js/jquery.js"></script>
+    <script src="dist/js/bootstrap.min.js"></script>
+  </body>
+</html>
+
+</apex:page>

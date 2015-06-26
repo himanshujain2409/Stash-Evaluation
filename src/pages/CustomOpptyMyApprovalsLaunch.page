@@ -1,0 +1,22 @@
+<!-- 
+    Apttus Approvals Management
+    CustomOpptyMyApprovalsLaunch
+     
+    @2014 Apttus Inc. All rights reserved.
+
+ -->
+<apex:page standardController="Opportunity"
+		   extensions="CustomOpptyMyApprovalsLaunchController"
+		   action="{!doLaunchMyApprovals}">
+
+	<apex:form >
+		<apex:outputPanel id="idErrorPanel">
+			<apex:pageBlock >
+				<apex:pageMessages id="idErrorPage" rendered="{!hasErrors}"/>
+				<apex:pageBlockButtons >
+					<apex:commandButton value="(!$Label.Apttus_Approval__Return}" action="{!doReturn}" />
+				</apex:pageBlockButtons>
+			</apex:pageBlock>
+		</apex:outputPanel>
+	</apex:form>
+</apex:page>

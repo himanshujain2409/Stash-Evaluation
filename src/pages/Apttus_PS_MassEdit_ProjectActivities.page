@@ -1,0 +1,47 @@
+<apex:page standardController="Apttus_PS_Project_Activities__c" recordSetVar="unused" sidebar="false">
+
+    
+<apex:includeScript value="{!$Resource.UtilJS}" />
+<apex:form >
+<apex:pageBlock >
+<apex:pageMessages />
+<apex:pageBlock >
+Note: All modifications made on the page will be lost if Return button is clicked without clicking the Save button first. 
+</apex:pageBlock>
+<apex:pageBlockButtons >
+<apex:commandButton value="Save" action="{!save}"/>
+<apex:commandButton value="Return" action="{!cancel}"/>
+</apex:pageBlockButtons>
+<apex:pageBlockTable value="{!selected}" var="a" id="table">
+<apex:column headerValue="Name">
+<apex:inputField value="{!a.name}"
+required="false"/>
+
+</apex:column>
+
+<apex:column headerValue="Week#">
+<apex:inputField value="{!a.Apttus_PS_Week_Num__c}"
+required="false"/>
+</apex:column>
+
+<apex:column headerValue="Activities Current Week">
+<apex:inputField value="{!a.Apttus_PS_Activities_Current_Week__c}"
+required="false"/>
+</apex:column>
+
+<apex:column headerValue="Activities Next Week">
+<apex:inputField value="{!a.Apttus_PS_Activities_Next_Week__c}"
+required="false"/>
+</apex:column>
+
+<apex:column headerValue="Include In Status Report">
+<apex:inputField value="{!a.Apttus_PS_Include_In_Status_Report__c}"
+required="false"/>
+</apex:column>
+
+
+
+</apex:pageBlockTable>
+</apex:pageBlock>
+</apex:form>
+</apex:page>

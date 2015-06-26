@@ -1,0 +1,115 @@
+<apex:page showHeader="false" sidebar="false">
+
+<apex:stylesheet value="{!URLFOR($Resource.fullcalendar, 'fullcalendar.css')}"/>
+
+<apex:includeScript value="{!URLFOR($Resource.jquery, 'js/jquery-1.9.1.js')}"/>
+<apex:includeScript value="{!URLFOR($Resource.fullcalendar, 'fullcalendar.js')}"/>
+<apex:includeScript value="{!URLFOR($Resource.fullcalendar, 'gcal.js')}"/>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+    if (getURLParameter("mode") == "small") {
+        var height = 400;
+        var headerButtons = "";
+        var eventClick = function(calEvent, jsEvent, view) {
+            return false;
+        }
+    } else {
+        var height = 600;
+        var headerButtons = "month,agendaWeek,agendaDay";
+        var eventClick = function(calEvent, jsEvent, view) {
+            if(calEvent.description.substring(0, 7) == "http://" || calEvent.description.substring(0, 8) == "https://")
+                window.open(calEvent.description);
+                
+            return false;
+        }
+        $("input[value='Full View']").hide();
+    }
+
+
+    $('#calendar').fullCalendar({
+        height: height,
+        defaultView: "month",
+        header: {
+            left: headerButtons,
+            center: 'title',
+            right: 'prev,next today'
+        },
+        eventClick: eventClick,
+        eventAfterRender: function( event, element, view ) { 
+            if(event.description.substring(0, 7) == "http://" || event.description.substring(0, 8) == "https://")
+                element[0].style.cursor="pointer";
+        },
+        eventSources: [
+            {
+                url: "https://www.google.com/calendar/feeds/38cmpi9sbikenieevodke53re8%40group.calendar.google.com/private-55de60792c547971d14e29c609410ce6/basic",
+                className: 'content-releases',
+                color: '#a47ae2',
+                textColor: 'black'
+            },
+            {
+                url: "https://www.google.com/calendar/feeds/06cbq9qkh9v7jsa45gbjsk9rac%40group.calendar.google.com/private-b6899a384c81297811fbfa7fd96c0e78/basic",
+                className: 'email-campaigns',
+                color: '#9fe1e7',
+                textColor: 'black'
+            },
+            {
+                url: "https://www.google.com/calendar/feeds/o26d0sslb1lhvskfg4fg7r8rec%40group.calendar.google.com/private-73b5b8e3fff2b8ff989f9a5014bba27c/basic",
+                className: 'live-events',
+                color: '#b3dc6c',
+                textColor: 'black'
+            },
+            {
+                url: "https://www.google.com/calendar/feeds/ueufmsrdoh48grll2cs5fcfmd0%40group.calendar.google.com/private-94d66e181d0e473f4eca96ad1b487aec/basic",
+                className: 'press-releases',
+                color: '#f691b2',
+                textColor: 'black'
+            },
+            {
+                url: "https://www.google.com/calendar/feeds/a30dcoi6ob4a8rcvmbe9tucfdc%40group.calendar.google.com/private-7b280aec9030a3d4c636805fc8b15839/basic",
+                className: 'webinars',
+                color: '#cd74e6',
+                textColor: 'black'
+            },
+            {
+                url: "https://www.google.com/calendar/feeds/p4tnrai91r1ha90jloa9v9ge0k%40group.calendar.google.com/private-05b873d13eaeef4bc577a3e0fde7f40e/basic",
+                className: 'executive business reviews (ebr)',
+                color: '#ff6666',
+                textColor: 'black'
+            }
+        ]
+    });
+});
+
+//http://stackoverflow.com/a/1404100
+function getURLParameter(name) {
+    return decodeURI(
+        (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
+    );
+}
+</script>
+<apex:form >
+<apex:pageBlock title="Marketing Calendar">
+
+
+    <apex:pageBlockButtons >
+        <apex:commandButton id="marketingcalendar_commandbutton" value="Full View" onclick="window.top.location.href = '/apex/MarketingCalendarTab?sfdc.tabName=01r50000000V5nK';"/>
+    </apex:pageBlockButtons>
+
+
+<div id='calendar' style="margin-bottom=10px;"></div>
+
+<div style="float: right;margin: 10px;">
+<h3>Legend</h3>
+<div style="width:125px;background-color:#a47ae2;margin:2px;padding:1px;border-right-width: 1px;"><span>Content Releases</span></div>
+<div style="width:125px;background-color:#9fe1e7;margin:2px;padding:1px;"><span>Email Campaigns</span></div>
+<div style="width:125px;background-color:#b3dc6c;margin:2px;padding:1px;"><span>Live Events</span></div>
+<div style="width:125px;background-color:#f691b2;margin:2px;padding:1px;"><span>Press Releases</span></div>
+<div style="width:125px;background-color:#cd74e6;margin:2px;padding:1px;"><span>Webinars</span></div>
+</div>
+<div style="clear: both;"></div>
+
+</apex:pageBlock>
+</apex:form>
+</apex:page>

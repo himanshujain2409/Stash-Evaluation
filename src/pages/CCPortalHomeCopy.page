@@ -1,0 +1,735 @@
+<apex:page standardStylesheets="false" controller="CCPOrganizationController" showHeader="true" sidebar="false" tabStyle="Home_Copy__tab">     
+        <!-- jQuery Plugin Set -->
+        <script src="{!URLFOR($Resource.Community_Assets, '/assets/plugins/jquery/jquery.js')}"></script>
+        
+        <!-- jQuery UI Plugin Set -->
+        <link rel="stylesheet" href="{!URLFOR($Resource.Community_Assets, '/assets/plugins/jquery-ui-1.11.1/jquery-ui.css')}"></link>
+        <script src="{!URLFOR($Resource.Community_Assets, '/assets/plugins/jquery-ui-1.11.1/jquery-ui.js')}"></script>
+        <script src="{!URLFOR($Resource.Community_Assets, '/assets/plugins/jquery-ui-1.11.1/jquery.easing.js')}"></script>
+        
+        <!-- Bootstrap Plugin Set -->
+        <link rel="stylesheet" href="{!URLFOR($Resource.Community_Assets, '/assets/css/bootstrap.css')}"></link>
+        <script src="{!URLFOR($Resource.Community_Assets, '/assets/javascripts/bootstrap.js')}"></script>
+        
+        <!-- Font Aewsome Plugin Set -->
+        <link rel="stylesheet" href="{!URLFOR($Resource.Community_Assets, '/assets/plugins/font-awesome/css/font-awesome.min.css')}"></link>
+        
+        <!-- Fonts -->
+        <link href='//fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,700,800,300' rel='stylesheet' type='text/css'></link>
+        
+        <!-- Project Theme Style Sheet -->
+        <link rel="stylesheet" href="https://f9af4d289ab3f505a12ef30824384cde31bac38d.googledrive.com/host/0Bzw4V9PlGuneNGN2dUhZNkVIeHM/production/assets/css/project-theme.css"></link>
+        
+        <!--[if lte IE 6]>
+            <script src="{!URLFOR($Resource.Community_Assets, '/assets/js/html5shiv.js')}"></script>
+            <script src="{!URLFOR($Resource.Community_Assets, '/assets/js/respond.js')}"></script>
+            <script src="{!URLFOR($Resource.Community_Assets, '/assets/js/css3-mediaqueries.js')}"></script>
+            <script type="text/javascript" src="{!URLFOR($Resource.Community_Assets, '/assets/js/selectivizr.js')}"></script>
+        <![endif]-->
+        
+        <!--<header>
+            <div class="logo-search-container">
+                <div class="container">
+                    <div class="logo-container pull-left">
+                        <a href="#"><img src="{!URLFOR($Resource.Community_Assets, '/assets/images/main-logo.png')}" alt=""/></a>
+                    </div>
+                    <div class="search-account-control-container pull-right">
+                        <div class="search-box-container">
+                            <form action="#">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control"/>
+                                        <div class="input-group-addon">
+                                            <button class="btn btn-warning">Search</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="account-control-container">
+                            <ul class="list-inline">
+                                <li><a href="#">my account</a></li>
+                                <li><a href="#">log out</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="apttus-main-navbar-container">
+                <div class="container">
+                    <nav class="navbar apttus-main-navbar">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                        </div>
+                        <div class="collapse navbar-collapse apttus-main-nav" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav">
+                                <li><a href="#">Collaboration</a></li>
+                                <li><a href="#">Ideas</a></li>
+                                <li><a href="#">Knowledge Base</a></li>
+                                <li><a href="#">Documentation</a></li>
+                                <li><a href="#">Training</a></li>
+                                <li><a href="#">My Cases</a></li>
+                                <li><a href="#">Install</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </header> -->
+
+        <section>
+            <article class="whats-new-container">
+                <div class="container">
+                    <div class="whats-new-container-inner">
+                        <div class="head">
+                            <h1>What's New</h1>
+                        </div>
+                        <div class="body">
+                            <div class="row row-xs">
+                                <div class="col col-xs-6 col-md-3">
+                                    <div class="whats-new-content">
+                                        <div class="whats-new-icon">
+                                            <img src="{!URLFOR($Resource.Assets, '/assets/images/whats-new-icon-01.png')}" alt=""/>
+                                        </div>
+                                        <div class="whats-new-text">
+                                            <div class="whats-new-head">
+                                                <h3>Events</h3>
+                                            </div>
+                                            <!--<div class="whats-new-body">
+                                                <p><strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</strong></p>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi iusto a soluta, ipsa vel maxime vitae aperiam provident voluptatum mollitia.</p>
+                                            </div>
+                                            <div class="link-register-here">
+                                                <a href="#" class="highlight"><span>Register Here</span> <i class="fa fa-angle-double-right"></i></a>
+                                            </div>-->
+                                            <div>
+                                                <apex:outputText escape="false" value="{!$Label.CCPHomeBillboardFirstOptionContent}" /> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col col-xs-6 col-md-3">
+                                    <div class="whats-new-content">
+                                        <div class="whats-new-icon">
+                                            <img src="{!URLFOR($Resource.Assets, '/assets/images/whats-new-icon-02.png')}" alt=""/>
+                                        </div>
+                                        <div class="whats-new-text">
+                                            <div class="whats-new-head">
+                                                <h3>New Features</h3>
+                                            </div>
+                                           <!-- <div class="whats-new-body">
+                                                <p><strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</strong></p>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores fugit quam sit magnam facere provident libero enim minus fugiat ab.</p>
+                                            </div>
+                                            <div class="link-register-here">
+                                                <a href="#" class="highlight"><span>Register Here</span> <i class="fa fa-angle-double-right"></i></a>
+                                            </div> -->
+                                            <div>
+                                                <apex:outputText escape="false" value="{!$Label.CCPHomeBillboardSecondOptionContent}" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col col-xs-6 col-md-3">
+                                    <div class="whats-new-content">
+                                        <div class="whats-new-icon">
+                                            <img src="{!URLFOR($Resource.Assets, '/assets/images/whats-new-icon-03.png')}" alt=""/>
+                                        </div>
+                                        <div class="whats-new-text">
+                                            <div class="whats-new-head">
+                                                <h3>Webinar Series</h3>
+                                            </div>
+                                            <!--<div class="whats-new-body">
+                                                <p><strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</strong></p>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora, veritatis, deleniti! Dolore mollitia fugit eos velit similique vero earum perspiciatis.</p>
+                                            </div>
+                                            <div class="link-register-here">
+                                                <a href="#" class="highlight"><span>Register Here</span> <i class="fa fa-angle-double-right"></i></a>
+                                            </div> --->
+                                            <div>
+                                                <apex:outputText escape="false" value="{!$Label.CCPHomeBillboardThirdOptionContent}" /> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col col-xs-6 col-md-3">
+                                    <div class="whats-new-content">
+                                        <div class="whats-new-icon">
+                                            <img src="{!URLFOR($Resource.Assets, '/assets/images/whats-new-icon-04.png')}" alt=""/>
+                                        </div>
+                                        <div class="whats-new-text">
+                                            <div class="whats-new-head">
+                                                <h3>Newsletter</h3>
+                                            </div>
+                                            <!--<div class="whats-new-body">
+                                                <p><strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</strong></p>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam sit consequatur ea iure, laboriosam recusandae ab quidem est dicta adipisci.</p>
+                                            </div>
+                                            <div class="link-register-here">
+                                                <a href="#" class="highlight"><span>Sign Up Here</span> <i class="fa fa-angle-double-right"></i></a>
+                                            </div> -->
+                                            <div>
+                                                <apex:outputText escape="false" value="{!$Label.CCPHomeBillboardFourthOptionContent}" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+        
+            <article class="features-container">
+                <div class="container">
+                    <div class="features-container-inner">
+                        <div class="row row-nopad">
+                        
+                        <apex:outputpanel rendered="{!caseFlag}">
+                            <div class="col col-sm-6">
+                                <div class="feature">
+                                    <div class="feature-head">
+                                        <div class="feature-head-icon pull-left">
+                                            <img src="{!URLFOR($Resource.Assets, '/assets/images/features-icon-01.png')}" alt="" class="img-responsive"/>
+                                        </div>
+                                        <div class="feature-head-text pull-left">
+                                            <apex:outputLink value="{!$Label.CCPHomeSmallBox1HeaderLink}" rendered="{!caseFlag}"><h3>My Cases</h3></apex:outputLink>
+                                            <p>File and review cases.</p>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="description-text">
+                                            <p>Got an issue? Tell us about it. We’re here to help.</p>
+                                        </div>
+                                    </div>
+                                    <div class="feature-body">
+                                    
+                                        <!--<ul class="list-unstyled feature-list">
+                                            <li><a href="#"><i class="fa fa-caret-right"></i><span>Lorem ipsum dolor sit amet.</span></a></li>
+                                            <li><a href="#"><i class="fa fa-caret-right"></i><span>Lorem ipsum dolor sit amet.</span></a></li>
+                                            <li><a href="#"><i class="fa fa-caret-right"></i><span>Lorem ipsum dolor sit amet.</span></a></li>
+                                            <li><a href="#"><i class="fa fa-caret-right"></i><span>Lorem ipsum dolor sit amet.</span></a></li>
+                                            <li><a href="#"><i class="fa fa-caret-right"></i><span>Lorem ipsum dolor sit amet.</span></a></li>
+                                            <li><a href="#"><i class="fa fa-caret-right"></i><span>Lorem ipsum dolor sit amet.</span></a></li>
+                                        </ul> -->
+                                        <!-- <apex:outputText escape="false" value="{!$Label.CCPHomeSmallBox1Content}" rendered="{!caseFlag}"/> -->
+                                    </div>
+                                </div>
+                            </div>
+                            </apex:outputpanel>
+                            
+                            <apex:outputpanel >
+                            <div class="col col-sm-6">
+                                <div class="feature">
+                                    <div class="feature-head">
+                                        <div class="feature-head-icon pull-left">
+                                            <img src="{!URLFOR($Resource.Assets, '/assets/images/features-icon-02.png')}" alt="" class="img-responsive"/>
+                                        </div>
+                                        <div class="feature-head-text pull-left">
+                                            <apex:outputLink value="{!$Label.CCPHomeSmallBox6HeaderLink}"><h3>Install</h3></apex:outputLink>
+                                            <p>Install Apttus modules and browse release notes.</p>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="description-text">
+                                            <p>Download the latest version of your Apttus solution.</p>
+                                         </div>
+                                    </div>
+                                    <div class="feature-body">
+                                        
+                                        <!--<ul class="list-unstyled feature-list">
+                                            <li><a href="#"><i class="fa fa-caret-right"></i><span>Lorem ipsum dolor sit amet.</span></a></li>
+                                            <li><a href="#"><i class="fa fa-caret-right"></i><span>Lorem ipsum dolor sit amet.</span></a></li>
+                                            <li><a href="#"><i class="fa fa-caret-right"></i><span>Lorem ipsum dolor sit amet.</span></a></li>
+                                            <li><a href="#"><i class="fa fa-caret-right"></i><span>Lorem ipsum dolor sit amet.</span></a></li>
+                                            <li><a href="#"><i class="fa fa-caret-right"></i><span>Lorem ipsum dolor sit amet.</span></a></li>
+                                            <li><a href="#"><i class="fa fa-caret-right"></i><span>Lorem ipsum dolor sit amet.</span></a></li>
+                                        </ul> -->
+                                        
+                                        <!-- <apex:outputText escape="false" value="{!$Label.CCPHomeSmallBox6Content}" /> -->
+                                    </div>
+                                </div>
+                            </div>
+                            </apex:outputpanel>
+                        </div>
+
+                        <div class="row row-nopad">
+                            <apex:outputpanel >
+                            <div class="col col-sm-6">
+                                <div class="feature">
+                                    <div class="feature-head">
+                                        <div class="feature-head-icon pull-left">
+                                            <img src="{!URLFOR($Resource.Assets, '/assets/images/features-icon-03.png')}" alt="" class="img-responsive"/>
+                                        </div>
+                                        <div class="feature-head-text pull-left">
+                                            <apex:outputLink value="{!$Label.CCPHomeSmallBox7HeaderLink}"><h3>Collaboration</h3></apex:outputLink>
+                                            <p>Chatter with other Apttus users.</p>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="description-text">
+                                            <p>Connect with Apttus users. Engage in discussions. Join user groups. </p>
+                                        </div>
+                                    </div>
+                                    <div class="feature-body">
+                                        
+                                       <!-- <ul class="list-unstyled feature-list">
+                                            <li><a href="#"><i class="fa fa-caret-right"></i><span>Lorem ipsum dolor sit amet.</span></a></li>
+                                            <li><a href="#"><i class="fa fa-caret-right"></i><span>Lorem ipsum dolor sit amet.</span></a></li>
+                                            <li><a href="#"><i class="fa fa-caret-right"></i><span>Lorem ipsum dolor sit amet.</span></a></li>
+                                            <li><a href="#"><i class="fa fa-caret-right"></i><span>Lorem ipsum dolor sit amet.</span></a></li>
+                                            <li><a href="#"><i class="fa fa-caret-right"></i><span>Lorem ipsum dolor sit amet.</span></a></li>
+                                            <li><a href="#"><i class="fa fa-caret-right"></i><span>Lorem ipsum dolor sit amet.</span></a></li>
+                                        </ul> -->
+                                        <!-- <apex:outputText escape="false" value="{!$Label.CCPHomeSmallBox7Content}" />-->
+                                    </div>
+                                </div>
+                            </div>
+                            </apex:outputpanel>
+                            
+                            <apex:outputpanel rendered="{!ideaFlag}">
+                            <div class="col col-sm-6">
+                                <div class="feature">
+                                    <div class="feature-head">
+                                        <div class="feature-head-icon pull-left">
+                                            <img src="{!URLFOR($Resource.Assets, '/assets/images/features-icon-04.png')}" alt="" class="img-responsive"/>
+                                        </div>
+                                        <div class="feature-head-text pull-left">
+                                             <apex:outputLink value="{!$Label.CCPHomeSmallBox4HeaderLink}" ><h3>Ideas</h3></apex:outputLink>
+                                            <p>Share ideas with Apttus users around the world!</p>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="description-text">
+                                            <p>You speak. We listen. Share, vote, and comment on ideas to help us improve our products.</p>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="feature-body">
+                                        <!--<ul class="list-unstyled feature-list">
+                                            <li><a href="#"><i class="fa fa-caret-right"></i><span>Lorem ipsum dolor sit amet.</span></a></li>
+                                            <li><a href="#"><i class="fa fa-caret-right"></i><span>Lorem ipsum dolor sit amet.</span></a></li>
+                                            <li><a href="#"><i class="fa fa-caret-right"></i><span>Lorem ipsum dolor sit amet.</span></a></li>
+                                            <li><a href="#"><i class="fa fa-caret-right"></i><span>Lorem ipsum dolor sit amet.</span></a></li>
+                                            <li><a href="#"><i class="fa fa-caret-right"></i><span>Lorem ipsum dolor sit amet.</span></a></li>
+                                            <li><a href="#"><i class="fa fa-caret-right"></i><span>Lorem ipsum dolor sit amet.</span></a></li>
+                                        </ul>-->
+                                        <!-- <apex:outputText escape="false" value="{!$Label.CCPHomeSmallBox4Content}"/>-->
+                                    </div>
+                                </div>
+                            </div>
+                            </apex:outputpanel>
+                        </div>
+
+                        <div class="row row-nopad">
+                            <apex:outputPanel rendered="{!articleFlag}">
+                            <div class="col col-sm-6">
+                                <div class="feature">
+                                    <div class="feature-head">
+                                        <div class="feature-head-icon pull-left">
+                                            <img src="{!URLFOR($Resource.Assets, '/assets/images/features-icon-05.png')}" alt="" class="img-responsive"/>
+                                        </div>
+                                        <div class="feature-head-text pull-left">
+                                            <apex:outputLink value="{!$Label.CCPHomeSmallBox2HeaderLink}" ><h3>Knowledge Base</h3></apex:outputLink>
+                                            <p>Browse Apttus Knowledge Base and solutions.</p>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="description-text">
+                                            <p>Best practices, knowledge articles, and guides. All made available to help you learn new skills and refine current ones. </p>
+                                        </div>
+                                    </div>
+                                    <div class="feature-body">
+                                        <!--<ul class="list-unstyled feature-list">
+                                            <li><a href="#"><i class="fa fa-caret-right"></i><span>Lorem ipsum dolor sit amet.</span></a></li>
+                                            <li><a href="#"><i class="fa fa-caret-right"></i><span>Lorem ipsum dolor sit amet.</span></a></li>
+                                            <li><a href="#"><i class="fa fa-caret-right"></i><span>Lorem ipsum dolor sit amet.</span></a></li>
+                                            <li><a href="#"><i class="fa fa-caret-right"></i><span>Lorem ipsum dolor sit amet.</span></a></li>
+                                            <li><a href="#"><i class="fa fa-caret-right"></i><span>Lorem ipsum dolor sit amet.</span></a></li>
+                                            <li><a href="#"><i class="fa fa-caret-right"></i><span>Lorem ipsum dolor sit amet.</span></a></li>
+                                        </ul> -->
+                                        
+                                        <!-- <apex:outputText escape="false" value="{!$Label.CCPHomeSmallBox2Content}"/> -->
+                                    </div>
+                                </div>
+                            </div>
+                            </apex:outputPanel>
+                            
+                            <apex:outputPanel rendered="{!docFlag}">
+                            <div class="col col-sm-6">
+                                <div class="feature">
+                                    <div class="feature-head">
+                                        <div class="feature-head-icon pull-left">
+                                            <img src="{!URLFOR($Resource.Assets, '/assets/images/features-icon-06.png')}" alt="" class="img-responsive"/>
+                                        </div>
+                                        <div class="feature-head-text pull-left">
+                                            <apex:outputLink value="{!$Label.CCPHomeSmallBox3HeaderLink}"><h3>Documentation</h3></apex:outputLink>
+                                            <p>Read Apttus documentation.</p>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="description-text">
+                                            <p>Guides and release notes all made to help you improve your Apttus deployment.</p>
+                                        </div>
+                                    </div>
+                                    <div class="feature-body">
+                                        <!--<ul class="list-unstyled feature-list">
+                                            <li><a href="#"><i class="fa fa-caret-right"></i><span>Lorem ipsum dolor sit amet.</span></a></li>
+                                            <li><a href="#"><i class="fa fa-caret-right"></i><span>Lorem ipsum dolor sit amet.</span></a></li>
+                                            <li><a href="#"><i class="fa fa-caret-right"></i><span>Lorem ipsum dolor sit amet.</span></a></li>
+                                            <li><a href="#"><i class="fa fa-caret-right"></i><span>Lorem ipsum dolor sit amet.</span></a></li>
+                                            <li><a href="#"><i class="fa fa-caret-right"></i><span>Lorem ipsum dolor sit amet.</span></a></li>
+                                            <li><a href="#"><i class="fa fa-caret-right"></i><span>Lorem ipsum dolor sit amet.</span></a></li>
+                                        </ul> -->
+                                        <!-- <apex:outputText escape="false" value="{!$Label.CCPHomeSmallBox3Content}"/> -->
+                                    </div>
+                                </div>
+                            </div>
+                            </apex:outputPanel>
+                        </div>
+                        
+                        <!-- <apex:outputPanel rendered="{!TrainingFlag}"> -->
+                        <div class="feature">
+                            <div class="feature-head">
+                                <div class="feature-head-icon pull-left">
+                                    <img src="{!URLFOR($Resource.Assets, '/assets/images/features-icon-07.png')}" alt="" class="img-responsive"/>
+                                </div>
+                                <div class="feature-head-text pull-left">
+                                    <apex:outputLink value="{!$Label.CCPHomeSmallBox5HeaderLink}"><h3>Training</h3></apex:outputLink>
+                                    <p>See Apttus University training.</p>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="description-text">
+                                    <p>Enroll in our Apttus University classes and get the most out of your Apttus investment.</p>
+                                </div>
+                            </div>
+                            <div class="feature-body">
+                                <div class="row row-nopad">
+                                    <div class="col col-sm-6">
+                                      <!--  <ul class="list-unstyled feature-list">
+                                            <li><a href="#"><i class="fa fa-caret-right"></i><span>Lorem ipsum dolor sit amet.</span></a></li>
+                                            <li><a href="#"><i class="fa fa-caret-right"></i><span>Lorem ipsum dolor sit amet.</span></a></li>
+                                            <li><a href="#"><i class="fa fa-caret-right"></i><span>Lorem ipsum dolor sit amet.</span></a></li>
+                                            <li><a href="#"><i class="fa fa-caret-right"></i><span>Lorem ipsum dolor sit amet.</span></a></li>
+                                            <li><a href="#"><i class="fa fa-caret-right"></i><span>Lorem ipsum dolor sit amet.</span></a></li>
+                                            <li><a href="#"><i class="fa fa-caret-right"></i><span>Lorem ipsum dolor sit amet.</span></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col col-sm-6">
+                                        <ul class="list-unstyled feature-list">
+                                            <li><a href="#"><i class="fa fa-caret-right"></i><span>Lorem ipsum dolor sit amet.</span></a></li>
+                                            <li><a href="#"><i class="fa fa-caret-right"></i><span>Lorem ipsum dolor sit amet.</span></a></li>
+                                            <li><a href="#"><i class="fa fa-caret-right"></i><span>Lorem ipsum dolor sit amet.</span></a></li>
+                                            <li><a href="#"><i class="fa fa-caret-right"></i><span>Lorem ipsum dolor sit amet.</span></a></li>
+                                            <li><a href="#"><i class="fa fa-caret-right"></i><span>Lorem ipsum dolor sit amet.</span></a></li>
+                                            <li><a href="#"><i class="fa fa-caret-right"></i><span>Lorem ipsum dolor sit amet.</span></a></li>
+                                        </ul> -->
+                                        <!-- <apex:outputText escape="false" value="{!$Label.CCPHomeSmallBox5Content}" /> -->
+                                    </div>
+                                    <div class="col col-sm-6">
+                                        <div class="feature">
+                                            <div class="feature-body">
+                                                <!-- <apex:outputText escape="false" value="{!$Label.CCPHomeSmallBox5Content_2}" /> -->
+                                            </div>
+                                        </div>       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- </apex:outputPanel> -->
+                    </div>
+                </div>
+            </article>
+            
+        </section>
+
+        <!-- <footer>
+            <div class="container">
+                <div class="footer-nav-lists-container">
+                    <div class="row">
+                        
+                        <div class="col-sm-3">
+                            <div class="footer-nav-list">
+                                <div class="list-head">
+                                    <h4>Menu</h4>
+                                </div>
+                                <div class="list-body">
+                                    <ul class="list-unstyled apttus-block-list">
+                                        <li><a href="#">Collaboration</a></li>
+                                        <li><a href="#">Ideas</a></li>
+                                        <li><a href="#">Knowledge Base</a></li>
+                                        <li><a href="#">Documentation</a></li>
+                                        <li><a href="#">Training</a></li>
+                                        <li><a href="#">My Cases</a></li>
+                                        <li><a href="#">Install</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="footer-nav-list">
+                                <div class="list-head">
+                                    <h4>Other Sites</h4>
+                                </div>
+                                <div class="list-body">
+                                    <ul class="list-unstyled apttus-block-list text-uppercase">
+                                        <li><a href="#">Apptus.com</a></li>
+                                        <li><a href="#">X-Author.com</a></li>
+                                    </ul>
+                                    <ul class="list-inline apttus-inline-list social-icons-container">
+                                        <li><a href="https://www.facebook.com/ApttusCorporation"><img src="{!URLFOR($Resource.Community_Assets, '/assets/images/social-icon-01.png')}" alt="" class="img-responsive"/></a></li>
+                                        <li><a href="https://twitter.com/apttus"><img src="{!URLFOR($Resource.Community_Assets, '/assets/images/social-icon-02.png')}" alt="" class="img-responsive"/></a></li>
+                                        <li><a href="http://www.linkedin.com/company/1181097"><img src="{!URLFOR($Resource.Community_Assets, '/assets/images/social-icon-03.png')}" alt="" class="img-responsive"/></a></li>
+                                        <li><a href="https://www.youtube.com/user/ApttusChannel"><img src="{!URLFOR($Resource.Community_Assets, '/assets/images/social-icon-04.png')}" alt="" class="img-responsive"/></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="footer-nav-list">
+                                <div class="list-head">
+                                    <h4>Company</h4>
+                                </div>
+                                <div class="list-body">
+                                    <ul class="list-unstyled apttus-block-list">
+                                        <li><a href="#">About Apttus</a></li>
+                                        <li><a href="#">Contact Us</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="footer-nav-list">
+                                <div class="list-head">
+                                    <h4>What's New</h4>
+                                </div>
+                                <div class="list-body">
+                                    <ul class="list-unstyled apttus-block-list">
+                                        <li><a href="http://www.apttus.com/accelerate2015/">Events</a></li>
+                                        <li><a href="#">New Features</a></li>
+                                        <li><a href="http://apttus.force.com/articles/Best_Practice/Customer-Excellence-Webinar-Series">Webinar Series</a></li>
+                                        <li><a href="http://info.apttus.com/Apttus-Newsletter.html">Newsletter</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="footer-nav-list">
+                                <div class="list-head">
+                                    <h4>Need a demo?</h4>
+                                </div>
+                                <div class="list-body">
+                                    <ul class="list-unstyled apttus-block-list">
+                                        <li>Increase revenues, margin, profits. Fast track optimum deals.</li>
+                                    </ul>
+                                    <div class="footer-list-link">
+                                        <a href="#" class="highlight"><span>Request a demo</span> <i class="fa fa-angle-double-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="footer-nav-list">
+                                <div class="list-head">
+                                    <h4>Like Apttus?</h4>
+                                </div>
+                                <div class="list-body">
+                                    <ul class="list-unstyled apttus-block-list">
+                                        <li>Let us know why with an AppExchange review.</li>
+                                    </ul>
+                                    <div class="footer-list-link">
+                                        <a href="#" class="highlight"><span>Write a review</span> <i class="fa fa-angle-double-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </footer>   --> 
+        
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+            
+            ga('create', 'UA-57878445-1', 'auto');
+            ga('send', 'pageview');
+        </script>
+        
+        <!-- Body events -->    
+</apex:page>
+<!--<apex:page standardStylesheets="false" controller="ACPOrganizationController" showHeader="true" sidebar="false" tabStyle="Home__tab">
+
+<style>
+    .smallbox .people    {background: url("{!URLFOR($Resource.ApttusCustomerPortalHomeBoxesImages, $Label.ACPHomeBoxesDocumentationImage)}")}
+    .smallbox .books     {background: url("{!URLFOR($Resource.ApttusCustomerPortalHomeBoxesImages, $Label.ACPHomeBoxesIdeasImage)}")}
+    .smallbox .notes     {background: url("{!URLFOR($Resource.ApttusCustomerPortalHomeBoxesImages, $Label.ACPHomeBoxesKnowledgeBaseImage)}")}
+    .smallbox .checklist {background: url("{!URLFOR($Resource.ApttusCustomerPortalHomeBoxesImages, $Label.ACPHomeBoxesMyCasesImage)}")}
+    .smallbox .training  {background: url("{!URLFOR($Resource.ApttusCustomerPortalHomeBoxesImages, $Label.ACPHomeBoxesTrainingImage)}")}
+    .smallbox .install   {background: url("{!URLFOR($Resource.ApttusCustomerPortalHomeBoxesImages, $Label.ACPHomeBoxesInstallCenterImage)}")}
+  
+
+</style> 
+
+<!-- <c:CustomerCommunityPortal /> -->
+<!--<c:ApttusCustomerPortalDynamicMenu />
+<script>
+    var d = new Date();
+    d.setTime(d.getTime()+(8*60*60*1000));  
+    var username = "Welcome, {!$User.FirstName} {!$User.LastName}";
+    document.cookie = "usernameMsg="+username + ";path=/;expires="+d.toGMTString();
+    document.cookie = "CommunityProfile={!IsRestrictedProfile}" + ";path=/;expires="+d.toGMTString();
+    
+      
+    document.cookie = "trainingTabAvailable=" + {!$User.lmscons__Cornerstone_ID__c != NULL} + ";expires="+d.toGMTString();
+</script>
+
+<apex:outputPanel >
+<div class="searchBarContainer clearfix" style="display:block">
+    <span style="float:left;margin-top: 10px;">
+        <c:ApttusCustomerPortalHomeSearchBar />
+    </span>
+
+    <ul class="searchNavigationButtons">
+        <li><a href="mailto:training@apttus.com?Subject=Apttus University">Take Training</a></li> 
+        <apex:outputPanel rendered="{!IsTrainingAvailable}">
+        <li><a href="{!$Page.lmsilt__Calendar}?f=1&username={!$User.FirstName}|{!$User.LastName}">Take Training</a></li>
+        </apex:outputPanel>
+        <li><a href="http://www.apttus.com/company/contact-us.php" target="_blank">Contact Us</a></li>
+        <li><a href="http://www.apttus.com/solutions/quote-to-cash/" target="_blank">Additional Apps</a></li>
+    </ul>
+</div>
+</apex:outputPanel>
+<div class="billboardContainer clearfix" style="display:block">
+    <c:ApttusCustomerPortalBillboard header="{!$Label.ACPHomeBillboardHeader}"
+                                        slide1="{!$Label.ACPHomeBillboardFirstOption}"
+                                        slide2="{!$Label.ACPHomeBillboardSecondOption}"
+                                        slide3="{!$Label.ACPHomeBillboardThirdOption}"
+                                        slide4="{!$Label.ACPHomeBillboardFourthOption}" > 
+        <div id="slide1">
+            <img src="{!URLFOR($Resource.ApttusCustomerPortalBillboardImages, $Label.ACPHomeBillboardFirstOptionImage)}" />
+            <span>
+                <apex:outputText escape="false" value="{!$Label.ACPHomeBillboardFirstOptionContent}" /> 
+            </span>
+        </div>
+    
+        <div id="slide2">
+            <img src="{!URLFOR($Resource.ApttusCustomerPortalBillboardImages, $Label.ACPHomeBillboardSecondOptionImage)}" />
+            <span>
+                <apex:outputText escape="false" value="{!$Label.ACPHomeBillboardSecondOptionContent}" /> 
+            </span>
+        </div>
+        
+        <div id="slide3">
+            <img src="{!URLFOR($Resource.ApttusCustomerPortalBillboardImages,$Label.ACPHomeBillboardThirdOptionImage)}" />
+            <span>
+                <apex:outputText escape="false" value="{!$Label.ACPHomeBillboardThirdOptionContent}" /> 
+            </span>
+        </div>
+        <div id="slide4">
+            <img src="{!URLFOR($Resource.ApttusCustomerPortalBillboardImages, $Label.ACPHomeBillboardFourthOptionImage)}" />
+            <span>
+                <apex:outputText escape="false" value="{!$Label.ACPHomeBillboardFourthOptionContent}" />  
+            </span>
+        </div>
+    </c:ApttusCustomerPortalBillboard>
+</div>
+
+<apex:outputPanel rendered="{!IsRestrictedProfile}">
+
+<div class="clearfix" style="display:block">
+<c:ApttusCustomerPortalSmallBox headerlink="{!$Label.ACPHomeSmallBox1HeaderLink}" header="{!$Label.ACPHomeSmallBox1Header}" icon="checklist" rendered="{!( (!IsRestrictedProfile) || (MapOfAvailableTabs['Case']))}">
+    <div class="communityLink">
+        <apex:outputText escape="false" value="{!$Label.ACPHomeSmallBox1Content}" />
+        <c:ApttusCustomerPortalLatestCases />
+    </div>
+</c:ApttusCustomerPortalSmallBox>
+
+<c:ApttusCustomerPortalSmallBox headerlink="{!$Label.ACPHomeSmallBox2HeaderLink}" header="{!$Label.ACPHomeSmallBox2Header}" icon="notes" rendered="{!( (!IsRestrictedProfile) || (MapOfAvailableTabs['Knowledge']))}">
+    <div class="communityLink">
+        <apex:outputText escape="false" value="{!$Label.ACPHomeSmallBox2Content}" />
+    </div>
+</c:ApttusCustomerPortalSmallBox>
+
+<c:ApttusCustomerPortalSmallBox headerlink="{!$Label.ACPHomeSmallBox3HeaderLink}" header="{!$Label.ACPHomeSmallBox3Header}" icon="people" rendered="{!( (!IsRestrictedProfile) || (MapOfAvailableTabs['Document']))}">
+    <div class="communityLink">
+        <apex:outputText escape="false" value="{!$Label.ACPHomeSmallBox3Content}" />
+    </div>
+</c:ApttusCustomerPortalSmallBox>
+
+
+<c:ApttusCustomerPortalSmallBox headerlink="{!$Label.ACPHomeSmallBox4HeaderLink}" header="{!$Label.ACPHomeSmallBox4Header}" icon="books" rendered="{!( (!IsRestrictedProfile) || (MapOfAvailableTabs['Ideas']))}">
+    <div class="communityLink">
+        <apex:outputText escape="false" value="{!$Label.ACPHomeSmallBox4Content}" />
+    </div>
+</c:ApttusCustomerPortalSmallBox>
+
+<c:ApttusCustomerPortalSmallBox headerlink="{!$Label.ACPHomeSmallBox5HeaderLink}" header="{!$Label.ACPHomeSmallBox5Header}" icon="training" rendered="{!( (!IsRestrictedProfile) || (MapOfAvailableTabs['Training']))}">
+    <div class="communityLink">
+        <apex:outputText escape="false" value="{!$Label.ACPHomeSmallBox5Content}" />
+    </div>
+</c:ApttusCustomerPortalSmallBox>
+
+<c:ApttusCustomerPortalSmallBox headerlink="{!$Label.ACPHomeSmallBox6HeaderLink}" header="{!$Label.ACPHomeSmallBox6Header}" icon="install" rendered="{!( (!IsRestrictedProfile) || (MapOfAvailableTabs['Install Center']))}">
+    <div class="communityLink">
+        <apex:outputText escape="false" value="{!$Label.ACPHomeSmallBox6Content}" />
+    </div>
+</c:ApttusCustomerPortalSmallBox>
+</div>
+
+</apex:outputPanel>
+
+<apex:outputPanel rendered="{!(!IsRestrictedProfile)}">
+
+<div class="clearfix" style="display:block">
+<c:ApttusCustomerPortalSmallBox headerlink="{!$Label.ACPHomeSmallBox1HeaderLink}" header="{!$Label.ACPHomeSmallBox1Header}" icon="checklist" rendered="{!( (!IsRestrictedProfile) || (MapOfAvailableTabs['Case']))}">
+    <div class="communityLink">
+        <apex:outputText escape="false" value="{!$Label.ACPHomeSmallBox1Content}" />
+        <c:ApttusCustomerPortalLatestCases />
+    </div>
+</c:ApttusCustomerPortalSmallBox>
+
+<c:ApttusCustomerPortalSmallBox headerlink="{!$Label.ACPHomeSmallBox2HeaderLink}" header="{!$Label.ACPHomeSmallBox2Header}" icon="notes" rendered="{!( (!IsRestrictedProfile) || (MapOfAvailableTabs['Knowledge']))}">
+    <div class="communityLink">
+        <apex:outputText escape="false" value="{!$Label.ACPHomeSmallBox2Content}" />
+    </div>
+</c:ApttusCustomerPortalSmallBox>
+
+<c:ApttusCustomerPortalSmallBox headerlink="{!$Label.ACPHomeSmallBox3HeaderLink}" header="{!$Label.ACPHomeSmallBox3Header}" icon="people" rendered="{!( (!IsRestrictedProfile) || (MapOfAvailableTabs['Document']))}">
+    <div class="communityLink">
+        <apex:outputText escape="false" value="{!$Label.ACPHomeSmallBox3Content}" />
+    </div>
+</c:ApttusCustomerPortalSmallBox>
+
+</div>
+<div class="clearfix" style="display:block">
+<c:ApttusCustomerPortalSmallBox headerlink="{!$Label.ACPHomeSmallBox4HeaderLink}" header="{!$Label.ACPHomeSmallBox4Header}" icon="books" rendered="{!( (!IsRestrictedProfile) || (MapOfAvailableTabs['Ideas']))}">
+    <div class="communityLink">
+        <apex:outputText escape="false" value="{!$Label.ACPHomeSmallBox4Content}" />
+    </div>
+</c:ApttusCustomerPortalSmallBox>
+
+<c:ApttusCustomerPortalSmallBox headerlink="{!$Label.ACPHomeSmallBox5HeaderLink}" header="{!$Label.ACPHomeSmallBox5Header}" icon="training" rendered="{!( (!IsRestrictedProfile) || (MapOfAvailableTabs['Training']))}">
+    <div class="communityLink">
+        <apex:outputText escape="false" value="{!$Label.ACPHomeSmallBox5Content}" />
+    </div>
+</c:ApttusCustomerPortalSmallBox>
+
+<c:ApttusCustomerPortalSmallBox headerlink="{!$Label.ACPHomeSmallBox6HeaderLink}" header="{!$Label.ACPHomeSmallBox6Header}" icon="install" rendered="{!( (!IsRestrictedProfile) || (MapOfAvailableTabs['Install Center']))}">
+    <div class="communityLink">
+        <apex:outputText escape="false" value="{!$Label.ACPHomeSmallBox6Content}" />
+    </div>
+</c:ApttusCustomerPortalSmallBox>
+
+</div>
+
+
+<!--a href="/_ui/core/chatter/ui/ChatterPage" target="_top">try this for chatter tab</a-->
+
+<!--</apex:outputPanel>-->
+<!--<apex:outputText value="{!RenderDynamicStyle}" escape="false"></apex:outputText>-->
+<!--<c:CommunityCustomerPortalFooter /> -->
+<!--</apex:page> -->

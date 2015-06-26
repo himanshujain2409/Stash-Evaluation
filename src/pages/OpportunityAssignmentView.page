@@ -1,0 +1,32 @@
+<apex:page standardController="OpportunityAssignment__c" extensions="OpportunityAssignmentViewExt">
+<apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"/>
+
+    <apex:detail subject="{!OpportunityAssignment__c}"/>
+
+    <!-- <apex:relatedList list="Competitors__r" />
+    <apex:relatedList list="TrainingCourses__r" id="RealtedCourses"/>
+    <apex:relatedList list="Training_Paths__r" />
+    <apex:relatedList list="Course__r" />-->
+<script>
+
+{!CTContent}    
+
+jQuery.noConflict();
+
+jQuery(document).ready(function() {
+    var ahC = jQuery('[id$="RealtedCourses"] .list').find('.dataCell a');
+
+    for(var k in o){
+        var r = k.substr(0, 15);
+        jQuery('[id$="RealtedCourses"] .list a[href$="'+r+'"]').html(o[k]);
+    }
+
+});
+
+
+
+
+
+</script>
+
+</apex:page>

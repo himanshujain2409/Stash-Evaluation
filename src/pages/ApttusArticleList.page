@@ -1,0 +1,89 @@
+<apex:page controller="VfSearchController" sidebar="false" title="Knowledge Search">
+
+<style>
+td{
+vertical-align : top;
+text-align: left;
+}
+</style>
+<apex:form >
+<apex:panelGrid columns="2" >
+<apex:panelGroup >
+<apex:pageBlock >
+<apex:outputText value="Filter Your Results" />
+<apex:pageBlockSection columns="1">
+<apex:dataTable value="{!dataCategoryGroupInfo}" var="dataCategory" id="dataCategory">
+<apex:column >
+<apex:outputLabel for="categoryType_{!dataCategory.name}">{!dataCategory.name}</apex:outputLabel>
+<br />
+<select id="categoryType_{!dataCategory.name}" name="categoryType_{!dataCategory.name}" onchange = "refreshSearchResult()" >
+<option value="NoFilter">No Filter</option>
+<option value="All">All</option>
+<knowledge:categoryList categoryVar="category" categoryGroup="{!dataCategory.name}" rootCategory="All" level="-1">
+<option value="{!category.name}">
+<apex:outputText escape="false" value="{!LPAD(' ',6*category.depth,'&nbsp;')}" />
+{!category.label}
+</option>
+</knowledge:categoryList>
+</select>
+</apex:column>
+</apex:dataTable>
+</apex:pageBlockSection>
+<input type="button" value="Clear" onClick="window.location.reload()"></input>
+</apex:pageBlock>
+<apex:pageBlock >
+<apex:outputText value="Updated Knowledge Articles" />
+<apex:pageBlockSection columns="1">
+<knowledge:articleList articleVar="article" articleTypes="SFDC_TEST__kav" pageSize="10"
+>
+<li>
+<apex:outputLink target="_self" value="{!URLFOR($Action.KnowledgeArticle.View,
+article.id, ['popup' = 'false'])}">{!article.title}</apex:outputLink>
+</li>
+</knowledge:articleList>
+</apex:pageBlockSection>
+</apex:pageBlock>
+</apex:panelGroup>
+<apex:panelGroup >
+<apex:pageBlock title="Search" >
+<apex:inputText value="{!searchstring}" id="theSearchstring" maxlength="100" size="110" onkeypress="if (event.keyCode == 13) {refreshSearchResult();return false;} "/> &nbsp;
+<apex:commandButton value="Go" id="submitButton" style="width:30" reRender="theSearchResults" />
+</apex:pageBlock>
+<apex:messages />
+<apex:panelGroup id="theSearchResults" >
+<apex:pageBlock title="Search Results" >
+<apex:panelGrid width="100%">
+<table width="99%">
+<tr>
+<th width="99%">Articles</th>
+</tr>
+</table>
+<knowledge:articleList articleVar="article" categories="{!categoryKeyword}"
+Keyword="{!searchstring}" pageNumber="{!currentPageNumber}" hasMoreVar="false" pageSize="10">
+<table width="99%">
+<tr>
+<td width="99%">
+<apex:outputLink target="_self" value="{!URLFOR($Action.KnowledgeArticle.View, article.id,['popup' = 'false'])}">{!article.title}</apex:outputLink>
+<br></br>
+<apex:outputText >{!article.articleTypeLabel}</apex:outputText>
+<br></br>
+<apex:outputText >{!article.abstract}</apex:outputText>
+<p></p>
+</td>
+</tr>
+</table>
+</knowledge:articleList>
+</apex:panelGrid>
+</apex:pageBlock>
+<apex:panelGrid columns="2">
+<apex:commandLink action="{!previous}" value="Previous" style="{!IF(prevRequired = true,'display:block','display:none')}" reRender="theSearchResults"/>
+<apex:commandLink action="{!next}" value="Next" style="{!IF(nextRequired = true,'display:block','display:none')}" reRender="theSearchResults"/>
+</apex:panelGrid>
+</apex:panelGroup>
+</apex:panelGroup>
+</apex:panelGrid>
+<apex:actionFunction action="{!refreshSearchResult}" name="refreshSearchResult" rerender="theSearchResults" >
+</apex:actionFunction>
+
+</apex:form>
+</apex:page>

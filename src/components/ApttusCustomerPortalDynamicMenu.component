@@ -1,0 +1,42 @@
+<apex:component controller="ACPOrganizationController">
+<apex:outputpanel rendered="{!(IsRestrictedProfile)}">
+
+ <!--
+ <script>
+ 
+ $("#MenuUL").append('<li class="nav-home">\
+                            <span>\
+                                <a href="/apex/ApttusCustomerPortalHome" id="home">Home</a>\
+                            </span>\
+                        </li>\
+ ');
+ 
+ $("#MenuUL").append('<li class="nav-cases" style="display:{!IF(MapOfAvailableTabs['Case'] = false, 'none', 'block')};">\
+                            <span>\
+                                <a href="/apex/ApttusCustomerPortalCaseViews" id="home">cases</a>\
+                            </span>\
+                        </li>\
+ ');
+
+ 
+ </script>
+ 
+ <script>
+     
+    window.parent.document.$('.nav-cases').css('display','none'); 
+    alert('test');
+ </script>
+-->
+ <style>
+     .nav-cases {display : {!IF(MapOfAvailableTabs['Case'] = false, 'none', 'block')};}  
+     .nav-knowledge {display : {!IF(MapOfAvailableTabs['Knowledge'] = false, 'none', 'block')};}  
+     .nav-doc {display : {!IF(MapOfAvailableTabs['Document'] = false, 'none', 'block')};}  
+     .nav-ideas {display : {!IF(MapOfAvailableTabs['Ideas'] = false, 'none', 'block')};}  
+     .nav-training  {display : {!IF(MapOfAvailableTabs['Training'] = false, 'none', 'block')};}  
+     .nav-downloads {display : {!IF(MapOfAvailableTabs['Install Center'] = false, 'none', 'block')};}  
+ </style> 
+ 
+ 
+ 
+ </apex:outputpanel>
+</apex:component>

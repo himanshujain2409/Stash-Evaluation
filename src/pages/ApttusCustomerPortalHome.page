@@ -1,0 +1,166 @@
+<apex:page standardStylesheets="false" controller="ACPOrganizationController">
+
+<style>
+    .smallbox .people    {background: url("{!URLFOR($Resource.ApttusCustomerPortalHomeBoxesImages, $Label.ACPHomeBoxesDocumentationImage)}")}
+    .smallbox .books     {background: url("{!URLFOR($Resource.ApttusCustomerPortalHomeBoxesImages, $Label.ACPHomeBoxesIdeasImage)}")}
+    .smallbox .notes     {background: url("{!URLFOR($Resource.ApttusCustomerPortalHomeBoxesImages, $Label.ACPHomeBoxesKnowledgeBaseImage)}")}
+    .smallbox .checklist {background: url("{!URLFOR($Resource.ApttusCustomerPortalHomeBoxesImages, $Label.ACPHomeBoxesMyCasesImage)}")}
+    .smallbox .training  {background: url("{!URLFOR($Resource.ApttusCustomerPortalHomeBoxesImages, $Label.ACPHomeBoxesTrainingImage)}")}
+    .smallbox .install   {background: url("{!URLFOR($Resource.ApttusCustomerPortalHomeBoxesImages, $Label.ACPHomeBoxesInstallCenterImage)}")}
+  
+
+</style>
+<c:ApttusCustomerPortalDynamicMenu />
+<script>
+    var d = new Date();
+    d.setTime(d.getTime()+(8*60*60*1000));  
+    var username = "Welcome, {!$User.FirstName} {!$User.LastName}";
+    document.cookie = "usernameMsg="+username + ";path=/;expires="+d.toGMTString();
+    document.cookie = "CommunityProfile={!IsRestrictedProfile}" + ";path=/;expires="+d.toGMTString();
+    
+      
+    document.cookie = "trainingTabAvailable=" + {!$User.lmscons__Cornerstone_ID__c != NULL} + ";expires="+d.toGMTString();
+</script>
+
+<apex:outputPanel >
+<div class="searchBarContainer clearfix" style="display:block">
+    <span style="float:left;margin-top: 10px;">
+        <c:ApttusCustomerPortalHomeSearchBar />
+    </span>
+
+    <ul class="searchNavigationButtons">
+        <!-- <li><a href="mailto:training@apttus.com?Subject=Apttus University">Take Training</a></li> -->
+        <apex:outputPanel rendered="{!IsTrainingAvailable}">
+        <li><a href="{!$Page.lmsilt__Calendar}?f=1&username={!$User.FirstName}|{!$User.LastName}">Take Training</a></li>
+        </apex:outputPanel>
+        <li><a href="http://www.apttus.com/company/contact-us.php" target="_blank">Contact Us</a></li>
+        <li><a href="http://www.apttus.com/solutions/quote-to-cash/" target="_blank">Additional Apps</a></li>
+    </ul>
+</div>
+</apex:outputPanel>
+<div class="billboardContainer clearfix" style="display:block">
+    <c:ApttusCustomerPortalBillboard header="{!$Label.ACPHomeBillboardHeader}"
+                                        slide1="{!$Label.ACPHomeBillboardFirstOption}"
+                                        slide2="{!$Label.ACPHomeBillboardSecondOption}"
+                                        slide3="{!$Label.ACPHomeBillboardThirdOption}"
+                                        slide4="{!$Label.ACPHomeBillboardFourthOption}" > 
+        <div id="slide1">
+            <img src="{!URLFOR($Resource.ApttusCustomerPortalBillboardImages, $Label.ACPHomeBillboardFirstOptionImage)}" />
+            <span>
+                <apex:outputText escape="false" value="{!$Label.ACPHomeBillboardFirstOptionContent}" /> 
+            </span>
+        </div>
+    
+        <div id="slide2">
+            <img src="{!URLFOR($Resource.ApttusCustomerPortalBillboardImages, $Label.ACPHomeBillboardSecondOptionImage)}" />
+            <span>
+                <apex:outputText escape="false" value="{!$Label.ACPHomeBillboardSecondOptionContent}" /> 
+            </span>
+        </div>
+        
+        <div id="slide3">
+            <img src="{!URLFOR($Resource.ApttusCustomerPortalBillboardImages,$Label.ACPHomeBillboardThirdOptionImage)}" />
+            <span>
+                <apex:outputText escape="false" value="{!$Label.ACPHomeBillboardThirdOptionContent}" /> 
+            </span>
+        </div>
+        <div id="slide4">
+            <img src="{!URLFOR($Resource.ApttusCustomerPortalBillboardImages, $Label.ACPHomeBillboardFourthOptionImage)}" />
+            <span>
+                <apex:outputText escape="false" value="{!$Label.ACPHomeBillboardFourthOptionContent}" />  
+            </span>
+        </div>
+    </c:ApttusCustomerPortalBillboard>
+</div>
+
+<apex:outputPanel rendered="{!IsRestrictedProfile}">
+
+<div class="clearfix" style="display:block">
+<c:ApttusCustomerPortalSmallBox headerlink="{!$Label.ACPHomeSmallBox1HeaderLink}" header="{!$Label.ACPHomeSmallBox1Header}" icon="checklist" rendered="{!( (!IsRestrictedProfile) || (MapOfAvailableTabs['Case']))}">
+    <div class="communityLink">
+        <apex:outputText escape="false" value="{!$Label.ACPHomeSmallBox1Content}" />
+        <c:ApttusCustomerPortalLatestCases />
+    </div>
+</c:ApttusCustomerPortalSmallBox>
+
+<c:ApttusCustomerPortalSmallBox headerlink="{!$Label.ACPHomeSmallBox2HeaderLink}" header="{!$Label.ACPHomeSmallBox2Header}" icon="notes" rendered="{!( (!IsRestrictedProfile) || (MapOfAvailableTabs['Knowledge']))}">
+    <div class="communityLink">
+        <apex:outputText escape="false" value="{!$Label.ACPHomeSmallBox2Content}" />
+    </div>
+</c:ApttusCustomerPortalSmallBox>
+
+<c:ApttusCustomerPortalSmallBox headerlink="{!$Label.ACPHomeSmallBox3HeaderLink}" header="{!$Label.ACPHomeSmallBox3Header}" icon="people" rendered="{!( (!IsRestrictedProfile) || (MapOfAvailableTabs['Document']))}">
+    <div class="communityLink">
+        <apex:outputText escape="false" value="{!$Label.ACPHomeSmallBox3Content}" />
+    </div>
+</c:ApttusCustomerPortalSmallBox>
+
+
+<c:ApttusCustomerPortalSmallBox headerlink="{!$Label.ACPHomeSmallBox4HeaderLink}" header="{!$Label.ACPHomeSmallBox4Header}" icon="books" rendered="{!( (!IsRestrictedProfile) || (MapOfAvailableTabs['Ideas']))}">
+    <div class="communityLink">
+        <apex:outputText escape="false" value="{!$Label.ACPHomeSmallBox4Content}" />
+    </div>
+</c:ApttusCustomerPortalSmallBox>
+
+<c:ApttusCustomerPortalSmallBox headerlink="{!$Label.ACPHomeSmallBox5HeaderLink}" header="{!$Label.ACPHomeSmallBox5Header}" icon="training" rendered="{!( (!IsRestrictedProfile) || (MapOfAvailableTabs['Training']))}">
+    <div class="communityLink">
+        <apex:outputText escape="false" value="{!$Label.ACPHomeSmallBox5Content}" />
+    </div>
+</c:ApttusCustomerPortalSmallBox>
+
+<c:ApttusCustomerPortalSmallBox headerlink="{!$Label.ACPHomeSmallBox6HeaderLink}" header="{!$Label.ACPHomeSmallBox6Header}" icon="install" rendered="{!( (!IsRestrictedProfile) || (MapOfAvailableTabs['Install Center']))}">
+    <div class="communityLink">
+        <apex:outputText escape="false" value="{!$Label.ACPHomeSmallBox6Content}" />
+    </div>
+</c:ApttusCustomerPortalSmallBox>
+</div>
+
+</apex:outputPanel>
+
+<apex:outputPanel rendered="{!(!IsRestrictedProfile)}">
+
+<div class="clearfix" style="display:block">
+<c:ApttusCustomerPortalSmallBox headerlink="{!$Label.ACPHomeSmallBox1HeaderLink}" header="{!$Label.ACPHomeSmallBox1Header}" icon="checklist" rendered="{!( (!IsRestrictedProfile) || (MapOfAvailableTabs['Case']))}">
+    <div class="communityLink">
+        <apex:outputText escape="false" value="{!$Label.ACPHomeSmallBox1Content}" />
+        <c:ApttusCustomerPortalLatestCases />
+    </div>
+</c:ApttusCustomerPortalSmallBox>
+
+<c:ApttusCustomerPortalSmallBox headerlink="{!$Label.ACPHomeSmallBox2HeaderLink}" header="{!$Label.ACPHomeSmallBox2Header}" icon="notes" rendered="{!( (!IsRestrictedProfile) || (MapOfAvailableTabs['Knowledge']))}">
+    <div class="communityLink">
+        <apex:outputText escape="false" value="{!$Label.ACPHomeSmallBox2Content}" />
+    </div>
+</c:ApttusCustomerPortalSmallBox>
+
+<c:ApttusCustomerPortalSmallBox headerlink="{!$Label.ACPHomeSmallBox3HeaderLink}" header="{!$Label.ACPHomeSmallBox3Header}" icon="people" rendered="{!( (!IsRestrictedProfile) || (MapOfAvailableTabs['Document']))}">
+    <div class="communityLink">
+        <apex:outputText escape="false" value="{!$Label.ACPHomeSmallBox3Content}" />
+    </div>
+</c:ApttusCustomerPortalSmallBox>
+
+</div>
+<div class="clearfix" style="display:block">
+<c:ApttusCustomerPortalSmallBox headerlink="{!$Label.ACPHomeSmallBox4HeaderLink}" header="{!$Label.ACPHomeSmallBox4Header}" icon="books" rendered="{!( (!IsRestrictedProfile) || (MapOfAvailableTabs['Ideas']))}">
+    <div class="communityLink">
+        <apex:outputText escape="false" value="{!$Label.ACPHomeSmallBox4Content}" />
+    </div>
+</c:ApttusCustomerPortalSmallBox>
+
+<c:ApttusCustomerPortalSmallBox headerlink="{!$Label.ACPHomeSmallBox5HeaderLink}" header="{!$Label.ACPHomeSmallBox5Header}" icon="training" rendered="{!( (!IsRestrictedProfile) || (MapOfAvailableTabs['Training']))}">
+    <div class="communityLink">
+        <apex:outputText escape="false" value="{!$Label.ACPHomeSmallBox5Content}" />
+    </div>
+</c:ApttusCustomerPortalSmallBox>
+
+<c:ApttusCustomerPortalSmallBox headerlink="{!$Label.ACPHomeSmallBox6HeaderLink}" header="{!$Label.ACPHomeSmallBox6Header}" icon="install" rendered="{!( (!IsRestrictedProfile) || (MapOfAvailableTabs['Install Center']))}">
+    <div class="communityLink">
+        <apex:outputText escape="false" value="{!$Label.ACPHomeSmallBox6Content}" />
+    </div>
+</c:ApttusCustomerPortalSmallBox>
+</div>
+
+</apex:outputPanel>
+<!--<apex:outputText value="{!RenderDynamicStyle}" escape="false"></apex:outputText>-->
+
+</apex:page>

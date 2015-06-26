@@ -1,0 +1,35 @@
+<apex:page standardController="LiveChatTranscript">
+<apex:includeScript value="/support/console/26.0/integration.js"/>
+<script type="text/javascript">
+function fastFill() {
+    sforce.console.getFocusedPrimaryTabId(function(result) {
+        sforce.console.getSubtabIds(result.id, function(result){
+            console.log(result);
+            sforce.console.focusSubtabById(result.ids[0],focusSuccess);
+            saveVisitorData();
+            //sforce.console.getPageInfo(result.ids[0], function(result){console.log(result.pageInfo);});
+            //sforce.console.focusSubtabByNameAndPrimaryTabId("Live Agent Chat","scc-pt-1");
+        });   
+    });
+};
+var focusSuccess=function focusSuccess(result){
+
+   if (result.success == true) {
+        saveVisitorDaa();
+    } else {
+        alert('Going to the subtab was not successful');
+    }
+
+}
+function saveVisitorData(){
+    var labelCols=document.getElementsByClassName("labelCol");
+    var dataCols=document.getElementsByClassName("dataCol");
+    alert(labelCols.length);
+    for (var i = 0; i < labelCols.length; i++) {
+        alert(labelCols[i]);
+    }
+};
+
+</script>
+<a href="#" onClick="fastFill();return false">Fast Fill</a>
+</apex:page>

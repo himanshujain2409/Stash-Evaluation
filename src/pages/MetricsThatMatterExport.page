@@ -1,0 +1,79 @@
+<apex:page controller="MetricsThatMatterController" tabStyle="Report" sidebar="false" showHeader="false" contenttype="application/x-excel#MetricsThatMatter.xls">
+	<head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    
+        <style>
+            br {mso-data-placement:same-cell;}
+        </style>
+    </head>
+	<apex:sectionHeader title="Metrics That Matter"/>
+	
+	<apex:pageBlock id="pbReport">
+		
+		<apex:pageBlockTable value="{!metricWrappers}" var="w">
+		
+			<apex:column >
+				<apex:facet name="header">Team Member</apex:facet>
+				{!w.teamMember}
+			</apex:column>
+			
+			<apex:column >
+				<apex:facet name="header">Rounds/Day</apex:facet>
+				<apex:outputText value="{0, number, ##0.00}">
+					<apex:param value="{!w.rounds_Days}"/>
+				</apex:outputText>
+			</apex:column>
+			
+			<apex:column >
+				<apex:facet name="header">Round 1KP/Rounds %</apex:facet>
+				<apex:outputText value="{0, number, ##0.00}">
+					<apex:param value="{!w.round1KP_Round}"/>
+				</apex:outputText>
+			</apex:column>
+			
+			<apex:column >
+				<apex:facet name="header">KP/Company Ratio</apex:facet>
+				<apex:outputText value="{0, number, ##0.00}">
+					<apex:param value="{!w.kp_CompanyRatio}"/>
+				</apex:outputText>
+			</apex:column>
+			<apex:column >
+				<apex:facet name="header">Touches per Rounds Ratio</apex:facet>
+				<apex:outputText value="{0, number, ##0.00}">
+					<apex:param value="{!w.touchesPerRoundRatio}"/>
+				</apex:outputText>
+			</apex:column>
+			<apex:column >
+				<apex:facet name="header">Email % to Unique KP</apex:facet>
+				<apex:outputText value="{0, number, ##0.00}">
+					<apex:param value="{!w.emailPercent}"/>
+				</apex:outputText>
+			</apex:column>
+			<apex:column >
+				<apex:facet name="header">Rounds/Company</apex:facet>
+				<apex:outputText value="{0, number, ##0.00}">
+					<apex:param value="{!w.rounds_Company}"/>
+				</apex:outputText>
+			</apex:column>
+			<apex:column >
+				<apex:facet name="header">Rounds/KP</apex:facet>
+				<apex:outputText value="{0, number, ##0.00}">
+					<apex:param value="{!w.rounds_KP}"/>
+				</apex:outputText>
+			</apex:column>
+			<apex:column >
+				<apex:facet name="header">Rounds/MIs Booked</apex:facet>
+				<apex:outputText value="{0, number, ##0.00}">
+					<apex:param value="{!w.rounds_MIsBooked}"/>
+				</apex:outputText>
+			</apex:column>
+			<apex:column >
+				<apex:facet name="header">MI/KP Dialogues</apex:facet>
+				<apex:outputText value="{0, number, ##0.00}">
+					<apex:param value="{!w.mi_KPDialogues}"/>
+				</apex:outputText>
+			</apex:column>
+			
+		</apex:pageBlockTable>
+	</apex:pageBlock>
+</apex:page>

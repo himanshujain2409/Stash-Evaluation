@@ -1,0 +1,297 @@
+<apex:component controller="PS_ProjectApprovalEmailController" access="global" >
+<style>
+    .labels
+    {
+        font-weight:bold;
+    }
+    .table
+    {
+        border: 1px solid black;
+    }
+    
+    .table th
+    {
+        text-align:left;
+    }
+    
+    .table tr
+    {
+       border: 1px solid black;
+    }
+</style>
+    <apex:attribute name="ApprovalRequestSO" 
+                    description="This is the Approval Request SObject." 
+                    type="Apttus_Approval__Approval_Request__c" 
+                    assignTo="{!Context.RequestSO}" />
+    <apex:attribute name="ApprovalRecipientSO" 
+                    description="This is the Approval Recipient SObject." 
+                    type="User" 
+                    assignTo="{!Context.RecipientSO}" />
+     
+     <apex:outputPanel rendered="{!Context.AreActionsSupported}" >               
+        <apex:outputText value="{!$Label.Apttus_Approval__ApprovalActionLinkInstructionForEmailResponse1}" 
+                         escape="false" 
+                         rendered="{!Context.IsEmailApprovalResponseEnabled}" />
+        <apex:outputText value="{!$Label.Apttus_Approval__ApprovalActionLinkInstruction}" 
+                         rendered="{!NOT(Context.IsEmailApprovalResponseEnabled)}" />
+        <br/>
+        <br/>
+        <apex:outputLink value="{!Context.ReassignPageUrl}">{!$Label.Apttus_Approval__Reassign}</apex:outputLink>
+        <br/>
+        <apex:outputLink value="{!Context.ApproveRejectPageUrl}">{!$Label.Apttus_Approval__ApproveReject}</apex:outputLink>
+        <br/>
+        <apex:outputLink value="{!Context.AddCommentPageUrl}">{!$Label.Apttus_Approval__AddComment}</apex:outputLink>
+        <br/>
+        <br/>
+        <apex:outputPanel rendered="{!Context.IsEmailApprovalResponseEnabled}"  >     
+            <apex:outputText value="{!$Label.Apttus_Approval__ApprovalActionLinkInstructionForEmailResponse2}" 
+                             escape="false" />
+            <br/>
+            <br/>
+            <apex:outputText value="{!$Label.Apttus_Approval__ApprovalActionLinkInstructionForEmailResponse3}" 
+                             escape="false" />
+            <br/>
+            <br/>
+        </apex:outputPanel>
+    </apex:outputPanel>     
+   <apex:outputPanel >
+   <b>Customer Details</b>
+    <table border="1">
+        <tr>
+            <td>{!$ObjectType.Account.fields.Name.Label}: </td><td><apex:outputText value="{!EmailWrapper.ProjectSO.pse__Account__r.Name}" /></td>
+        </tr>
+        <tr>
+            <td>{!$ObjectType.Account.fields.AccountStatusGS__c.Label}:</td><td><apex:outputText value="{!EmailWrapper.projectSO.pse__Account__r.AccountStatusGS__c}" /></td>
+        </tr>
+        <tr>
+            <td>{!$ObjectType.Account.fields.Account_Level__c.Label}:</td><td><apex:outputText value="{!EmailWrapper.projectSO.pse__Account__r.Account_Level__c}" /></td>
+        </tr>
+        <tr>
+            <td>{!$ObjectType.Account.fields.CSM__c.Label} :</td><td><apex:outputField value="{!EmailWrapper.projectSO.pse__Account__r.CSM__r.Name}" /></td>
+        </tr>
+        <tr>
+            <td>Related Opportunity Avg. ACV : </td><td><apex:outputText value="{!EmailWrapper.projectSO.pse__Opportunity__r.ACV__c}" /></td>
+        </tr>
+    </table>
+    </apex:outputPanel>
+    <br/><br />
+    <b>Concession Request Details</b>
+    <table border="1">
+            <tr>
+                 <td class="labels">{!$ObjectType.pse__Proj__c.fields.Name.Label}:</td>
+                 <td>{!EmailWrapper.ConcessionRequest.Project__r.Name}</td>
+            </tr>
+            <tr>
+                <td class="labels">{!$ObjectType.pse__Proj__c.fields.pse__Project_Manager__c.Label}:</td>
+                <td>
+                     <apex:outputlink value="{!LEFT($Api.Partner_Server_URL_140,FIND('.com',$Api.Partner_Server_URL_140)+4)+EmailWrapper.projectSO.pse__Project_Manager__c}">
+                        <apex:outputField value="{!EmailWrapper.projectSO.pse__Project_Manager__r.Name}" />
+                     </apex:outputLink>
+                </td>
+            </tr>
+            <tr>
+                <td class="labels">Project Owner</td>
+                <td>
+                    <apex:outputlink value="{!LEFT($Api.Partner_Server_URL_140,FIND('.com',$Api.Partner_Server_URL_140)+4)+EmailWrapper.projectSO.OwnerId}">
+                        <apex:outputField value="{!EmailWrapper.projectSO.Owner.Name}" />
+                    </apex:outputLink>
+                </td>
+            </tr>
+            <tr>
+                 <td class="labels">{!$ObjectType.Concession_Request__c.fields.Concession_Type__c.Label}:</td>
+                 <td><apex:outputField value="{!EmailWrapper.ConcessionRequest.Concession_Type__c}" /></td>
+            </tr>
+            <tr>
+                 <td class="labels">{!$ObjectType.Concession_Request__c.fields.Hours_Requested__c.Label}:</td>
+                 <td><apex:outputField value="{!EmailWrapper.ConcessionRequest.Hours_Requested__c}" /></td>
+            </tr>
+            <tr>
+                 <td class="labels">{!$ObjectType.Concession_Request__c.fields.X1_Has_work_been_delivered__c.Label}:</td>
+                 <td><apex:outputField value="{!EmailWrapper.ConcessionRequest.X1_Has_work_been_delivered__c}" /></td>
+            </tr>
+            <tr>             
+                 <td class="labels">{!$ObjectType.Concession_Request__c.fields.Root_cause__c.Label}:</td>
+                 <td><apex:outputField value="{!EmailWrapper.ConcessionRequest.Root_cause__c}" /></td>
+            </tr>
+            <tr>
+                 <td class="labels">{!$ObjectType.Concession_Request__c.fields.Reasons_for_cost_and_time_overruns__c.Label}:</td>
+                 <td><apex:outputField value="{!EmailWrapper.ConcessionRequest.Reasons_for_cost_and_time_overruns__c}" /></td>
+            </tr>
+            <tr>
+                 <td class="labels">{!$ObjectType.Concession_Request__c.fields.Why_not_a_CO__c.Label}:</td>
+                 <td><apex:outputField value="{!EmailWrapper.ConcessionRequest.Why_not_a_CO__c}" /></td>
+            </tr>
+            <tr>
+                 <td class="labels">{!$ObjectType.Concession_Request__c.fields.Delivery_Confidence__c.Label}:</td>
+                 <td><apex:outputField value="{!EmailWrapper.ConcessionRequest.Delivery_Confidence__c}" /></td>
+            </tr>
+            <tr>
+                 <td class="labels">{!$ObjectType.Concession_Request__c.fields.Risks__c.Label}:</td>
+                 <td><apex:outputField value="{!EmailWrapper.ConcessionRequest.Risks__c}" /></td>
+            </tr>
+            <tr>
+                <td class="labels">PS {!$ObjectType.pse__Proj__c.fields.PS_Bookings__c.Label}:</td>
+                <td><apex:outputText value="{!EmailWrapper.projectSO.PS_Bookings__c}" /></td>
+            </tr>
+            <tr>
+                <td class="labels">{!$ObjectType.pse__Proj__c.fields.Concession_amount__c.Label}:</td>
+                <td><apex:outputText value="{!EmailWrapper.projectSO.Concession_amount__c}" /></td>
+            </tr>
+            <tr>
+                <td class="labels">{!$ObjectType.pse__Proj__c.fields.Gross_Bookings__c.Label}:</td>
+                <td><apex:outputText value="{!EmailWrapper.projectSO.Gross_Bookings__c}" /></td>
+            </tr>
+            <tr>
+                <td class="labels">{!$ObjectType.pse__Proj__c.fields.pse__Planned_Hours__c.Label}:</td>
+                <td><apex:outputText value="{!EmailWrapper.projectSO.pse__Planned_Hours__c}" /></td>
+            </tr>
+            <tr>
+                <td class="labels">{!$ObjectType.pse__Proj__c.fields.Concession_Hours__c.Label}:</td>
+                <td><apex:outputText value="{!EmailWrapper.projectSO.Concession_Hours__c}" /></td>
+             </tr>
+            <tr>
+                <td class="labels">{!$ObjectType.pse__Proj__c.fields.Total_Planned_Hours__c.Label}:</td>
+                <td><apex:outputText value="{!EmailWrapper.projectSO.Total_Planned_Hours__c}" /></td>
+            </tr>
+            <tr>
+                <td class="labels">{!$ObjectType.pse__Proj__c.fields.PM_Estimated_Total_Hours__c.Label}:</td>
+                <td><apex:outputText value="{!EmailWrapper.projectSO.PM_Estimated_Total_Hours__c}" /></td>
+            </tr>
+            <tr>
+                <td class="labels">{!$ObjectType.pse__Proj__c.fields.Total_hours_spent__c.Label}:</td>
+                <td><apex:outputText value="{!EmailWrapper.projectSO.Total_hours_spent__c}" /></td>
+            </tr>
+            <tr>
+                <td class="labels">SOW Type</td>
+                <td><apex:outputText value="{!EmailWrapper.projectSO.pse__Billing_Type__c}" /></td>
+            </tr>
+            <tr>
+                <td class="labels">SOW Amount</td>
+                <td><apex:outputText value="{!EmailWrapper.projectSO.pse__Bookings__c}" /></td>
+            </tr>
+            <tr>
+                 <td class="labels">{!$ObjectType.pse__Proj__c.fields.Planned_Effective_Rate__c.Label}:</td>
+                 <td>{!EmailWrapper.ConcessionRequest.Project__r.Planned_Effective_Rate__c}</td>
+            </tr>           
+            <tr>
+                 <td class="labels">{!$ObjectType.pse__Proj__c.fields.Actual_Effective_Rate__c.Label}:</td>
+                 <td>{!EmailWrapper.ConcessionRequest.Project__r.Actual_Effective_Rate__c}</td>
+           </tr>
+    </table>                        
+    <br/><br />
+    <b>Budget Details</b>
+    <table border="1">
+        <tr>
+            <th>{!$ObjectType.pse__Budget__c.fields.Name.Label}</th>
+            <th>{!$ObjectType.pse__Budget__c.fields.pse__Amount__c.Label} </th>
+            <th>{!$ObjectType.pse__Budget__c.fields.Budget_Hours__c.Label}</th>
+            <th>{!$ObjectType.pse__Budget__c.fields.pse__Effective_Date__c.Label}</th>
+            <th>{!$ObjectType.pse__Budget__c.fields.pse__Type__c.Label}</th>
+            <th>{!$ObjectType.pse__Budget__c.fields.Subtype__c.Label}</th>
+            <th>{!$ObjectType.pse__Budget__c.fields.pse__Status__c.Label}</th>
+        </tr>
+        <apex:repeat value="{!EmailWrapper.ProjectSO.pse__Budgets__r}" var="b">
+            <tr>
+               <td><apex:outputField value="{!b.Name}" /></td>
+               <td><apex:outputField value="{!b.pse__Amount__c}" /></td>
+               <td><apex:outputField value="{!b.Budget_Hours__c}" /></td>
+               <td><apex:outputField value="{!b.pse__Effective_Date__c}" /></td>
+               <td><apex:outputField value="{!b.pse__Type__c}" /></td>
+               <td><apex:outputField value="{!b.Subtype__c }" /></td>
+               <td><apex:outputField value="{!b.pse__Status__c}" /></td>
+            </tr>
+        </apex:repeat>
+    </table> 
+    <br/><br/>
+    <b>Project Milestones Summary</b>
+    <table border="1">
+        <tr>
+            <th>{!$ObjectType.pse__Milestone__c.fields.Name.Label}</th>
+            <th>{!$ObjectType.pse__Milestone__c.fields.pse__Target_Date__c.Label}</th>
+            <th>{!$ObjectType.pse__Milestone__c.fields.Revised_Completion_Date__c.Label}</th>
+            <th>{!$ObjectType.pse__Milestone__c.fields.pse__Actual_Date__c.Label}</th>
+            <th>{!$ObjectType.pse__Milestone__c.fields.pse__Milestone_Amount__c.Label}</th>
+            <th>{!$ObjectType.pse__Milestone__c.fields.pse__Status__c.Label}</th>
+            <th>{!$ObjectType.pse__Milestone__c.fields.Training_Milestone__c.Label}</th>
+        </tr>
+        <apex:repeat value="{!EmailWrapper.ProjectSO.pse__Milestones__r}" var="m">
+            <tr>
+               <td><apex:outputField value="{!m.Name}" /></td>
+               <td><apex:outputField value="{!m.pse__Target_Date__c}" /></td>
+               <td><apex:outputField value="{!m.Revised_Completion_Date__c}" /></td>
+               <td><apex:outputField value="{!m.pse__Actual_Date__c}" /></td>
+               <td><apex:outputField value="{!m.pse__Milestone_Amount__c}" /></td>
+               <td><apex:outputField value="{!m.pse__Status__c}" /></td>
+               <td><apex:outputField value="{!m.Training_Milestone__c}" /></td>
+            </tr>
+        </apex:repeat>
+    </table>
+    <br />    
+    <b>Other Pending Concession Requests (Submitted via Workflow):</b>
+    <table  border="1">
+       <tr>
+            <th>{!$ObjectType.Concession_Request__c.fields.Name.Label}</th>
+            <th>{!$ObjectType.Concession_Request__c.fields.Concession_Type__c.Label}</th>
+            <th>{!$ObjectType.Concession_Request__c.fields.Root_cause__c.Label}</th>
+            <th>{!$ObjectType.Concession_Request__c.fields.Hours_Requested__c.Label}</th>
+            <th>{!$ObjectType.Concession_Request__c.fields.Approval_Status__c.Label}</th>
+            <th>{!$ObjectType.Concession_Request__c.fields.Requestor__c.Label}</th>
+            <th>Approval request assigned to</th>
+       </tr>
+       <apex:repeat value="{!EmailWrapper.ConcessionRequestList}" var="c">
+           <tr>
+               <td>{!c.ConcessionRequest.Name}</td>
+               <td>{!c.ConcessionRequest.Concession_Type__c}</td>
+               <td>{!c.ConcessionRequest.Root_cause__c}</td>
+               <td>{!c.ConcessionRequest.Hours_Requested__c}</td>
+               <td>{!c.ConcessionRequest.Approval_Status__c}</td>
+               <td>{!c.ConcessionRequest.Requestor__r.Name}</td>
+               <td>{!c.ApprovalRequest.Apttus_Approval__Assigned_To_Name__c}</td>
+           </tr>
+               
+       </apex:repeat>
+    </table>
+    <br /><br />
+    
+    <apex:outputText value="{!Context.ContextLinkInstruction}" />
+    <br/>
+    <apex:outputLink value="{!Context.ContextPageUrl}">{!Context.requestSO.Apttus_Approval__Object_Name__c}</apex:outputLink>
+    <br/>
+    <br/>
+    <apex:outputPanel rendered="{!NOT(Context.IsStatusCancelled)}" >    
+        <apex:outputText value="{!$Label.Apttus_Approval__ApprovalRequestID & ': '}" /><apex:outputField value="{!Context.requestSO.Id}" />
+        <br/>
+        <apex:outputText value="{!$Label.Apttus_Approval__ApprovalUserID & ': '}" /><apex:outputField value="{!Context.recipientSO.Id}" />
+        <br/>
+    </apex:outputPanel>
+    
+   <apex:outputPanel rendered="{!NOT(Context.IsStatusCancelled)}" >    
+        <apex:outputText value="{!$Label.Apttus_Approval__Approvals & ':'}" />
+        <br/>
+        <table border="1">
+            <tr>
+                <th><apex:outputText value="{!$ObjectType.Apttus_Approval__Approval_Request__c.Fields.Apttus_Approval__Step_Name__c.Label}"/></th>
+                <th><apex:outputText value="{!$ObjectType.Apttus_Approval__Approval_Request__c.Fields.Apttus_Approval__Approval_Status__c.Label}"/></th>
+                <th><apex:outputText value="{!$ObjectType.Apttus_Approval__Approval_Request__c.Fields.Apttus_Approval__Date__c.Label}"/></th>
+                <th><apex:outputText value="{!$Label.Apttus_Approval__AssignedTo}"/></th>
+                <th><apex:outputText value="{!$ObjectType.Apttus_Approval__Approval_Request__c.Fields.Apttus_Approval__DependsOn__c.Label}"/></th>
+                <th><apex:outputText value="{!$ObjectType.Apttus_Approval__Approval_Request__c.Fields.Apttus_Approval__Actual_Approver__c.Label}"/></th>
+                <th><apex:outputText value="{!$ObjectType.Apttus_Approval__Approval_Request__c.Fields.Apttus_Approval__Approver_Comments__c.Label}"/></th>
+                
+            </tr>
+            <apex:repeat value="{!Context.ApprovalHistory}" var="history" >
+                <tr>
+                    <td><apex:outputField value="{!history.Apttus_Approval__Step_Name__c}" /></td>
+                    <td><apex:outputField value="{!history.Apttus_Approval__Approval_Status__c}" /></td>
+                    <td><apex:outputField value="{!history.Apttus_Approval__Date__c}" /></td>
+                    <td><apex:outputField value="{!history.Apttus_Approval__Assigned_To_Name__c}" /></td>
+                    <td><apex:outputField value="{!history.Apttus_Approval__DependsOn__c}" /></td>
+                    <td><apex:outputField value="{!history.Apttus_Approval__Actual_Approver__c}" /></td>
+                    <td><apex:outputField value="{!history.Apttus_Approval__Approver_Comments__c}" /></td>
+                    
+                </tr>
+            </apex:repeat>
+        </table>
+    </apex:outputPanel>
+   
+</apex:component>

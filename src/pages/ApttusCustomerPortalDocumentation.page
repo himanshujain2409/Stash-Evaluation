@@ -1,0 +1,112 @@
+<apex:page controller="ACPDocumentationController">
+
+	<script src="{!URLFOR($Resource.ApttusCustomerPortalJQueryTree, 'jquery.treeview.js')}"></script>
+	<script src="{!URLFOR($Resource.ApttusCustomerPortalJQueryTree, '/lib/jquery.cookie.js')}"></script>
+
+	<script>
+		jQuery(document).ready(function(){
+			jQuery('#docSearchBar').append(jQuery('[name="srch_document_sbar"]'));
+			jQuery('#docSearchBar #srch_document_sbar .btn').attr('value', 'Find Document');
+		});
+
+		// Sort folders as specified in "ACPDocumentationFoldersOrder" custom label
+		var folderNames = '{!JSINHTMLENCODE($Label.ACPDocumentationFoldersOrder)}'
+			.replace(/\n{2,}/g, '\n')
+			.split('\n');
+
+		for (var i = folderNames.length - 1; i >=0 ; i--) {
+			jQuery("#browserApttus > li:contains('" + folderNames[i].trim() + "')").prependTo("#browserApttus");
+		}
+
+		jQuery("#browserApttus").treeview({
+			control: "#treecontrol"
+		});
+	</script>
+	<style>
+		#docSearchBar #srch_document_sbar .btn{
+			background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+			background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+			filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+			background-color:#ededed;
+			-moz-border-radius:6px;
+			-webkit-border-radius:6px;
+			border-radius:6px;
+			border:1px solid #dfdfdf;
+			display:inline-block;
+			color:#1b5c78;
+			font-family:Arial,Helvetica,sans-serif;
+			font-size:12px;
+			font-weight:bold;
+			padding:2px 14px;
+			text-decoration:none;
+		}
+		.searchTextBox,
+		#searchTextLabel{
+			font-family:Arial,Helvetica,sans-serif;
+			font-size:12px;
+		}
+		.treeview .folder,
+		.treeview .file {
+			font-family:Arial,Helvetica,sans-serif;
+			font-size: 14px;
+			line-height: 16px;
+		}
+		.treeview .folder.hover,
+		#browserApttus a:hover,
+		#browserApttus a:visited {
+			color: #15365f;
+		}
+		#treecontrol{
+			border-left-width: 1px;
+		    border-right-width: 1px;
+		    border-top-width: 1px;
+		    font-family: Arial;
+		    font-size: 10px;
+		    font-weight: bold;
+		    margin-bottom: 15px;
+		    margin-left: 18px;
+		}
+		#treecontrol a, .treeview .folder:hover {
+			text-decoration:underline;
+		}
+	</style>
+	<c:ApttusCustomerPortalDynamicMenu />
+	<apex:stylesheet value="{!URLFOR($Resource.ApttusCustomerPortalJQueryTree, 'jquery.treeview.css?v=8')}"/>
+	<div id="searchSection" style="margin-left:16px; margin-bottom:20px;">
+		<div id="searchTextLabel">
+			Enter keywords to find matching documents.
+		</div>
+		<div id="docSearchBar" style="margin-bottom:10px; margin-top:5px;"></div>
+	</div>
+	<div id="docuemntsBolck" class="bPageBlock brandSecondaryBrd apexDefaultPageBlock secondaryPalette">
+		<div class="pbHeader">
+    		<div class="pbTitle">
+        		<h2 class="mainTitle">Documentation</h2>
+    		</div>
+		</div>
+		<div id="treecontrol">
+				<a title="Expand the entire tree below" href="#"><img src="{!URLFOR($Resource.ApttusCustomerPortalJQueryTree, '/images/plus.gif')}" /> Expand All</a>
+				<a title="Collapse the entire tree below" href="#"><img src="{!URLFOR($Resource.ApttusCustomerPortalJQueryTree, '/images/minus.gif')}"/> Collapse All</a>
+		</div>
+		<div style="margin-left: 15px;">
+			<ul id="browserApttus" class="filetree treeview">
+				<apex:repeat value="{!listWrapperDocuments}" var="wDocs">
+					<li>
+						<div class="hitarea expandable-hitarea"></div>
+						<span class="folder">{!wDocs.folderName}</span>
+						<ul style="display:none;">
+							<apex:repeat value="{!wDocs.documents}" var="d">
+								<li>
+									<span class="file">
+										<apex:outputlink value="/{!d.Id}">{!d.Name}</apex:outputlink>
+									</span>
+								</li>
+							</apex:repeat>
+						</ul>
+					</li> 
+				</apex:repeat>
+			</ul>
+		</div>
+		<span class="fFooter"></span>
+	</div>
+</apex:page>

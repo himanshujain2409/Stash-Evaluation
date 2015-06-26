@@ -1,0 +1,157 @@
+<apex:page controller="PMProductivityReportController" tabStyle="Report" sidebar="false">
+
+    <script type="text/javascript">
+        function setFocus(){}
+        var sfOnload = window.onload;
+        window.onload = function() {
+            if (sfOnload) {
+                sfOnload();
+            }
+            setFocus();
+        }
+    </script>
+    
+    <apex:sectionHeader title="Productivity Report for Leads & Contacts"/>
+    <c:Overlay style="processing" />
+    <apex:form >
+    
+        <apex:actionStatus id="overlayStatus" onStart="showOverlay();" onstop="hideOverlay();"/>
+        <apex:actionFunction name="filter" action="{!filter}" rerender="pbReport" status="overlayStatus"/>
+    
+        <apex:pageBlock >
+        
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton onclick="filter();return false;" value="Search"/>
+            </apex:pageBlockButtons>
+                
+            <apex:pageBlockSection columns="1">
+            
+                <apex:pageBlockSectionItem >
+                    Show
+                    <apex:selectList value="{!showOption}" multiselect="false" size="1">
+                        <apex:selectOptions value="{!showOptions}"/>
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+            
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Created From " for="startDate"/>
+                    
+                        <apex:outputPanel >
+                            <apex:inputField value="{!fromDate.Callback_Date__c}"/>
+                            &nbsp; <b>To</b> &nbsp;
+                            <apex:inputField value="{!toDate.Callback_Date__c}"/>
+                        </apex:outputPanel>
+                    
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        
+        <apex:pageBlock id="pbReport" title="Generated Report : ">
+        
+            <apex:pageBlockButtons location="top">
+                <apex:commandButton action="{!xlsExport}" value="Export"/>
+            </apex:pageBlockButtons>
+    
+            <apex:pageBlockTable value="{!roundSummaryList}" var="rsW">
+            
+                <apex:column value="{!rsW.roundOwnerName}">
+                    <apex:facet name="footer">Grand Total</apex:facet>
+                    <apex:facet name="header">Round Owner Name</apex:facet>
+                </apex:column>
+                
+                <apex:column headerValue="Unique Accounts" value="{!rsW.noOfAccounts}">
+                    <apex:facet name="footer">{!grandTotalNoOfAccounts}</apex:facet>
+                </apex:column>
+                                
+                <apex:column headerValue="Unique Contacts" value="{!rsW.noOfContacts}">
+                    <apex:facet name="footer">{!grandTotalNoOfContacts}</apex:facet>
+                </apex:column>
+                
+                <apex:column headerValue="Rounds" value="{!rsW.noOfRounds}">
+                    <apex:facet name="footer">{!grandTotalNoOfRounds}</apex:facet>
+                </apex:column>
+                
+                <apex:column value="{!rsW.totalAdminDialog}">
+                    <apex:facet name="footer">{!grandTotalAdminDialog}</apex:facet>
+                    <apex:facet name="header">Admin Dialog</apex:facet>
+                </apex:column>
+                
+                <apex:column value="{!rsW.totalAdminEM}">
+                    <apex:facet name="footer">{!grandTotalAdminEM}</apex:facet>
+                    <apex:facet name="header">Admin EM</apex:facet>
+                </apex:column>
+                
+                <apex:column value="{!rsW.totalAdminVM}">
+                    <apex:facet name="footer">{!grandTotalAdminVM}</apex:facet>
+                    <apex:facet name="header">Admin VM</apex:facet>
+                </apex:column>
+                
+                <apex:column value="{!rsW.totalKPDialog}">
+                    <apex:facet name="footer">{!grandTotalKPDialog}</apex:facet>
+                    <apex:facet name="header">KP Dialog</apex:facet>
+                </apex:column>
+                
+                <apex:column value="{!rsW.totalKPEM}">
+                    <apex:facet name="footer">{!grandTotalKPEM}</apex:facet>
+                    <apex:facet name="header">KP EM</apex:facet>
+                </apex:column>
+                
+                <apex:column value="{!rsW.totalKPVM}">
+                    <apex:facet name="footer">{!grandTotalKPVM}</apex:facet>
+                    <apex:facet name="header">KP VM</apex:facet>
+                </apex:column>
+                
+                <apex:column value="{!rsW.totalReferral}">
+                    <apex:facet name="footer">{!grandTotalReferral}</apex:facet>
+                    <apex:facet name="header">Referral</apex:facet>
+                </apex:column>
+                
+                <apex:column headerValue="# of Touches" value="{!rsW.noOfTouches}">
+                    <apex:facet name="footer">{!grandTotalNoOfTouches}</apex:facet>
+                </apex:column>
+                
+                <apex:column >
+                    <apex:facet name="footer">
+                        <apex:outputText value="{0, number, #####}">
+                            <apex:param value="{!grandTotalMI}"/>
+                        </apex:outputText>
+                    </apex:facet>
+                    <apex:facet name="header">MIs Booked</apex:facet>
+                    <apex:outputText value="{0, number, #####}">
+                        <apex:param value="{!rsW.totalMI}"/>
+                    </apex:outputText>
+                </apex:column>
+                
+                <apex:column headerValue="MIs Executed" value="{!rsW.noOfMIs}">
+                    <apex:facet name="footer">{!grandTotalNoOfMIs}</apex:facet>
+                </apex:column>
+                
+                <apex:column >
+                    <apex:facet name="footer">
+                        <apex:outputText value="{0, number, #####}">
+                            <apex:param value="{!grandTotalRound1KP}"/>
+                        </apex:outputText>
+                    </apex:facet>
+                    <apex:facet name="header">Round 1 KP</apex:facet>
+                    <apex:outputText value="{0, number, #####}">
+                        <apex:param value="{!rsW.totalRound1KP}"/>
+                    </apex:outputText>
+                </apex:column>
+                
+                <apex:column headerValue="Sum of Round Scores">
+                    <apex:facet name="footer">
+                        <apex:outputText value="{0, number, #####}">
+                            <apex:param value="{!grandTotalRoundScores}"/>
+                        </apex:outputText>
+                    </apex:facet>
+                    <apex:outputText value="{0, number, #####}">
+                        <apex:param value="{!rsW.totalRoundScores}"/>
+                    </apex:outputText>
+                </apex:column>
+                
+            </apex:pageBlockTable>
+            
+        </apex:pageBlock>
+    </apex:form>
+
+</apex:page>

@@ -1,0 +1,15 @@
+<apex:page showHeader="true" sidebar="true" controller="ACPTrainingController">
+<script>
+	/*window.location='https://cs13.salesforce.com/secur/login_portal.jsp?orgId=00DW0000000Iouj&portalId=06050000000Lmmj';	
+	jQuery(document).ready(function(){
+		jQuery('#docSearchBar').append(jQuery('[name="srch_document_sbar"]'));
+	});*/
+</script>
+<h1>Test Page</h1>
+<img src="{!URLFOR($Resource.ApttusCustomerPortal, '/img/ApttusBanner.gif')}" width="80%">
+</img>
+
+
+<div id="docSearchBar">
+</div>
+</apex:page>

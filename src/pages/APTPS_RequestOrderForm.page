@@ -1,0 +1,3 @@
+<apex:page controller="APTPS_RequestOrderFormController" action="{!sendEmail}">
+ 
+</apex:page>
