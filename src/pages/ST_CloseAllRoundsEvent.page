@@ -1,3 +1,0 @@
-<apex:page standardController="Event" extensions="ST_CloseAllRoundsEvent" action="{!closeAllRoundsEventPage}" standardStylesheets="true" showHeader="false" sidebar="false">
-    <apex:pageMessages />
-</apex:page>

@@ -1,9 +1,0 @@
-<apex:page controller="ProjectCostUpdate" >
-  <apex:pageBlock >
-  <apex:form >
-      <apex:pageBlockSection >
-             <apex:commandButton value="Calculate Past ProjectCost" action="{!calculateProjectCost}"/>
-      </apex:pageBlockSection>
-   </apex:form>
-  </apex:pageBlock>
-</apex:page>

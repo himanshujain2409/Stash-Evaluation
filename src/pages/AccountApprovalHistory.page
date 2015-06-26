@@ -1,3 +1,0 @@
-<apex:page StandardController="Account">
-   <Apttus_Approval:ApprovalHistory ctxObjectId="{!$CurrentPage.Parameters.Id}"></Apttus_Approval:ApprovalHistory>
-</apex:page>

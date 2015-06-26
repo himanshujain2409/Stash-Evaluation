@@ -1,7 +1,0 @@
-<apex:page standardcontroller="Case"   renderAs="PDF" cache="true">
-
- <apex:detail relatedList="true"  > 
- </apex:detail>
-
-
-</apex:page>

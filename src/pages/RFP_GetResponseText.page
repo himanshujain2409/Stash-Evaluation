@@ -1,3 +1,0 @@
-<apex:page contentType="text/plain" showHeader="false" controller="RFP_AJAXInterface">
-<apex:repeat var="r" value="{!ResponseText}">{!r}</apex:repeat>
-</apex:page>

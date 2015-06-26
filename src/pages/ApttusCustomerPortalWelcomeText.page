@@ -1,5 +1,0 @@
-<apex:page showChat="false" showHeader="false" sidebar="false" contentType="text/javascript">
-    var userName = "{!JSENCODE($User.FirstName & ' ' & $User.LastName)}";
-
-    jQuery(".userName").html('<h2 class="brandPrimaryFgr">Welcome, ' + userName + '</h2>');
-</apex:page>

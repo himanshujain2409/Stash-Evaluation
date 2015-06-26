@@ -1,3 +1,0 @@
-<apex:page standardController="Account" extensions="CreateNDAController" action="{!createNDAAgreement}">
-
-</apex:page>

@@ -1,3 +1,0 @@
-<apex:page standardController="India_Service_Request__c"> 
-<apex:iframe id="jiraWindow" src="https://apttusdev.atlassian.net/plugins/servlet/customware/connector/issue/2/India_Service_Request__c/fetch.action?id={!$CurrentPage.parameters.id}"></apex:iframe> 
-</apex:page>
